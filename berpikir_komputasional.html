@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentasi Interaktif Konsep Dasar Ilmu Komputer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e0f2f7;
+            /* Lighter, more inviting background */
+            color: #2d3748;
+            /* Darker text for readability */
+            line-height: 1.7;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .presentation-container {
+            max-width: 1200px;
+            margin: 2.5rem auto;
+            /* More vertical margin */
+            padding: 2rem;
+            /* More padding */
+            background-color: #ffffff;
+            border-radius: 16px;
+            /* More rounded corners */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            /* Stronger, softer shadow */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide {
+            display: none;
+            /* Hidden by default */
+            flex-grow: 1;
+            padding: 1rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            /* A more distinct font for headings */
+            color: #1a202c;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            /* Larger title */
+            text-align: center;
+            background-image: linear-gradient(to right, #4a90e2, #6a82fb);
+            /* Gradient for main title */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+            letter-spacing: -0.05em;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            border-bottom: 3px solid #e2e8f0;
+            /* Thicker border */
+            padding-bottom: 0.8rem;
+            margin-top: 1rem;
+            /* Adjusted for slide context */
+            color: #3182ce;
+            /* Blue accent for section titles */
+        }
+
+        h3 {
+            font-size: 1.6rem;
+            margin-top: 1.5rem;
+            /* Adjusted for slide context */
+            color: #4299e1;
+            /* Lighter blue for subheadings */
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            list-style-type: none;
+            /* Remove default disc */
+            margin-left: 0;
+            padding-left: 0;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.7rem;
+            /* More spacing */
+            display: flex;
+            align-items: flex-start;
+            color: #4a5568;
+            /* Slightly darker list item text */
+        }
+
+        li .icon {
+            margin-right: 0.8rem;
+            font-size: 1.2em;
+            line-height: 1.5;
+            /* Align icon with text */
+            color: #3182ce;
+            /* Icon color */
+        }
+
+        li strong {
+            color: #2b6cb0;
+            /* Stronger blue for bold text */
+            font-weight: 700;
+        }
+
+
+        /* Flowchart Specific Styles */
+        .flowchart-node {
+            background-color: #63b3ed;
+            color: white;
+            padding: 0.9rem 1.8rem;
+            /* Increased padding */
+            margin: 0.8rem auto;
+            border-radius: 10px;
+            /* Slightly more rounded */
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+            /* Stronger shadow */
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.2s;
+        }
+
+        .flowchart-node:hover {
+            transform: scale(1.03);
+        }
+
+        .flowchart-parallelogram {
+            background-color: #f6ad55;
+            color: white;
+            padding: 0.9rem 1.8rem;
+            margin: 0.8rem auto;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            transform: skewX(-15deg);
+            /* Slightly less skew for better readability */
+            position: relative;
+            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.2s;
+        }
+
+        .flowchart-parallelogram:hover {
+            transform: skewX(-15deg) scale(1.03);
+        }
+
+        .flowchart-parallelogram span {
+            display: block;
+            transform: skewX(15deg);
+        }
+
+        .flowchart-arrow {
+            width: 3px;
+            /* Thicker arrows */
+            height: 40px;
+            /* Longer arrows */
+            background-color: #4a5568;
+            margin: 0.5rem auto;
+            /* Adjusted margin */
+            position: relative;
+        }
+
+        .flowchart-arrow::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -5px;
+            /* Adjusted for thicker arrow */
+            border-left: 7px solid transparent;
+            /* Larger arrowhead */
+            border-right: 7px solid transparent;
+            border-top: 10px solid #4a5568;
+        }
+
+        .flowchart-node.highlight,
+        .flowchart-parallelogram.highlight {
+            background-color: #38a169;
+            /* Darker green highlight */
+            box-shadow: 0 0 20px rgba(56, 161, 105, 0.8);
+            /* More intense glow */
+            transform: scale(1.05);
+            /* Slight pop effect */
+        }
+
+        /* Data Structure Box (General) */
+        .data-structure-box {
+            border: 2px solid #a0aec0;
+            border-radius: 8px;
+            padding: 0.6rem 1.2rem;
+            margin: 0.3rem;
+            display: inline-block;
+            background-color: #e2f8ff;
+            /* Lighter blue for data boxes */
+            font-weight: 600;
+            color: #2b6cb0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Stack & Queue Specific Styles */
+        .stack-container,
+        .queue-container {
+            border: 2px dashed #a0aec0;
+            /* More prominent border */
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #f0f8ff;
+            /* Light blue background */
+        }
+
+        .stack-item,
+        .queue-item {
+            border: 1px solid #4299e1;
+            background-color: #90cdf4;
+            /* More vibrant blue */
+            color: white;
+            padding: 0.6rem 1.2rem;
+            margin-bottom: 8px;
+            /* More spacing */
+            width: 120px;
+            /* Slightly wider */
+            text-align: center;
+            border-radius: 6px;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-out;
+        }
+
+        .stack-item.removing,
+        .queue-item.removing {
+            opacity: 0;
+            transform: translateY(-30px) scale(0.8);
+            /* More dramatic exit */
+        }
+
+        .queue-container {
+            flex-direction: row;
+            justify-content: center;
+            flex-wrap: wrap;
+            /* Allow items to wrap */
+        }
+
+        .queue-item {
+            margin-right: 8px;
+            margin-bottom: 8px;
+            /* Consistent spacing */
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #cbd5e0;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #63b3ed;
+            box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.3);
+            outline: none;
+        }
+
+        .button-group button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .button-group button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .button-group button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Graph & Tree Specific Styles */
+        .graph-node,
+        .tree-node {
+            width: 50px;
+            /* Larger nodes */
+            height: 50px;
+            background-color: #805ad5;
+            /* Deeper purple */
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            position: absolute;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s;
+        }
+
+        .graph-node:hover,
+        .tree-node:hover {
+            background-color: #6b46c1;
+            transform: scale(1.15);
+            /* More pronounced hover */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .graph-node.active,
+        .tree-node.active {
+            background-color: #f6ad55;
+            box-shadow: 0 0 20px rgba(246, 173, 85, 0.9);
+            /* Stronger glow */
+            transform: scale(1.1);
+        }
+
+        .graph-container,
+        .tree-container {
+            border: 2px dashed #a0aec0;
+            border-radius: 10px;
+            background-color: #f0f8ff;
+            box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .graph-container {
+            height: 300px;
+        }
+
+        .tree-container {
+            height: 500px;
+        }
+
+        svg line {
+            stroke: #667eea;
+            stroke-width: 3;
+        }
+
+        /* Info Box */
+        .info-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 1.2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.3s;
+        }
+
+        .info-box.active-message {
+            background-color: #cce5ff;
+            border-color: #b8daff;
+            box-shadow: 0 0 15px rgba(184, 218, 255, 0.8);
+        }
+
+        /* Navigation Buttons */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            margin-top: auto;
+        }
+
+        .navigation-buttons button {
+            background-color: #3182ce;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .navigation-buttons button:hover {
+            background-color: #2c5282;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .navigation-buttons button:disabled {
+            background-color: #a0aec0;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            h3 {
+                font-size: 1.3rem;
+            }
+
+            .presentation-container {
+                padding: 1rem;
+                margin: 1.5rem auto;
+            }
+
+            .slide {
+                padding: 0.5rem;
+            }
+
+            .flowchart-node,
+            .flowchart-parallelogram {
+                padding: 0.6rem 1.2rem;
+            }
+
+            .stack-item,
+            .queue-item {
+                width: 80px;
+            }
+
+            .button-group {
+                flex-direction: column;
+                space-y: 1rem;
+            }
+
+            .button-group>* {
+                width: 100%;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="p-4">
+    <div class="presentation-container">
+        <h1>Berpikir Komputasional</h1>
+
+        <!-- Slide 1: Ekspresi dan Operator (previously Slide 2) -->
+        <div id="slide-0" class="slide active">
+            <h2>1. Ekspresi dan Operator</h2>
+            <p class="text-lg text-gray-700 mb-8 text-center">Materi ini akan membawa Anda memahami:</p>
+            <p class="mb-4 text-gray-700">Ekspresi adalah kombinasi dari *operand* (nilai atau variabel) dan *operator*
+                yang menghasilkan nilai baru.</p>
+
+            <h3 class="text-lg font-semibold mb-2">Contoh Ekspresi:</h3>
+            <div class="flex items-center space-x-4 mb-6 justify-center">
+                <div class="data-structure-box">5</div>
+                <span class="text-2xl font-bold text-blue-600">+</span>
+                <div class="data-structure-box">3</div>
+                <span class="text-2xl font-bold text-blue-600">=</span>
+                <div class="data-structure-box">8</div>
+            </div>
+            <p class="text-sm text-gray-600 mb-4 text-center">Di sini, '5' dan '3' adalah *operand*, dan '+' adalah
+                *operator*. Coba bayangkan ini seperti operasi matematika dasar!</p>
+
+            <h3 class="text-lg font-semibold mb-2">Jenis-jenis Operator:</h3>
+            <div class="overflow-x-auto mb-6">
+                <table class="min-w-full bg-white rounded-lg shadow overflow-hidden border border-gray-200">
+                    <thead class="bg-blue-600 text-white">
+                        <tr>
+                            <th class="py-3 px-4 text-left">Jenis Operator</th>
+                            <th class="py-3 px-4 text-left">Contoh</th>
+                            <th class="py-3 px-4 text-left">Deskripsi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr>
+                            <td class="py-3 px-4">Aritmetika</td>
+                            <td class="py-3 px-4">`5 + 3`, `10 / 2`</td>
+                            <td class="py-3 px-4">Penjumlahan, pengurangan, perkalian, pembagian.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4">Relasional</td>
+                            <td class="py-3 px-4">`x > y`, `a == b`</td>
+                            <td class="py-3 px-4">Membandingkan dua nilai (menghasilkan *true* atau *false*).</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4">Logika</td>
+                            <td class="py-3 px-4">`A AND B`, `NOT C`</td>
+                            <td class="py-3 px-4">Menggabungkan ekspresi boolean (AND, OR, NOT).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Slide 2: Tabel Kebenaran & Evaluasi Ekspresi (previously Slide 3) -->
+        <div id="slide-1" class="slide">
+            <h2>1. Ekspresi dan Operator (Lanjutan)</h2>
+            <h3 class="text-lg font-semibold mb-2 mt-6">Tabel Kebenaran Operator Logika</h3>
+            <div class="overflow-x-auto mb-6">
+                <table class="min-w-full bg-white rounded-lg shadow overflow-hidden border border-gray-200">
+                    <thead class="bg-indigo-600 text-white">
+                        <tr>
+                            <th class="py-3 px-4 text-center">A</th>
+                            <th class="py-3 px-4 text-center">B</th>
+                            <th class="py-3 px-4 text-center">NOT A</th>
+                            <th class="py-3 px-4 text-center">A AND B</th>
+                            <th class="py-3 px-4 text-center">A OR B</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr>
+                            <td class="py-3 px-4 text-center">True</td>
+                            <td class="py-3 px-4 text-center">True</td>
+                            <td class="py-3 px-4 text-center">False</td>
+                            <td class="py-3 px-4 text-center">True</td>
+                            <td class="py-3 px-4 text-center">True</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 text-center">True</td>
+                            <td class="py-3 px-4 text-center">False</td>
+                            <td class="py-3 px-4 text-center">False</td>
+                            <td class="py-3 px-4 text-center">False</td>
+                            <td class="py-3 px-4 text-center">True</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 text-center">False</td>
+                            <td class="py-3 px-4 text-center">True</td>
+                            <td class="py-3 px-4 text-center">True</td>
+                            <td class="py-3 px-4 text-center">False</td>
+                            <td class="py-3 px-4 text-center">True</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 text-center">False</td>
+                            <td class="py-3 px-4 text-center">False</td>
+                            <td class="py-3 px-4 text-center">True</td>
+                            <td class="py-3 px-4 text-center">False</td>
+                            <td class="py-3 px-4 text-center">False</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="text-lg font-semibold mb-2 mt-6">Coba Evaluasi Ekspresi Anda Sendiri! (Operator Aritmetika &
+                Relasional)</h3>
+            <div
+                class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 p-4 border rounded-lg bg-blue-50">
+                <input type="number" id="operand1" placeholder="Operand 1"
+                    class="p-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 w-full md:w-auto">
+                <select id="operatorSelect"
+                    class="p-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 w-full md:w-auto">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                    <option value="*">*</option>
+                    <option value="/">/</option>
+                    <option value="==">==</option>
+                    <option value="!=">!=</option>
+                    <option value=">">></option>
+                    <option value="<">
+                        << /option>
+                    <option value=">=">>=</option>
+                    <option value="<=">
+                        <=< /option>
+                </select>
+                <input type="number" id="operand2" placeholder="Operand 2"
+                    class="p-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 w-full md:w-auto">
+                <button onclick="evaluateExpression()"
+                    class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg shadow-md w-full md:w-auto">Evaluasi</button>
+                <div id="expressionResult" class="data-structure-box text-lg font-bold w-full md:w-auto text-center">
+                    Hasil</div>
+            </div>
+            <p class="text-sm text-gray-600 mt-4 text-center">Masukkan dua angka dan pilih operator untuk melihat
+                hasilnya!</p>
+
+            <h3 class="text-lg font-semibold mb-2 mt-6">Coba Evaluasi Ekspresi Logika Anda Sendiri!</h3>
+            <div
+                class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 p-4 border rounded-lg bg-green-50">
+                <select id="logicalOperand1"
+                    class="p-2 border rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 w-full md:w-auto">
+                    <option value="true">True (A)</option>
+                    <option value="false">False (A)</option>
+                </select>
+                <select id="logicalOperatorSelect"
+                    class="p-2 border rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 w-full md:w-auto">
+                    <option value="AND">AND</option>
+                    <option value="OR">OR</option>
+                    <option value="NOT">NOT</option>
+                </select>
+                <select id="logicalOperand2"
+                    class="p-2 border rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 w-full md:w-auto">
+                    <option value="true">True (B)</option>
+                    <option value="false">False (B)</option>
+                </select>
+                <button onclick="evaluateLogicalExpression()"
+                    class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-md w-full md:w-auto">Evaluasi
+                    Logika</button>
+                <div id="logicalExpressionResult"
+                    class="data-structure-box text-lg font-bold w-full md:w-auto text-center">Hasil</div>
+            </div>
+            <p class="text-sm text-gray-600 mt-4 text-center">Pilih nilai True/False untuk A dan B, lalu pilih operator
+                logika. Jika memilih 'NOT', nilai B akan diabaikan dan hanya A yang dievaluasi.</p>
+        </div>
+
+        <!-- Slide 3: Algoritma - Flowchart Simulasi (previously Slide 4) -->
+        <div id="slide-2" class="slide">
+            <h2>2. Algoritma</h2>
+            <div id="infoMessage" class="info-box">
+                Klik pada elemen-elemen di bawah untuk melihat penjelasan lebih lanjut atau berinteraksi!
+            </div>
+            <p class="mb-4 text-gray-700">Berikut adalah contoh *flowchart* sederhana untuk menghitung luas lingkaran.
+                Masukkan nilai jari-jari (r) dan klik "Mulai Simulasi" untuk melihat prosesnya!</p>
+
+            <div class="flex flex-col items-center mt-6">
+                <div class="flex items-center space-x-4 mb-4">
+                    <input type="number" id="radiusInput" placeholder="Masukkan nilai r"
+                        class="p-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 w-40">
+                    <button onclick="startFlowchartSimulation()"
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md">Mulai
+                        Simulasi</button>
+                </div>
+
+                <div id="flowchart-start" class="flowchart-node w-40 rounded-full">Mulai</div>
+                <div class="flowchart-arrow"></div>
+                <div id="flowchart-input" class="flowchart-parallelogram w-48"><span>Masukkan nilai r</span></div>
+                <div class="flowchart-arrow"></div>
+                <div id="flowchart-process" class="flowchart-node w-60">Hitung nilai Luas L = p * r kuadrat</div>
+                <div class="flowchart-arrow"></div>
+                <div id="flowchart-output" class="flowchart-parallelogram w-48"><span>Tampilkan Luas L</span></div>
+                <div class="flowchart-arrow"></div>
+                <div id="flowchart-end" class="flowchart-node w-40 rounded-full">Selesai</div>
+                <div id="flowchartResult" class="data-structure-box text-lg font-bold mt-4 hidden"></div>
+            </div>
+            <p class="text-sm text-gray-600 mt-4 text-center">Klik pada setiap kotak *flowchart* untuk melihat
+                penjelasannya!</p>
+        </div>
+
+        <!-- Slide 4: Algoritma - Catatan (previously Slide 5) -->
+        <div id="slide-3" class="slide">
+            <h2>2. Algoritma (Catatan Penting)</h2>
+            <h3 class="text-lg font-semibold mb-2 mt-6">Apa Itu Algoritma?</h3>
+            <p class="mb-4 text-gray-700">Algoritma adalah suatu prosedur sistematis untuk menyelesaikan masalah
+                matematika dalam langkah-langkah terbatas atau urutan pengambilan keputusan yang logis untuk memecahkan
+                masalah tersebut.</p>
+            <br>
+            <h3 class="text-lg font-semibold mb-2 mt-6">Mengapa Algoritma Penting? (Manfaat Algoritma):</h3>
+            <ul>
+                <li><span class="icon">💡</span> Membantu memecahkan masalah dengan cara yang logis dan sistematis.</li>
+                <li><span class="icon">♻️</span> Algoritma dapat digunakan lebih dari satu kali untuk menyelesaikan
+                    masalah yang sama.</li>
+                <li><span class="icon">🧩</span> Algoritma juga dapat digunakan untuk membantu memecahkan masalah yang
+                    kompleks dengan lebih sederhana.</li>
+                <li><span class="icon">🐞</span> Bagi programmer, algoritma akan memudahkan mereka untuk melacak setiap
+                    kesalahan yang muncul.</li>
+                <li><span class="icon">✍️</span> Memungkinkan pemrograman untuk dengan mudah memodifikasi program tanpa
+                    mengubah total algoritma dan tanpa harus mengulang dari awal.</li>
+            </ul>
+            <br>
+            <h3 class="text-lg font-semibold mb-2 mt-6">Jenis-Jenis Algoritma yang Perlu Anda Tahu:</h3>
+            <ul>
+                <li><span class="icon">➡️</span> <span class="font-bold text-blue-700">Algoritma Sekuensial:</span>
+                    Langkah-langkah dieksekusi secara berurutan, satu demi satu, dari awal hingga akhir. Ini adalah
+                    jenis algoritma yang paling sederhana!</li>
+                <li><span class="icon">❓</span> <span class="font-bold text-blue-700">Algoritma Kondisional
+                        (Seleksi):</span> Ada keputusan yang harus diambil! Algoritma ini akan memilih jalur eksekusi
+                    berdasarkan kondisi tertentu (misalnya, jika A benar, lakukan X; jika tidak, lakukan Y).</li>
+                <li><span class="icon">🔄</span> <span class="font-bold text-blue-700">Algoritma Perulangan
+                        (Looping):</span> Sebuah blok instruksi diulang berkali-kali sampai kondisi tertentu terpenuhi.
+                    Sangat efisien untuk tugas yang berulang!</li>
+            </ul>
+            <br>
+            <h3 class="text-lg font-semibold mb-2 mt-6">Bagaimana Kita Menyajikan Algoritma? Ada 3 Cara Utama yang
+                Menarik!</h3>
+            <ul>
+                <li><span class="icon">📝</span> <span class="font-bold text-blue-700">Deskriptif:</span> Menggunakan
+                    bahasa sehari-hari untuk menjelaskan langkah-langkahnya. Mudah dipahami, tapi kurang detail untuk
+                    pemrograman.</li>
+                <li><span class="icon">💻</span> <span class="font-bold text-blue-700">Pseudocode:</span> Menggunakan
+                    campuran bahasa manusia dan sintaks pemrograman sederhana. Ini seperti "kode palsu" yang mudah
+                    dibaca manusia dan dapat dengan mudah diterjemahkan ke bahasa pemrograman.</li>
+                <li><span class="icon">📊</span> <span class="font-bold text-blue-700">Flowchart (Diagram Alir):</span>
+                    Menggunakan simbol grafis standar untuk merepresentasikan langkah-langkah dan alur logika. Visual
+                    dan sangat intuitif!</li>
+            </ul>
+        </div>
+
+        <!-- Slide 5: Struktur Data - Stack & Queue (previously Slide 6) -->
+        <div id="slide-4" class="slide">
+            <h2>3. Struktur Data</h2>
+            <h3 class="text-lg font-semibold mb-2">a. Stack (Tumpukan) - LIFO (Last In, First Out)</h3>
+            <p class="text-sm text-gray-600 mb-2">Bayangkan ini seperti tumpukan piring. Piring yang terakhir Anda
+                letakkan adalah yang pertama Anda ambil!</p>
+            <div id="stackContainer" class="stack-container">
+                <!-- Stack items will be rendered here by JS -->
+            </div>
+            <div class="flex justify-center mt-4 space-x-4 button-group">
+                <input type="text" id="stackInput" placeholder="Item baru"
+                    class="p-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 w-32">
+                <button onclick="pushStack()"
+                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-md">Push
+                    (Tambah)</button>
+                <button onclick="popStack()"
+                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg shadow-md">Pop
+                    (Hapus)</button>
+            </div>
+
+            <h3 class="text-lg font-semibold mb-2 mt-6">b. Queue (Antrian) - FIFO (First In, First Out)</h3>
+            <p class="text-sm text-gray-600 mb-2">Ini seperti antrian di bank. Orang yang pertama datang adalah yang
+                pertama dilayani!</p>
+            <div id="queueContainer" class="queue-container">
+                <!-- Queue items will be rendered here by JS -->
+            </div>
+            <div class="flex justify-center mt-4 space-x-4 button-group">
+                <input type="text" id="queueInput" placeholder="Item baru"
+                    class="p-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 w-32">
+                <button onclick="enqueueQueue()"
+                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-md">Enqueue
+                    (Tambah)</button>
+                <button onclick="dequeueQueue()"
+                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg shadow-md">Dequeue
+                    (Hapus)</button>
+            </div>
+        </div>
+
+        <!-- Slide 6: Struktur Data - Graph (previously Slide 7) -->
+        <div id="slide-5" class="slide">
+            <h2>3. Struktur Data (Lanjutan)</h2>
+            <h3 class="text-lg font-semibold mb-2 mt-6">c. Graph</h3>
+            <p class="mb-4 text-gray-700">Graph terdiri dari simpul (*vertex*) dan sisi (*edge*) yang menghubungkannya.
+                Klik pada simpul untuk melihat detailnya!</p>
+            <div class="graph-container relative">
+                <!-- Nodes - Adjusted positions for better layout -->
+                <div class="graph-node" id="graph-node-A" style="top: 20px; left: 50%; transform: translateX(-50%);"
+                    onclick="showMessage('graph', 'Simpul A adalah titik pusat atau awal dalam graph ini.')">A</div>
+                <div class="graph-node" id="graph-node-B" style="top: 80px; left: 15%; transform: translateX(-50%);"
+                    onclick="showMessage('graph', 'Simpul B terhubung ke A dan D.')">B</div>
+                <div class="graph-node" id="graph-node-C" style="top: 80px; left: 85%; transform: translateX(-50%);"
+                    onclick="showGraphNodeInfo('C', 'Simpul C terhubung ke A dan D.')">C</div>
+                <div class="graph-node" id="graph-node-D" style="top: 180px; left: 50%; transform: translateX(-50%);"
+                    onclick="showGraphNodeInfo('D', 'Simpul D adalah titik akhir atau tujuan dalam graph ini.')">D</div>
+
+                <!-- SVG lines for edges - Adjusted coordinates -->
+                <svg class="absolute inset-0 w-full h-full" style="z-index: 1;">
+                    <!-- A to B -->
+                    <line x1="50%" y1="60" x2="15%" y2="100" stroke="#667eea" stroke-width="3" />
+                    <!-- A to C -->
+                    <line x1="50%" y1="60" x2="85%" y2="100" stroke="#667eea" stroke-width="3" />
+                    <!-- B to D -->
+                    <line x1="15%" y1="120" x2="50%" y2="200" stroke="#667eea" stroke-width="3" />
+                    <!-- C to D -->
+                    <line x1="85%" y1="120" x2="50%" y2="200" stroke="#667eea" stroke-width="3" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- Slide 7: Struktur Data - Tree (previously Slide 8) -->
+        <div id="slide-6" class="slide">
+            <h2>3. Struktur Data (Lanjutan)</h2>
+            <h3 class="text-lg font-semibold mb-2 mt-6">d. Tree</h3>
+            <p class="mb-4 text-gray-700">Struktur data hierarkis dengan simpul akar, simpul anak, dan daun. Klik pada
+                simpul untuk melihat detailnya!</p>
+            <div class="tree-container relative">
+                <!-- Nodes - Adjusted positions for better layout -->
+                <!-- Level 1 (Root) -->
+                <div class="tree-node" id="tree-node-A" style="top: 40px; left: 50%; transform: translateX(-50%);"
+                    onclick="showTreeNodeInfo('A', 'Ini adalah simpul Akar (Root). Semua simpul lain berasal dari sini.')">
+                    A (Root)</div>
+                <!-- Level 2 -->
+                <div class="tree-node" id="tree-node-B" style="top: 140px; left: 30%; transform: translateX(-50%);"
+                    onclick="showTreeNodeInfo('B', 'Simpul B adalah anak dari A.')">B</div>
+                <div class="tree-node" id="tree-node-C" style="top: 140px; left: 70%; transform: translateX(-50%);"
+                    onclick="showTreeNodeInfo('C', 'Simpul C adalah anak dari A.')">C</div>
+                <!-- Level 3 -->
+                <div class="tree-node" id="tree-node-D" style="top: 240px; left: 15%; transform: translateX(-50%);"
+                    onclick="showTreeNodeInfo('D', 'Simpul D adalah anak dari B.')">D</div>
+                <div class="tree-node" id="tree-node-E" style="top: 240px; left: 45%; transform: translateX(-50%);"
+                    onclick="showTreeNodeInfo('E', 'Simpul E adalah anak dari B.')">E</div>
+                <div class="tree-node" id="tree-node-F" style="top: 240px; left: 85%; transform: translateX(-50%);"
+                    onclick="showTreeNodeInfo('F', 'Simpul F adalah anak dari C.')">F</div>
+                <!-- Level 4 (Leaves) -->
+                <div class="tree-node" id="tree-node-G" style="top: 340px; left: 15%; transform: translateX(-50%);"
+                    onclick="showTreeNodeInfo('G', 'Simpul G adalah Daun (Leaf), tidak memiliki anak.')">G (Leaf)</div>
+                <div class="tree-node" id="tree-node-H" style="top: 340px; left: 45%; transform: translateX(-50%);"
+                    onclick="showTreeNodeInfo('H', 'Simpul H adalah Daun (Leaf), tidak memiliki anak.')">H (Leaf)</div>
+
+                <!-- SVG lines for Tree - Adjusted coordinates -->
+                <svg class="absolute inset-0 w-full h-full" style="z-index: 0;">
+                    <!-- A to B -->
+                    <line x1="50%" y1="60" x2="30%" y2="160" stroke="#667eea" stroke-width="3" />
+                    <!-- A to C -->
+                    <line x1="50%" y1="60" x2="70%" y2="160" stroke="#667eea" stroke-width="3" />
+                    <!-- B to D -->
+                    <line x1="30%" y1="160" x2="15%" y2="260" stroke="#667eea" stroke-width="3" />
+                    <!-- B to E -->
+                    <line x1="30%" y1="160" x2="45%" y2="260" stroke="#667eea" stroke-width="3" />
+                    <!-- C to F -->
+                    <line x1="70%" y1="160" x2="85%" y2="260" stroke="#667eea" stroke-width="3" />
+                    <!-- D to G -->
+                    <line x1="15%" y1="260" x2="15%" y2="360" stroke="#667eea" stroke-width="3" />
+                    <!-- E to H -->
+                    <line x1="45%" y1="260" x2="45%" y2="360" stroke="#667eea" stroke-width="3" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- Slide 8: Kegunaan Graph dan Tree (previously Slide 9) -->
+        <div id="slide-7" class="slide">
+            <h2>3. Struktur Data (Kegunaan)</h2>
+            <h3 class="text-lg font-semibold mb-2 mt-6">Kegunaan Graph dan Tree dalam Kehidupan Sehari-hari</h3>
+            <p class="mb-4 text-gray-700">Struktur data Graph dan Tree mungkin terdengar abstrak, tetapi keduanya
+                memiliki peran yang sangat penting dalam berbagai aplikasi di sekitar kita:</p>
+            <ul class="list-disc pl-5 text-gray-700">
+                <li><span class="font-bold text-blue-700">Graph:</span>
+                    <ul class="list-circle pl-5 mt-2">
+                        <li><span class="icon">👥</span> <span class="font-semibold">Media Sosial:</span> Jaringan
+                            pertemanan Anda di Facebook atau koneksi di LinkedIn adalah contoh Graph. Setiap orang
+                            adalah simpul, dan hubungan pertemanan/koneksi adalah sisi.</li>
+                        <li><span class="icon">🗺️</span> <span class="font-semibold">Peta dan Navigasi:</span> Google
+                            Maps menggunakan Graph untuk menemukan rute terpendek. Kota-kota adalah simpul, dan jalanan
+                            adalah sisi.</li>
+                        <li><span class="icon">🌐</span> <span class="font-semibold">Jaringan Komputer:</span> Bagaimana
+                            internet bekerja? Itu adalah Graph raksasa di mana komputer adalah simpul dan koneksi adalah
+                            sisi.</li>
+                        <li><span class="icon">🛒</span> <span class="font-semibold">Rekomendasi Produk:</span> Situs
+                            belanja online menggunakan Graph untuk merekomendasikan produk yang mungkin Anda suka
+                            berdasarkan apa yang dibeli orang lain.</li>
+                    </ul>
+                </li>
+                <li><span class="font-bold text-blue-700">Tree:</span>
+                    <ul class="list-circle pl-5 mt-2">
+                        <li><span class="icon">📁</span> <span class="font-semibold">Sistem File Komputer:</span>
+                            Struktur folder dan file di komputer Anda adalah contoh Tree. Folder utama adalah akar, dan
+                            sub-folder serta file adalah cabangnya.</li>
+                        <li><span class="icon">🏢</span> <span class="font-semibold">Struktur Organisasi
+                                Perusahaan:</span> Hierarki jabatan dari CEO hingga karyawan paling bawah sering
+                            digambarkan sebagai Tree.</li>
+                        <li><span class="icon">📄</span> <span class="font-semibold">Situs Web (DOM):</span> Struktur
+                            halaman web yang Anda lihat (Document Object Model) adalah Tree, di mana elemen HTML
+                            bersarang satu sama lain.</li>
+                        <li><span class="icon">🧠</span> <span class="font-semibold">Pohon Keputusan (Decision
+                                Trees):</span> Digunakan dalam Kecerdasan Buatan untuk membuat keputusan berdasarkan
+                            serangkaian kondisi, seperti dalam diagnosis medis atau klasifikasi data.</li>
+                    </ul>
+                </li>
+            </ul>
+            <p class="text-sm text-gray-600 mt-4 text-center">Jadi, Graph dan Tree adalah fondasi di balik banyak
+                teknologi yang kita gunakan setiap hari!</p>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="navigation-buttons">
+            <button id="prevButton" onclick="changeSlide(-1)" disabled>Sebelumnya</button>
+            <span id="slideCounter" class="text-gray-700 font-semibold">Slide 1 dari 9</span>
+            <button id="nextButton" onclick="changeSlide(1)">Selanjutnya</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const slideCounter = document.getElementById('slideCounter');
+
+        // Global message box function (retained for consistency, but now inside Algorithm slide)
+        let messageTimeout;
+        function showMessage(source, message) {
+            console.log(`Message from ${source}: ${message}`);
+            const infoBox = document.getElementById('infoMessage');
+            if (!infoBox) {
+                console.error("infoMessage element not found!");
+                return;
+            }
+
+            infoBox.textContent = message;
+            infoBox.style.backgroundColor = '#d1ecf1';
+            infoBox.style.borderColor = '#bee5eb';
+            infoBox.style.color = '#0c5460';
+
+            infoBox.classList.add('active-message');
+
+            if (messageTimeout) {
+                clearTimeout(messageTimeout);
+            }
+
+            messageTimeout = setTimeout(() => {
+                infoBox.classList.remove('active-message');
+                infoBox.style.backgroundColor = '#fff3cd';
+                infoBox.style.borderColor = '#ffeeba';
+                infoBox.style.color = '#856404';
+            }, 3000);
+        }
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+            currentSlide = index;
+            updateNavigationButtons();
+            updateSlideCounter();
+            // Clear info message when changing slides, unless it's the flowchart slide
+            if (slides[currentSlide].id !== 'slide-2') { // slide-2 is the flowchart slide (updated ID)
+                const infoBox = document.getElementById('infoMessage');
+                if (infoBox) {
+                    infoBox.textContent = 'Klik pada elemen-elemen di bawah untuk melihat penjelasan lebih lanjut atau berinteraksi!';
+                    infoBox.classList.remove('active-message');
+                    infoBox.style.backgroundColor = '#fff3cd';
+                    infoBox.style.borderColor = '#ffeeba';
+                    infoBox.style.color = '#856404';
+                    clearTimeout(messageTimeout); // Clear any pending messages
+                }
+            }
+        }
+
+        function changeSlide(direction) {
+            let newIndex = currentSlide + direction;
+            if (newIndex >= 0 && newIndex < totalSlides) {
+                showSlide(newIndex);
+            }
+        }
+
+        function updateNavigationButtons() {
+            prevButton.disabled = (currentSlide === 0);
+            nextButton.disabled = (currentSlide === totalSlides - 1);
+        }
+
+        function updateSlideCounter() {
+            slideCounter.textContent = `Slide ${currentSlide + 1} dari ${totalSlides}`;
+        }
+
+        // --- Flowchart Simulation Logic (copied from previous immersive) ---
+        const flowchartNodes = [
+            { id: 'flowchart-start', message: 'Ini adalah titik awal algoritma.' },
+            { id: 'flowchart-input', message: (r) => `Langkah ini meminta input jari-jari lingkaran (r) dari pengguna. Nilai r yang dimasukkan adalah ${r}.` },
+            { id: 'flowchart-process', message: (r, area) => `Pada langkah ini, luas lingkaran dihitung menggunakan rumus P * r kuadrat. Dengan r = ${r}, luasnya adalah ${area.toFixed(2)}.` },
+            { id: 'flowchart-output', message: (area) => `Hasil perhitungan luas lingkaran (${area.toFixed(2)}) akan ditampilkan kepada pengguna.` },
+            { id: 'flowchart-end', message: 'Algoritma berakhir di sini.' }
+        ];
+
+        function resetFlowchartHighlight() {
+            flowchartNodes.forEach(node => {
+                const element = document.getElementById(node.id);
+                if (element) {
+                    element.classList.remove('highlight');
+                }
+            });
+            const flowchartResult = document.getElementById('flowchartResult');
+            if (flowchartResult) { // Check if element exists before accessing
+                flowchartResult.classList.add('hidden');
+                flowchartResult.textContent = '';
+            }
+        }
+
+        async function startFlowchartSimulation() {
+            resetFlowchartHighlight();
+
+            const radiusInput = document.getElementById('radiusInput');
+            const r = parseFloat(radiusInput.value);
+            const flowchartResultDisplay = document.getElementById('flowchartResult');
+
+            if (isNaN(r) || r <= 0) {
+                showMessage('flowchart', 'Harap masukkan nilai jari-jari (r) yang valid dan positif.');
+                return;
+            }
+
+            let delay = 1000;
+
+            let currentNode;
+
+            // Step 1: Mulai
+            currentNode = document.getElementById('flowchart-start');
+            if (currentNode) { currentNode.classList.add('highlight'); }
+            showMessage('flowchart', flowchartNodes[0].message);
+            await new Promise(resolve => setTimeout(resolve, delay));
+            if (currentNode) { currentNode.classList.remove('highlight'); }
+
+            // Step 2: Masukkan nilai r
+            currentNode = document.getElementById('flowchart-input');
+            if (currentNode) { currentNode.classList.add('highlight'); }
+            showMessage('flowchart', flowchartNodes[1].message(r));
+            await new Promise(resolve => setTimeout(resolve, delay));
+            if (currentNode) { currentNode.classList.remove('highlight'); }
+
+            // Step 3: Hitung nilai Luas L
+            currentNode = document.getElementById('flowchart-process');
+            if (currentNode) { currentNode.classList.add('highlight'); }
+            const area = Math.PI * r * r;
+            showMessage('flowchart', flowchartNodes[2].message(r, area));
+            await new Promise(resolve => setTimeout(resolve, delay));
+            if (currentNode) { currentNode.classList.remove('highlight'); }
+
+            // Step 4: Tampilkan Luas L
+            currentNode = document.getElementById('flowchart-output');
+            if (currentNode) { currentNode.classList.add('highlight'); }
+            if (flowchartResultDisplay) {
+                flowchartResultDisplay.textContent = `Luas Lingkaran: ${area.toFixed(2)}`;
+                flowchartResultDisplay.classList.remove('hidden');
+            }
+            showMessage('flowchart', flowchartNodes[3].message(area));
+            await new Promise(resolve => setTimeout(resolve, delay));
+            if (currentNode) { currentNode.classList.remove('highlight'); }
+
+            // Step 5: Selesai
+            currentNode = document.getElementById('flowchart-end');
+            if (currentNode) { currentNode.classList.add('highlight'); }
+            showMessage('flowchart', flowchartNodes[4].message);
+            await new Promise(resolve => setTimeout(resolve, delay));
+            if (currentNode) { currentNode.classList.remove('highlight'); }
+
+            showMessage('flowchart', 'Simulasi selesai! Masukkan nilai r baru untuk mencoba lagi.');
+        }
+
+        // --- Expression Evaluation Logic (copied from previous immersive) ---
+        function evaluateExpression() {
+            const operand1Input = document.getElementById('operand1');
+            const operand2Input = document.getElementById('operand2');
+            const operatorSelect = document.getElementById('operatorSelect');
+            const resultDisplay = document.getElementById('expressionResult');
+
+            if (!operand1Input || !operand2Input || !operatorSelect || !resultDisplay) {
+                console.error("One or more expression elements not found.");
+                return;
+            }
+
+            const operand1 = parseFloat(operand1Input.value);
+            const operand2 = parseFloat(operand2Input.value);
+            const operator = operatorSelect.value;
+
+            if (isNaN(operand1) || isNaN(operand2)) {
+                showMessage('ekspresi', 'Harap masukkan kedua operand (angka) yang valid.');
+                resultDisplay.textContent = 'Error';
+                return;
+            }
+
+            let result;
+            switch (operator) {
+                case '+': result = operand1 + operand2; break;
+                case '-': result = operand1 - operand2; break;
+                case '*': result = operand1 * operand2; break;
+                case '/':
+                    if (operand2 === 0) {
+                        showMessage('ekspresi', 'Tidak bisa membagi dengan nol!');
+                        resultDisplay.textContent = 'Error';
+                        return;
+                    }
+                    result = operand1 / operand2;
+                    break;
+                case '==': result = operand1 == operand2; break;
+                case '!=': result = operand1 != operand2; break;
+                case '>': result = operand1 > operand2; break;
+                case '<': result = operand1 < operand2; break;
+                case '>=': result = operand1 >= operand2; break;
+                case '<=': result = operand1 <= operand2; break;
+                default: result = 'Operator tidak valid';
+            }
+            resultDisplay.textContent = result;
+            showMessage('ekspresi', `Ekspresi ${operand1} ${operator} ${operand2} dievaluasi menjadi: ${result}`);
+        }
+
+        // --- Logical Expression Evaluation Logic (copied from previous immersive) ---
+        function evaluateLogicalExpression() {
+            const logicalOperand1 = document.getElementById('logicalOperand1');
+            const logicalOperand2 = document.getElementById('logicalOperand2');
+            const logicalOperatorSelect = document.getElementById('logicalOperatorSelect');
+            const logicalExpressionResult = document.getElementById('logicalExpressionResult');
+
+            if (!logicalOperand1 || !logicalOperand2 || !logicalOperatorSelect || !logicalExpressionResult) {
+                console.error("One or more logical expression elements not found.");
+                return;
+            }
+
+            const operandA = logicalOperand1.value === 'true';
+            const operandB = logicalOperand2.value === 'true';
+            const operator = logicalOperatorSelect.value;
+
+            let result;
+            let expressionString;
+
+            switch (operator) {
+                case 'AND':
+                    result = operandA && operandB;
+                    expressionString = `A (${operandA}) AND B (${operandB})`;
+                    break;
+                case 'OR':
+                    result = operandA || operandB;
+                    expressionString = `A (${operandA}) OR B (${operandB})`;
+                    break;
+                case 'NOT':
+                    result = !operandA;
+                    expressionString = `NOT A (${operandA})`;
+                    break;
+                default:
+                    result = 'Operator tidak valid';
+                    expressionString = 'Ekspresi tidak valid';
+            }
+            logicalExpressionResult.textContent = result;
+            showMessage('logika', `Ekspresi logika ${expressionString} dievaluasi menjadi: ${result}`);
+        }
+
+        // --- Stack Logic (copied from previous immersive) ---
+        let stack = [];
+        const stackContainer = document.getElementById('stackContainer');
+        const stackInput = document.getElementById('stackInput');
+
+        function renderStack() {
+            if (!stackContainer) return; // Ensure container exists
+            stackContainer.innerHTML = '';
+            stack.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'stack-item';
+                div.textContent = item;
+                stackContainer.appendChild(div);
+            });
+        }
+
+        function pushStack() {
+            if (!stackInput) return; // Ensure input exists
+            const item = stackInput.value.trim();
+            if (item) {
+                stack.push(item);
+                stackInput.value = '';
+                renderStack();
+                showMessage('stack', `'${item}' ditambahkan ke Stack. (Push)`);
+            } else {
+                showMessage('stack', 'Masukkan item untuk ditambahkan ke Stack.');
+            }
+        }
+
+        function popStack() {
+            if (!stackContainer) return; // Ensure container exists
+            if (stack.length > 0) {
+                const itemToRemove = stack[stack.length - 1];
+                const lastItemDiv = stackContainer.lastElementChild;
+                if (lastItemDiv) {
+                    lastItemDiv.classList.add('removing');
+                    setTimeout(() => {
+                        stack.pop();
+                        renderStack();
+                        showMessage('stack', `'${itemToRemove}' dihapus dari Stack. (Pop)`);
+                    }, 300);
+                }
+            } else {
+                showMessage('stack', 'Stack kosong, tidak ada yang bisa dihapus.');
+            }
+        }
+
+        // --- Queue Logic (copied from previous immersive) ---
+        let queue = [];
+        const queueContainer = document.getElementById('queueContainer');
+        const queueInput = document.getElementById('queueInput');
+
+        function renderQueue() {
+            if (!queueContainer) return; // Ensure container exists
+            queueContainer.innerHTML = '';
+            queue.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'queue-item';
+                div.textContent = item;
+                queueContainer.appendChild(div);
+            });
+        }
+
+        function enqueueQueue() {
+            if (!queueInput) return; // Ensure input exists
+            const item = queueInput.value.trim();
+            if (item) {
+                queue.push(item);
+                queueInput.value = '';
+                renderQueue();
+                showMessage('queue', `'${item}' ditambahkan ke Queue. (Enqueue)`);
+            } else {
+                showMessage('queue', 'Masukkan item untuk ditambahkan ke Queue.');
+            }
+        }
+
+        function dequeueQueue() {
+            if (!queueContainer) return; // Ensure container exists
+            if (queue.length > 0) {
+                const itemToRemove = queue[0];
+                const firstItemDiv = queueContainer.firstElementChild;
+                if (firstItemDiv) {
+                    firstItemDiv.classList.add('removing');
+                    setTimeout(() => {
+                        queue.shift();
+                        renderQueue();
+                        showMessage('queue', `'${itemToRemove}' dihapus dari Queue. (Dequeue)`);
+                    }, 300);
+                }
+            } else {
+                showMessage('queue', 'Queue kosong, tidak ada yang bisa dihapus.');
+            }
+        }
+
+        // --- Graph Node Interaction (copied from previous immersive) ---
+        let activeGraphNode = null;
+        function showGraphNodeInfo(nodeId, info) {
+            const currentNode = document.getElementById(`graph-node-${nodeId}`);
+            if (!currentNode) return; // Ensure node exists
+
+            if (activeGraphNode) {
+                const prevNode = document.getElementById(`graph-node-${activeGraphNode}`);
+                if (prevNode) prevNode.classList.remove('active');
+            }
+            currentNode.classList.add('active');
+            activeGraphNode = nodeId;
+
+            showMessage('graph', `Simpul ${nodeId}: ${info}`);
+        }
+
+        // --- Tree Node Interaction (copied from previous immersive) ---
+        let activeTreeNode = null;
+        function showTreeNodeInfo(nodeId, info) {
+            const currentNode = document.getElementById(`tree-node-${nodeId}`);
+            if (!currentNode) return; // Ensure node exists
+
+            if (activeTreeNode) {
+                const prevNode = document.getElementById(`tree-node-${activeTreeNode}`);
+                if (prevNode) prevNode.classList.remove('active');
+            }
+            currentNode.classList.add('active');
+            activeTreeNode = nodeId;
+
+            showMessage('tree', `Simpul ${nodeId}: ${info}`);
+        }
+
+        // Initialize presentation
+        document.addEventListener('DOMContentLoaded', () => {
+            showSlide(currentSlide);
+            renderStack(); // Ensure stack is rendered on its slide
+            renderQueue(); // Ensure queue is rendered on its slide
+        });
+    </script>
+</body>
+
+</html>

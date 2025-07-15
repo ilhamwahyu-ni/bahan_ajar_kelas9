@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentasi Kesepakatan Belajar - Informatika IX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .slide {
+            display: none;
+            perspective: 1000px;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide-content {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn-up 0.6s 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .slide.active .slide-content {
+            animation: fadeIn-up 0.6s 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .slide.active .animated-item {
+            opacity: 0;
+            animation: fadeIn-up 0.5s ease-out forwards;
+        }
+
+        .slide.active .item-1 {
+            animation-delay: 0.4s;
+        }
+
+        .slide.active .item-2 {
+            animation-delay: 0.6s;
+        }
+
+        .slide.active .item-3 {
+            animation-delay: 0.8s;
+        }
+
+        .slide.active .item-4 {
+            animation-delay: 1.0s;
+        }
+
+
+        @keyframes fadeIn-up {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-enter {
+            animation: zoom-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        @keyframes zoom-in {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        #prevBtn,
+        #nextBtn {
+            transition: all 0.3s ease;
+        }
+
+        #prevBtn:hover,
+        #nextBtn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-100 flex items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <!-- Kontainer Presentasi -->
+        <div id="presentation-container" class="relative p-6 md:p-8">
+
+            <!-- Slide 1: Judul -->
+            <div id="slide-1" class="slide active">
+                <div class="text-center flex flex-col items-center justify-center h-[500px]">
+                    <div class="slide-content flex flex-col items-center">
+                        <span class="text-indigo-500 font-bold animated-item item-1">Informatika Kelas IX</span>
+                        <h1 class="text-4xl md:text-6xl font-black text-slate-800 mt-2 animated-item item-2">Kesepakatan
+                            Belajar Bersama</h1>
+                        <p class="mt-4 text-lg text-slate-600 animated-item item-3">Perjalanan Belajar Kita di Tahun
+                            Ajaran 2025/2026</p>
+                        <div class="mt-8 animated-item item-4">
+                            <svg class="w-24 h-24 text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6.253v11.494m-9-5.747h18"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.25 6.75l-10.5 10.5M6.75 6.75l10.5 10.5"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Tim Kita -->
+            <div id="slide-2" class="slide">
+                <div class="flex flex-col items-center justify-center h-[500px]">
+                    <h2 class="text-3xl font-bold text-slate-800 text-center animated-item item-1">Pihak yang Terlibat
+                        dalam Pembelajaran</h2>
+                    <div class="mt-12 grid md:grid-cols-2 gap-12 w-full max-w-2xl">
+                        <div class="text-center p-6 bg-slate-50 rounded-lg animated-item item-2">
+                            <svg class="w-16 h-16 mx-auto text-indigo-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                            <h3 class="mt-4 text-xl font-bold text-slate-700">Pemandu Belajar (Guru)</h3>
+                            <p class="mt-1 text-slate-500">Ilham Wahyuni, S.Pd, M.Kom</p>
+                        </div>
+                        <div class="text-center p-6 bg-slate-50 rounded-lg animated-item item-3">
+                            <svg class="w-16 h-16 mx-auto text-indigo-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                </path>
+                            </svg>
+                            <h3 class="mt-4 text-xl font-bold text-slate-700">Peserta Didik (Siswa)</h3>
+                            <p class="mt-1 text-slate-500">[Nama Siswa]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Misi Pembelajaran -->
+            <div id="slide-3" class="slide">
+                <div class="flex flex-col items-center justify-center h-[500px]">
+                    <h2 class="text-3xl font-bold text-slate-800 text-center animated-item item-1">Apa Saja yang Akan
+                        Kita Pelajari?</h2>
+                    <div class="mt-10 grid sm:grid-cols-3 gap-8 text-center">
+                        <div class="p-4 animated-item item-2">
+                            <svg class="w-12 h-12 mx-auto text-indigo-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V7a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                </path>
+                            </svg>
+                            <p class="mt-2 font-semibold text-slate-700">Mahir Mengolah Data</p>
+                        </div>
+                        <div class="p-4 animated-item item-3">
+                            <svg class="w-12 h-12 mx-auto text-indigo-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z">
+                                </path>
+                            </svg>
+                            <p class="mt-2 font-semibold text-slate-700">Merancang Logika Program</p>
+                        </div>
+                        <div class="p-4 animated-item item-4">
+                            <svg class="w-12 h-12 mx-auto text-indigo-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                                </path>
+                            </svg>
+                            <p class="mt-2 font-semibold text-slate-700">Menjadi Warga Digital Cerdas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Semester Gasal -->
+            <div id="slide-4" class="slide">
+                <div class="flex flex-col items-center justify-center h-[500px]">
+                    <h2 class="text-3xl font-bold text-slate-800 text-center animated-item item-1">Rencana Pembelajaran:
+                        Semester Gasal</h2>
+                    <ul class="mt-8 list-none space-y-3 text-lg text-slate-600">
+                        <li class="flex items-center animated-item item-1"><svg class="w-5 h-5 text-indigo-500 mr-3"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>Berfikir Komputasional</li>
+                        <li class="flex items-center animated-item item-2"><svg class="w-5 h-5 text-indigo-500 mr-3"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>Sistim Komputer</li>
+                        <li class="flex items-center animated-item item-3"><svg class="w-5 h-5 text-indigo-500 mr-3"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>Jaringan Komputer dan Internet</li>
+                        <li class="flex items-center animated-item item-4"><svg class="w-5 h-5 text-indigo-500 mr-3"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>Analisis Data</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 5: Semester Genap -->
+            <div id="slide-5" class="slide">
+                <div class="flex flex-col items-center justify-center h-[500px]">
+                    <h2 class="text-3xl font-bold text-slate-800 text-center animated-item item-1">Rencana Pembelajaran:
+                        Semester Genap</h2>
+                    <ul class="mt-8 list-none space-y-3 text-lg text-slate-600">
+                        <li class="flex items-center animated-item item-1"><svg class="w-5 h-5 text-indigo-500 mr-3"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>Algoritma dan Pemograman</li>
+                        <li class="flex items-center animated-item item-2"><svg class="w-5 h-5 text-indigo-500 mr-3"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>Keamanan Digital (Kata Sandi, Malware)</li>
+                        <li class="flex items-center animated-item item-3"><svg class="w-5 h-5 text-indigo-500 mr-3"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>Dampak sosial Informatika</li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 6: Cara Belajar -->
+            <div id="slide-6" class="slide">
+                <div class="flex flex-col items-center justify-center h-[500px]">
+                    <h2 class="text-3xl font-bold text-slate-800 text-center animated-item item-1">Metode Belajar &
+                        Penilaian</h2>
+                    <div class="mt-10 grid md:grid-cols-2 gap-8 w-full">
+                        <div class="bg-slate-50 p-6 rounded-lg animated-item item-2">
+                            <h3 class="font-bold text-xl text-slate-700">Cara Belajar</h3>
+                            <ul class="mt-4 space-y-2 text-slate-600">
+                                <li>Diskusi & Tanya Jawab</li>
+                                <li>Praktik Langsung</li>
+                                <li>Kerja Kelompok & Proyek</li>
+                                <li>Penyelesaian Studi Kasus</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-lg animated-item item-3">
+                            <h3 class="font-bold text-xl text-slate-700">Penilaian</h3>
+                            <ul class="mt-4 space-y-2 text-slate-600">
+                                <li>Keaktifan di Kelas</li>
+                                <li>Tugas Formatif & Kuis</li>
+                                <li>Hasil Proyek / Karya</li>
+                                <li>Penilaian Sumatif (PTS/PAS)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Komitmen -->
+            <div id="slide-7" class="slide">
+                <div class="flex flex-col items-center justify-center h-[500px]">
+                    <h2 class="text-3xl font-bold text-slate-800 text-center animated-item item-1">Komitmen Bersama</h2>
+                    <div class="mt-10 grid md:grid-cols-2 gap-8 w-full">
+                        <div class="bg-indigo-50 p-6 rounded-lg animated-item item-2">
+                            <h3 class="font-bold text-xl text-indigo-800">Peserta Didik</h3>
+                            <p class="mt-4 text-indigo-700">Aktif, mengerjakan tugas, menghargai sesama, serta menjaga
+                                fasilitas bersama.</p>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-lg animated-item item-3">
+                            <h3 class="font-bold text-xl text-slate-700">Guru</h3>
+                            <p class="mt-4 text-slate-600">Membimbing, menciptakan suasana kondusif, memberi umpan
+                                balik, dan menilai secara adil.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Transisi ke OSN -->
+            <div id="slide-8" class="slide">
+                <div class="text-center flex flex-col items-center justify-center h-[500px]">
+                    <div class="slide-content flex flex-col items-center">
+                        <h1 class="text-4xl md:text-5xl font-bold text-slate-800 animated-item item-1">Kesempatan
+                            Istimewa</h1>
+                        <p class="mt-4 text-lg text-slate-600 animated-item item-2">Perjalanan belajar kita tidak
+                            berakhir di sini!</p>
+                        <div class="mt-8 p-6 animated-item item-3 flex justify-center">
+                            <svg class="w-24 h-24 text-indigo-300 animate-pulse" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <p class="mt-4 text-xl font-bold text-slate-700">Ada tantangan spesial untuk Anda yang
+                            berani!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Apa itu OSN? -->
+            <div id="slide-9" class="slide">
+                <div class="text-center flex flex-col items-center justify-center h-[500px]">
+                    <div class="slide-content">
+                        <svg class="w-20 h-20 mx-auto text-amber-400 animated-item item-1" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                            </path>
+                        </svg>
+                        <h2 class="text-3xl font-bold text-slate-800 mt-4 animated-item item-2">Tantangan Spesial: OSN
+                            Informatika</h2>
+                        <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600 animated-item item-3">
+                            Ajang kompetisi <span class="font-bold text-indigo-600">problem solving</span> paling
+                            bergengsi di Indonesia menggunakan logika dan pemrograman untuk membuktikan kemampuanmu di
+                            tingkat nasional!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: Materi OSN -->
+            <div id="slide-10" class="slide">
+                <div class="flex flex-col items-center justify-center h-[500px]">
+                    <h2 class="text-3xl font-bold text-slate-800 text-center animated-item item-1">Materi Utama Tim OSN
+                    </h2>
+                    <div class="mt-10 grid sm:grid-cols-3 gap-8 text-center w-full max-w-3xl">
+                        <div class="p-4 bg-slate-50 rounded-lg animated-item item-2">
+                            <svg class="w-12 h-12 mx-auto text-indigo-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                            <h3 class="mt-2 font-bold text-slate-700">Coding C++</h3>
+                            <p class="text-sm text-slate-500">Bahasa standar kompetisi untuk menuangkan logika.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-lg animated-item item-3">
+                            <svg class="w-12 h-12 mx-auto text-indigo-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z">
+                                </path>
+                            </svg>
+                            <h3 class="mt-2 font-bold text-slate-700">Algoritma & Struktur Data</h3>
+                            <p class="text-sm text-slate-500">Strategi efisien untuk masalah kompleks.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-lg animated-item item-4">
+                            <svg class="w-12 h-12 mx-auto text-indigo-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <h3 class="mt-2 font-bold text-slate-700">Logika Matematika</h3>
+                            <p class="text-sm text-slate-500">Dasar dari semua pemecahan masalah.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: Cara Belajar OSN -->
+            <div id="slide-11" class="slide">
+                <div class="flex flex-col items-center justify-center h-[500px]">
+                    <h2 class="text-3xl font-bold text-slate-800 text-center animated-item item-1">Strategi Latihan Tim
+                        OSN</h2>
+                    <div class="mt-10 grid md:grid-cols-3 gap-8 w-full max-w-3xl">
+                        <div class="bg-indigo-50 p-6 rounded-lg text-center animated-item item-2">
+                            <h3 class="font-bold text-lg text-indigo-800">Bimbingan Intensif</h3>
+                            <p class="mt-2 text-indigo-700">Sesi khusus bersama Bapak di labor untuk bedah soal dan
+                                konsep.</p>
+                        </div>
+                        <div class="bg-indigo-50 p-6 rounded-lg text-center animated-item item-3">
+                            <h3 class="font-bold text-lg text-indigo-800">Latihan Mandiri</h3>
+                            <p class="mt-2 text-indigo-700">Mengasah kemampuan dengan soal-soal dari berbagai platform
+                                kompetisi.</p>
+                        </div>
+                        <div class="bg-indigo-50 p-6 rounded-lg text-center animated-item item-4">
+                            <h3 class="font-bold text-lg text-indigo-800">Rekan Diskusi AI</h3>
+                            <p class="mt-2 text-indigo-700">Gunakan AI untuk brainstorming ide, debug kode, &
+                                memahami konsep sulit.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12: Call to Action OSN -->
+            <div id="slide-12" class="slide">
+                <div class="text-center flex flex-col items-center justify-center h-[500px]">
+                    <div class="slide-content flex flex-col items-center">
+                        <svg class="w-24 h-24 mx-auto text-indigo-500 animated-item item-1" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        <h1 class="text-4xl md:text-5xl font-bold text-slate-800 mt-4 animated-item item-2">Apakah Kamu
+                            Tertantang?</h1>
+                        <p class="mt-4 text-lg text-slate-600 animated-item item-3">Jika Anda merasa terpanggil untuk
+                            tantangan ini, jangan ragu!</p>
+                        <p class="mt-4 text-lg text-slate-600 animated-item item-3">Hanya 5 Orang!!!</p>
+                        <p
+                            class="mt-6 font-bold text-xl text-indigo-600 bg-indigo-100 py-3 px-6 rounded-full inline-block animated-item item-4">
+                            Segera temui Bapak di Labor Komputer!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Navigasi -->
+        <div class="bg-slate-800 p-4 flex justify-between items-center">
+            <button id="prevBtn"
+                class="bg-slate-600 hover:bg-slate-500 text-white font-bold py-2 px-4 rounded-lg transition-colors disabled:bg-slate-700 disabled:cursor-not-allowed">
+                Sebelumnya
+            </button>
+            <div id="slide-counter" class="text-white text-sm">
+                Slide 1 / 12
+            </div>
+            <button id="nextBtn"
+                class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                Berikutnya
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- Logika untuk mengontrol presentasi ---
+        let currentSlide = 1;
+        const totalSlides = document.querySelectorAll('.slide').length;
+
+        // Mengambil elemen dari DOM
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slideCounter = document.getElementById('slide-counter');
+
+        // Fungsi untuk menampilkan slide
+        function showSlide(slideNumber) {
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active', 'slide-enter');
+            });
+
+            const activeSlide = document.getElementById(`slide-${slideNumber}`);
+            if (activeSlide) {
+                activeSlide.classList.add('active', 'slide-enter');
+            }
+
+            slideCounter.textContent = `Slide ${slideNumber} / ${totalSlides}`;
+
+            prevBtn.disabled = slideNumber === 1;
+            nextBtn.disabled = slideNumber === totalSlides;
+        }
+
+        // Event listener untuk tombol berikutnya
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        });
+
+        // Event listener untuk tombol sebelumnya
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+
+        // Event listener untuk navigasi dengan keyboard (tombol panah)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextBtn.click();
+            } else if (e.key === 'ArrowLeft') {
+                prevBtn.click();
+            }
+        });
+
+        // Tampilkan slide pertama saat halaman dimuat
+        showSlide(currentSlide);
+    </script>
+
+</body>
+
+</html>
