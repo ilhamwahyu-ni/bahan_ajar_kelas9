@@ -249,7 +249,6 @@
         .queue-item {
             border: 1px solid #4299e1;
             background-color: #90cdf4;
-            /* More vibrant blue */
             color: white;
             padding: 0.6rem 1.2rem;
             margin-bottom: 8px;
@@ -310,6 +309,7 @@
         }
 
         .button-group button:hover {
+            background-color: #2c5282;
             transform: translateY(-2px);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
@@ -700,9 +700,30 @@
                 <li><span class="icon">❓</span> <span class="font-bold text-blue-700">Algoritma Kondisional
                         (Seleksi):</span> Ada keputusan yang harus diambil! Algoritma ini akan memilih jalur eksekusi
                     berdasarkan kondisi tertentu (misalnya, jika A benar, lakukan X; jika tidak, lakukan Y).</li>
+                <div class="p-4 border rounded-lg bg-yellow-50 mt-4 mb-4">
+                    <h4 class="font-semibold text-orange-700 mb-2">Contoh Interaktif: Cek Angka Positif/Negatif</h4>
+                    <div class="flex items-center justify-center space-x-2">
+                        <input type="number" id="conditionalInput" placeholder="Masukkan angka"
+                            class="p-2 border rounded-md w-40">
+                        <button onclick="checkNumberType()"
+                            class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg">Cek</button>
+                    </div>
+                    <p id="conditionalResult" class="mt-2 text-orange-800 font-semibold"></p>
+                </div>
                 <li><span class="icon">🔄</span> <span class="font-bold text-blue-700">Algoritma Perulangan
                         (Looping):</span> Sebuah blok instruksi diulang berkali-kali sampai kondisi tertentu terpenuhi.
                     Sangat efisien untuk tugas yang berulang!</li>
+                <div class="p-4 border rounded-lg bg-purple-50 mt-4 mb-4">
+                    <h4 class="font-semibold text-purple-700 mb-2">Contoh Interaktif: Hitung Sampai Angka</h4>
+                    <div class="flex items-center justify-center space-x-2">
+                        <input type="number" id="loopInput" placeholder="Hitung sampai..."
+                            class="p-2 border rounded-md w-40">
+                        <button onclick="startLoopSimulation()"
+                            class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg">Mulai
+                            Hitung</button>
+                    </div>
+                    <p id="loopResult" class="mt-2 text-purple-800 font-semibold"></p>
+                </div>
             </ul>
             <br>
             <h3 class="text-lg font-semibold mb-2 mt-6">Bagaimana Kita Menyajikan Algoritma? Ada 3 Cara Utama yang
@@ -714,9 +735,37 @@
                 <li><span class="icon">💻</span> <span class="font-bold text-blue-700">Pseudocode:</span> Menggunakan
                     campuran bahasa manusia dan sintaks pemrograman sederhana. Ini seperti "kode palsu" yang mudah
                     dibaca manusia dan dapat dengan mudah diterjemahkan ke bahasa pemrograman.</li>
+                <div class="p-4 border rounded-lg bg-gray-100 mt-4 mb-4 font-mono text-sm text-gray-800">
+                    <h4 class="font-semibold text-gray-700 mb-2">Contoh Pseudocode (Cek Angka):</h4>
+                    <pre>
+                            <code class="whitespace-pre-wrap">
+                                START
+                                  BACA angka
+                                  JIKA angka > 0 MAKA
+                                    TULIS "Angka Positif"
+                                  JIKA TIDAK JIKA angka < 0 MAKA
+                                    TULIS "Angka Negatif"
+                                  JIKA TIDAK
+                                    TULIS "Angka Nol"
+                                SELESAI
+                            </code>
+                        </pre>
+                    <h4 class="font-semibold text-gray-700 mb-2 mt-4">Contoh Pseudocode (Perulangan):</h4>
+                    <pre>
+                            <code class="whitespace-pre-wrap">
+                                START
+                                  BACA batas_angka
+                                  UNTUK setiap i DARI 1 HINGGA batas_angka LAKUKAN
+                                    TULIS i
+                                  SELESAI
+                                SELESAI
+                            </code>
+                        </pre>
+                </div>
                 <li><span class="icon">📊</span> <span class="font-bold text-blue-700">Flowchart (Diagram Alir):</span>
                     Menggunakan simbol grafis standar untuk merepresentasikan langkah-langkah dan alur logika. Visual
-                    dan sangat intuitif!</li>
+                    dan sangat intuitif! <br> Anda bisa melihat contoh *flowchart* interaktif di <span
+                        class="font-semibold text-blue-600 cursor-pointer" </span>.</li>
             </ul>
         </div>
 
@@ -845,9 +894,9 @@
             <h3 class="text-lg font-semibold mb-2 mt-6">Kegunaan Graph dan Tree dalam Kehidupan Sehari-hari</h3>
             <p class="mb-4 text-gray-700">Struktur data Graph dan Tree mungkin terdengar abstrak, tetapi keduanya
                 memiliki peran yang sangat penting dalam berbagai aplikasi di sekitar kita:</p>
-            <ul class="list-disc pl-5 text-gray-700">
-                <li><span class="font-bold text-blue-700">Graph:</span>
-                    <ul class="list-circle pl-5 mt-2">
+            <ul>
+                <li><span class="icon">🔗</span> <span class="font-bold text-blue-700">Graph:</span>
+                    <ul>
                         <li><span class="icon">👥</span> <span class="font-semibold">Media Sosial:</span> Jaringan
                             pertemanan Anda di Facebook atau koneksi di LinkedIn adalah contoh Graph. Setiap orang
                             adalah simpul, dan hubungan pertemanan/koneksi adalah sisi.</li>
@@ -862,8 +911,8 @@
                             berdasarkan apa yang dibeli orang lain.</li>
                     </ul>
                 </li>
-                <li><span class="font-bold text-blue-700">Tree:</span>
-                    <ul class="list-circle pl-5 mt-2">
+                <li><span class="icon">🌳</span> <span class="font-bold text-blue-700">Tree:</span>
+                    <ul>
                         <li><span class="icon">📁</span> <span class="font-semibold">Sistem File Komputer:</span>
                             Struktur folder dan file di komputer Anda adalah contoh Tree. Folder utama adalah akar, dan
                             sub-folder serta file adalah cabangnya.</li>
@@ -886,7 +935,8 @@
         <!-- Navigation Buttons -->
         <div class="navigation-buttons">
             <button id="prevButton" onclick="changeSlide(-1)" disabled>Sebelumnya</button>
-            <span id="slideCounter" class="text-gray-700 font-semibold">Slide 1 dari 9</span>
+            <span id="slideCounter" class="text-gray-700 font-semibold">Slide 1 dari 8</span>
+            <!-- Updated total slides -->
             <button id="nextButton" onclick="changeSlide(1)">Selanjutnya</button>
         </div>
     </div>
@@ -894,7 +944,7 @@
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
+        const totalSlides = slides.length; // Dynamically get total slides
         const prevButton = document.getElementById('prevButton');
         const nextButton = document.getElementById('nextButton');
         const slideCounter = document.getElementById('slideCounter');
@@ -968,7 +1018,7 @@
             slideCounter.textContent = `Slide ${currentSlide + 1} dari ${totalSlides}`;
         }
 
-        // --- Flowchart Simulation Logic (copied from previous immersive) ---
+        // --- Flowchart Simulation Logic ---
         const flowchartNodes = [
             { id: 'flowchart-start', message: 'Ini adalah titik awal algoritma.' },
             { id: 'flowchart-input', message: (r) => `Langkah ini meminta input jari-jari lingkaran (r) dari pengguna. Nilai r yang dimasukkan adalah ${r}.` },
@@ -1050,7 +1100,7 @@
             showMessage('flowchart', 'Simulasi selesai! Masukkan nilai r baru untuk mencoba lagi.');
         }
 
-        // --- Expression Evaluation Logic (copied from previous immersive) ---
+        // --- Expression Evaluation Logic ---
         function evaluateExpression() {
             const operand1Input = document.getElementById('operand1');
             const operand2Input = document.getElementById('operand2');
@@ -1097,7 +1147,7 @@
             showMessage('ekspresi', `Ekspresi ${operand1} ${operator} ${operand2} dievaluasi menjadi: ${result}`);
         }
 
-        // --- Logical Expression Evaluation Logic (copied from previous immersive) ---
+        // --- Logical Expression Evaluation Logic ---
         function evaluateLogicalExpression() {
             const logicalOperand1 = document.getElementById('logicalOperand1');
             const logicalOperand2 = document.getElementById('logicalOperand2');
@@ -1137,7 +1187,57 @@
             showMessage('logika', `Ekspresi logika ${expressionString} dievaluasi menjadi: ${result}`);
         }
 
-        // --- Stack Logic (copied from previous immersive) ---
+        // --- Conditional Algorithm Example Logic ---
+        function checkNumberType() {
+            const inputElement = document.getElementById('conditionalInput');
+            const resultElement = document.getElementById('conditionalResult');
+            const number = parseFloat(inputElement.value);
+
+            if (isNaN(number)) {
+                resultElement.textContent = "Masukkan angka yang valid!";
+                showMessage('algoritma-kondisional', 'Input tidak valid. Harap masukkan angka.');
+                return;
+            }
+
+            if (number > 0) {
+                resultElement.textContent = "Angka Positif!";
+                showMessage('algoritma-kondisional', `Angka ${number} adalah POSITIF.`);
+            } else if (number < 0) {
+                resultElement.textContent = "Angka Negatif!";
+                showMessage('algoritma-kondisional', `Angka ${number} adalah NEGATIF.`);
+            } else {
+                resultElement.textContent = "Angka Nol!";
+                showMessage('algoritma-kondisional', `Angka ${number} adalah NOL.`);
+            }
+        }
+
+        // --- Looping Algorithm Example Logic ---
+        async function startLoopSimulation() {
+            const inputElement = document.getElementById('loopInput');
+            const resultElement = document.getElementById('loopResult');
+            const limit = parseInt(inputElement.value);
+
+            if (isNaN(limit) || limit <= 0) {
+                resultElement.textContent = "Masukkan angka positif untuk batas!";
+                showMessage('algoritma-perulangan', 'Input tidak valid. Harap masukkan angka positif.');
+                return;
+            }
+
+            resultElement.textContent = "Mulai menghitung...";
+            let count = 1;
+            let loopDelay = 500; // milliseconds
+
+            while (count <= limit) {
+                resultElement.textContent = `Menghitung: ${count}`;
+                showMessage('algoritma-perulangan', `Langkah perulangan: ${count}`);
+                await new Promise(resolve => setTimeout(resolve, loopDelay));
+                count++;
+            }
+            resultElement.textContent += " Selesai!";
+            showMessage('algoritma-perulangan', 'Perulangan selesai!');
+        }
+
+        // --- Stack Logic ---
         let stack = [];
         const stackContainer = document.getElementById('stackContainer');
         const stackInput = document.getElementById('stackInput');
@@ -1184,7 +1284,7 @@
             }
         }
 
-        // --- Queue Logic (copied from previous immersive) ---
+        // --- Queue Logic ---
         let queue = [];
         const queueContainer = document.getElementById('queueContainer');
         const queueInput = document.getElementById('queueInput');
@@ -1231,7 +1331,7 @@
             }
         }
 
-        // --- Graph Node Interaction (copied from previous immersive) ---
+        // --- Graph Node Interaction ---
         let activeGraphNode = null;
         function showGraphNodeInfo(nodeId, info) {
             const currentNode = document.getElementById(`graph-node-${nodeId}`);
@@ -1247,7 +1347,7 @@
             showMessage('graph', `Simpul ${nodeId}: ${info}`);
         }
 
-        // --- Tree Node Interaction (copied from previous immersive) ---
+        // --- Tree Node Interaction ---
         let activeTreeNode = null;
         function showTreeNodeInfo(nodeId, info) {
             const currentNode = document.getElementById(`tree-node-${nodeId}`);
