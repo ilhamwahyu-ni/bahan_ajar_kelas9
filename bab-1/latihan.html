@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Soal Konsep Dasar Ilmu Komputer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Mengimpor font Inter dan Poppins dari Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@400;600;700&display=swap');
+
+        /* Gaya dasar untuk body */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Menggunakan font Inter sebagai default */
+            background-color: #e0f2f7;
+            /* Warna latar belakang yang lebih terang dan menarik */
+            color: #2d3748;
+            /* Warna teks yang lebih gelap untuk keterbacaan */
+            line-height: 1.7;
+            /* Jarak antar baris untuk kenyamanan membaca */
+            overflow-x: hidden;
+            /* Mencegah scroll horizontal */
+            display: flex;
+            /* Menggunakan flexbox untuk tata letak */
+            justify-content: center;
+            /* Memusatkan konten secara horizontal */
+            align-items: flex-start;
+            /* Memulai konten dari atas */
+            min-height: 100vh;
+            /* Tinggi minimum viewport */
+            padding: 2rem;
+            /* Padding di sekitar body */
+        }
+
+        /* Gaya untuk kontainer utama kuis */
+        .quiz-container {
+            max-width: 900px;
+            /* Lebar maksimum kontainer kuis */
+            width: 100%;
+            /* Lebar responsif */
+            margin: 2.5rem auto;
+            /* Margin vertikal dan horizontal otomatis */
+            padding: 2.5rem;
+            /* Padding di dalam kontainer */
+            background-color: #ffffff;
+            /* Latar belakang putih */
+            border-radius: 16px;
+            /* Sudut membulat */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            /* Bayangan lembut */
+            display: flex;
+            /* Menggunakan flexbox */
+            flex-direction: column;
+            /* Tata letak kolom */
+        }
+
+        /* Gaya untuk judul utama */
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            /* Font Poppins untuk judul */
+            font-size: 2.8rem;
+            /* Ukuran font besar */
+            text-align: center;
+            /* Teks di tengah */
+            background-image: linear-gradient(to right, #4a90e2, #6a82fb);
+            /* Gradien warna */
+            -webkit-background-clip: text;
+            /* Menerapkan gradien ke teks */
+            -webkit-text-fill-color: transparent;
+            /* Membuat teks transparan agar gradien terlihat */
+            margin-bottom: 2rem;
+            /* Margin bawah */
+            letter-spacing: -0.05em;
+            /* Jarak antar huruf */
+            font-weight: 800;
+            /* Tebal font */
+        }
+
+        /* Gaya untuk sub-judul (H2) */
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            /* Font Poppins */
+            font-size: 2.2rem;
+            /* Ukuran font */
+            border-bottom: 3px solid #e2e8f0;
+            /* Garis bawah tebal */
+            padding-bottom: 0.8rem;
+            /* Padding bawah */
+            margin-top: 1rem;
+            /* Margin atas */
+            color: #3182ce;
+            /* Warna biru */
+            font-weight: 700;
+            /* Tebal font */
+        }
+
+        /* Gaya untuk sub-sub-judul (H3) */
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            /* Font Poppins */
+            font-size: 1.6rem;
+            /* Ukuran font */
+            margin-top: 1.5rem;
+            /* Margin atas */
+            color: #4299e1;
+            /* Warna biru lebih terang */
+            font-weight: 600;
+            /* Tebal font */
+        }
+
+        /* Gaya untuk paragraf */
+        p {
+            margin-bottom: 1rem;
+            /* Margin bawah */
+        }
+
+        /* Gaya untuk input teks dan area teks */
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            padding: 0.6rem 1rem;
+            /* Padding */
+            border-radius: 8px;
+            /* Sudut membulat */
+            border: 1px solid #cbd5e0;
+            /* Border tipis */
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+            /* Bayangan dalam */
+            transition: border-color 0.2s, box-shadow 0.2s;
+            /* Transisi halus */
+        }
+
+        /* Gaya fokus untuk input dan textarea */
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #63b3ed;
+            /* Warna border saat fokus */
+            box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.3);
+            /* Bayangan luar saat fokus */
+            outline: none;
+            /* Menghilangkan outline default */
+        }
+
+        /* Gaya untuk tombol */
+        button {
+            padding: 0.75rem 1.5rem;
+            /* Padding */
+            border-radius: 8px;
+            /* Sudut membulat */
+            font-weight: 600;
+            /* Tebal font */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            /* Bayangan */
+            transition: all 0.2s ease-in-out;
+            /* Transisi halus */
+        }
+
+        /* Gaya hover untuk tombol */
+        button:hover {
+            transform: translateY(-2px);
+            /* Efek angkat saat hover */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            /* Bayangan lebih kuat saat hover */
+        }
+
+        /* Gaya aktif untuk tombol */
+        button:active {
+            transform: translateY(1px);
+            /* Efek tekan saat aktif */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* Bayangan lebih kecil saat aktif */
+        }
+
+        /* Gaya untuk kotak informasi/hasil */
+        .info-box {
+            background-color: #fff3cd;
+            /* Warna latar belakang kuning muda */
+            border: 1px solid #ffeeba;
+            /* Border kuning muda */
+            color: #856404;
+            /* Warna teks kuning gelap */
+            padding: 1.2rem;
+            /* Padding */
+            border-radius: 10px;
+            /* Sudut membulat */
+            margin-bottom: 2rem;
+            /* Margin bawah */
+            text-align: center;
+            /* Teks di tengah */
+            font-weight: 600;
+            /* Tebal font */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            /* Bayangan */
+            transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.3s;
+            /* Transisi halus */
+        }
+
+        /* Gaya aktif untuk kotak informasi/hasil */
+        .info-box.active-message {
+            background-color: #d4edda;
+            /* Warna latar belakang hijau muda */
+            border-color: #c3e6cb;
+            /* Border hijau muda */
+            color: #155724;
+            /* Warna teks hijau gelap */
+            box-shadow: 0 0 15px rgba(184, 218, 255, 0.8);
+            /* Bayangan lebih kuat */
+        }
+
+        /* Penyesuaian responsif untuk layar kecil */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            /* Ukuran font H1 lebih kecil */
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            /* Ukuran font H2 lebih kecil */
+            h3 {
+                font-size: 1.3rem;
+            }
+
+            /* Ukuran font H3 lebih kecil */
+            .quiz-container {
+                padding: 1.5rem;
+                margin: 1rem auto;
+            }
+
+            /* Padding dan margin lebih kecil */
+        }
+    </style>
+</head>
+
+<body class="p-4">
+    <div class="quiz-container">
+        <h1>Latihan Soal</h1>
+
+        <p class="mb-4 text-gray-700">Saatnya menguji pemahaman Anda tentang Ekspresi dan Operator! Jawablah
+            pertanyaan-pertanyaan berikut dengan teliti.</p>
+
+        <h3 class="text-lg font-semibold mb-4 mt-6 text-blue-800">Soal Pilihan Ganda: Pilihlah jawaban yang paling
+            tepat!</h3>
+
+        <!-- Soal 1: Aritmetika -->
+        <div class="mb-6 p-4 border rounded-lg bg-blue-50">
+            <p class="font-semibold mb-2">1. Berapakah hasil dari ekspresi: (10 \text{ + } 5) \text{ * } 2 \text{ - } 8
+                / 4</p>
+            <div class="flex flex-col space-y-2">
+                <label class="inline-flex items-center">
+                    <input type="radio" name="q1" value="28" class="form-radio text-blue-600">
+                    <span class="ml-2">28</span>
+                </label>
+                <label class="inline-flex items-center">
+                    <input type="radio" name="q1" value="30" class="form-radio text-blue-600">
+                    <span class="ml-2">30</span>
+                </label>
+                <label class="inline-flex items-center">
+                    <input type="radio" name="q1" value="22" class="form-radio text-blue-600">
+                    <span class="ml-2">22</span>
+                </label>
+                <label class="inline-flex items-center">
+                    <input type="radio" name="q1" value="18" class="form-radio text-blue-600">
+                    <span class="ml-2">18</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Soal 2: Relasional -->
+        <div class="mb-6 p-4 border rounded-lg bg-green-50">
+            <p class="font-semibold mb-2">2. Jika variabel x = 15 dan y = 10, manakah ekspresi relasional berikut yang
+                akan menghasilkan nilai **TRUE**?</p>
+            <div class="flex flex-col space-y-2">
+                <label class="inline-flex items-center">
+                    <input type="radio" name="q2" value="x < y" class="form-radio text-green-600">
+                    <span class="ml-2">x < y</span>
+                </label>
+                <label class="inline-flex items-center">
+                    <input type="radio" name="q2" value="x == y" class="form-radio text-green-600">
+                    <span class="ml-2">x == y</span>
+                </label>
+                <label class="inline-flex items-center">
+                    <input type="radio" name="q2" value="x >= y" class="form-radio text-green-600">
+                    <span class="ml-2">x >= y</span>
+                </label>
+                <label class="inline-flex items-center">
+                    <input type="radio" name="q2" value="x != 15" class="form-radio text-green-600">
+                    <span class="ml-2">x != 15</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Soal 3: Logika (AND) -->
+        <div class="mb-6 p-4 border rounded-lg bg-yellow-50">
+            <p class="font-semibold mb-2">3. Manakah kombinasi nilai A dan B berikut yang akan membuat ekspresi $$(A
+                \text{ AND } \text{TRUE})$$ menjadi **FALSE**?</p>
+            <div class="flex flex-col space-y-2">
+                <label class="inline-flex items-center">
+                    <input type="radio" name="q3" value="A = TRUE, B = TRUE" class="form-radio text-yellow-600">
+                    <span class="ml-2">A = TRUE, B = TRUE</span>
+                </label>
+                <label class="inline-flex items-center">
+                    <input type="radio" name="q3" value="A = TRUE, B = FALSE" class="form-radio text-yellow-600">
+                    <span class="ml-2">A = TRUE, B = FALSE</span>
+                </label>
+                <label class="inline-flex items-center">
+                    <input type="radio" name="q3" value="A = FALSE, B = TRUE" class="form-radio text-yellow-600">
+                    <span class="ml-2">A = FALSE, B = TRUE</span>
+                </label>
+                <label class="inline-flex items-center">
+                    <input type="radio" name="q3" value="A = FALSE, B = FALSE" class="form-radio text-yellow-600">
+                    <span class="ml-2">A = FALSE, B = FALSE</span>
+                </label>
+            </div>
+        </div>
+
+        <h3 class="text-lg font-semibold mb-4 mt-8 text-purple-800">Soal Algoritma:</h3>
+
+        <!-- Soal 4: Algoritma Sekuensial -->
+        <div class="mb-6 p-4 border rounded-lg bg-purple-50">
+            <p class="font-semibold mb-2">4. Perhatikan langkah-langkah berikut untuk membuat secangkir kopi:</p>
+            <ol class="list-decimal list-inside ml-4 mb-2 text-gray-700">
+                <li>Panaskan air.</li>
+                <li>Masukkan bubuk kopi ke dalam cangkir.</li>
+                <li>Tuangkan air panas ke dalam cangkir.</li>
+                <li>Tambahkan gula (opsional).</li>
+                <li>Aduk hingga rata.</li>
+            </ol>
+            <p class="font-semibold mb-2">Jenis algoritma apakah yang paling tepat menggambarkan proses di atas?</p>
+            <div class="flex flex-col space-y-2">
+                <label class="inline-flex items-center">
+                    <input type="radio" name="q4" value="Sekuensial" class="form-radio text-purple-600">
+                    <span class="ml-2">Sekuensial</span>
+                </label>
+                <label class="inline-flex items-center">
+                    <input type="radio" name="q4" value="Kondisional" class="form-radio text-purple-600">
+                    <span class="ml-2">Kondisional</span>
+                </label>
+                <label class="inline-flex items-center">
+                    <input type="radio" name="q4" value="Perulangan" class="form-radio text-purple-600">
+                    <span class="ml-2">Perulangan</span>
+                </label>
+                <label class="inline-flex items-center">
+                    <input type="radio" name="q4" value="Rekursif" class="form-radio text-purple-600">
+                    <span class="ml-2">Rekursif</span>
+                </label>
+            </div>
+        </div>
+
+        <h3 class="text-lg font-semibold mb-4 mt-8 text-red-800">Soal HOTS (Higher-Order Thinking Skills):</h3>
+
+        <!-- Soal HOTS 3 (sebelumnya HOTS 1) -->
+        <div class="mb-6 p-4 border rounded-lg bg-red-50">
+            <p class="font-semibold mb-2">5. Sebuah sistem keamanan memiliki dua sensor: Sensor A dan Sensor B. Alarm
+                akan berbunyi JIKA Sensor A mendeteksi gerakan DAN Sensor B mendeteksi panas. Jika pada suatu malam
+                Sensor A mendeteksi gerakan TAPI Sensor B TIDAK mendeteksi panas, apakah alarm akan berbunyi? Jelaskan
+                alasan Anda menggunakan konsep operator logika!</p>
+            <textarea id="hots1Answer"
+                class="mt-2 p-2 border rounded-md w-full h-24 shadow-sm focus:ring-red-500 focus:border-red-500"
+                placeholder="Tulis jawaban Anda di sini..."></textarea>
+        </div>
+
+        <!-- Soal HOTS 4 (sebelumnya HOTS 2) -->
+        <div class="mb-6 p-4 border rounded-lg bg-purple-50">
+            <p class="font-semibold mb-2">6. Anda sedang menulis program untuk menentukan apakah seorang siswa LULUS
+                atau TIDAK LULUS. Syarat LULUS adalah: Nilai Matematika (NM) harus lebih besar atau sama dengan 70 DAN
+                (Nilai Bahasa Indonesia (NBI) harus lebih besar dari 60 ATAU Nilai IPA (NIPA) lebih besar dari 65). Jika
+                seorang siswa memiliki NM = 75, NBI = 55, dan NIPA = 70, apakah siswa tersebut LULUS? Tuliskan ekspresi
+                logika lengkapnya dan evaluasi hasilnya langkah demi langkah!</p>
+            <textarea id="hots2Answer"
+                class="mt-2 p-2 border rounded-md w-full h-32 shadow-sm focus:ring-purple-500 focus:border-purple-500"
+                placeholder="Tulis jawaban Anda di sini..."></textarea>
+        </div>
+
+        <!-- Soal HOTS 5: Algoritma (Baru) -->
+        <div class="mb-6 p-4 border rounded-lg bg-indigo-50">
+            <p class="font-semibold mb-2">7. Anda ingin membuat algoritma sederhana untuk membantu teman Anda memilih
+                pakaian berdasarkan cuaca. Buatlah Flowchart atau daftar langkah-langkah deskriptif untuk algoritma ini.
+                Pertimbangkan setidaknya dua kondisi cuaca (misalnya, cerah dan hujan) dan bagaimana pilihan pakaian
+                akan berbeda!</p>
+            <textarea id="hots3Answer"
+                class="mt-2 p-2 border rounded-md w-full h-32 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="Tulis jawaban Anda di sini..."></textarea>
+        </div>
+
+
+        <div class="flex justify-center mt-6">
+            <button onclick="checkAnswers()"
+                class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg shadow-md">Periksa
+                Jawaban</button>
+        </div>
+        <div id="quizResult" class="info-box mt-4 hidden"></div>
+    </div>
+
+    <script>
+        // Fungsi untuk menampilkan pesan pada kotak hasil kuis
+        let messageTimeout; // Variabel untuk menyimpan timeout pesan
+        function showMessage(message) {
+            const quizResult = document.getElementById('quizResult'); // Mendapatkan elemen hasil kuis
+            if (!quizResult) {
+                console.error("Elemen 'quizResult' tidak ditemukan!"); // Log error jika elemen tidak ada
+                return;
+            }
+
+            quizResult.innerHTML = message; // Menampilkan pesan di kotak hasil
+            quizResult.classList.remove('hidden'); // Menampilkan kotak hasil
+            quizResult.classList.add('active-message'); // Menambahkan kelas untuk gaya aktif
+
+            // Menghapus pesan setelah beberapa detik
+            if (messageTimeout) {
+                clearTimeout(messageTimeout); // Menghapus timeout sebelumnya jika ada
+            }
+            messageTimeout = setTimeout(() => {
+                quizResult.classList.add('hidden'); // Menyembunyikan kotak hasil
+                quizResult.classList.remove('active-message'); // Menghapus kelas aktif
+            }, 10000); // Pesan akan hilang setelah 10 detik
+        }
+
+        // Fungsi untuk memeriksa jawaban kuis
+        function checkAnswers() {
+            let score = 0; // Inisialisasi skor
+            let feedback = ''; // Inisialisasi string umpan balik
+
+            // Soal 1: Aritmetika
+            const q1Answer = document.querySelector('input[name="q1"]:checked'); // Mendapatkan jawaban yang dipilih
+            if (q1Answer && q1Answer.value === "28") { // Memeriksa jawaban benar
+                score++; // Menambah skor jika benar
+                feedback += '1. Jawaban Anda untuk soal Aritmetika BENAR! (10 + 5) * 2 - 8 / 4 = 15 * 2 - 2 = 30 - 2 = 28.\n';
+            } else {
+                feedback += '1. Jawaban Anda untuk soal Aritmetika SALAH. (Jawaban benar: 28)\n';
+            }
+
+            // Soal 2: Relasional
+            const q2Answer = document.querySelector('input[name="q2"]:checked'); // Mendapatkan jawaban yang dipilih
+            if (q2Answer && q2Answer.value === "x >= y") { // Memeriksa jawaban benar
+                score++; // Menambah skor jika benar
+                feedback += '2. Jawaban Anda untuk soal Relasional BENAR! (15 >= 10 adalah TRUE)\n';
+            } else {
+                feedback += '2. Jawaban Anda untuk soal Relasional SALAH. (Jawaban benar: x >= y)\n';
+            }
+
+            // Soal 3: Logika (AND)
+            const q3Answer = document.querySelector('input[name="q3"]:checked'); // Mendapatkan jawaban yang dipilih
+            if (q3Answer && q3Answer.value === "A = FALSE, B = TRUE") { // Memeriksa jawaban benar
+                score++; // Menambah skor jika benar
+                feedback += '3. Jawaban Anda untuk soal Logika (AND) BENAR! (FALSE AND TRUE = FALSE)\n';
+            } else {
+                feedback += '3. Jawaban Anda untuk soal Logika (AND) SALAH. (Jawaban benar: A = FALSE, B = TRUE)\n';
+            }
+
+            // Soal 4: Algoritma Sekuensial
+            const q4Answer = document.querySelector('input[name="q4"]:checked');
+            if (q4Answer && q4Answer.value === "Sekuensial") {
+                score++;
+                feedback += '4. Jawaban Anda untuk soal Algoritma Sekuensial BENAR! Proses membuat kopi adalah urutan langkah-langkah yang berurutan.\n';
+            } else {
+                feedback += '4. Jawaban Anda untuk soal Algoritma Sekuensial SALAH. (Jawaban benar: Sekuensial)\n';
+            }
+
+            // Evaluasi Soal HOTS 1 (sekarang Soal 5)
+            const hots1Answer = document.getElementById('hots1Answer').value.trim();
+            if (hots1Answer) {
+                feedback += '\nJawaban HOTS 5 Anda akan dinilai secara manual. Ingat, ekspresi `Gerakan AND Panas` membutuhkan kedua kondisi TRUE agar alarm berbunyi. Jika Sensor A (Gerakan) TRUE tetapi Sensor B (Panas) FALSE, maka TRUE AND FALSE akan menghasilkan FALSE, sehingga alarm TIDAK berbunyi.\n';
+            } else {
+                feedback += '\nAnda belum mengisi jawaban untuk Soal HOTS 5.\n';
+            }
+
+            // Evaluasi Soal HOTS 2 (sekarang Soal 6)
+            const hots2Answer = document.getElementById('hots2Answer').value.trim();
+            if (hots2Answer) {
+                feedback += 'Jawaban HOTS 6 Anda akan dinilai secara manual. Ekspresi logikanya adalah: `(NM >= 70) AND (NBI > 60 OR NIPA > 65)`. Dengan nilai yang diberikan, `(75 >= 70)` adalah TRUE, `(55 > 60)` adalah FALSE, dan `(70 > 65)` adalah TRUE. Jadi, ekspresi menjadi `TRUE AND (FALSE OR TRUE)`, yang menyederhanakan menjadi `TRUE AND TRUE`, dan hasilnya adalah TRUE. Siswa tersebut LULUS.\n';
+            } else {
+                feedback += 'Anda belum mengisi jawaban untuk Soal HOTS 6.\n';
+            }
+
+            // Evaluasi Soal HOTS 3 (sekarang Soal 7 - Algoritma)
+            const hots3Answer = document.getElementById('hots3Answer').value.trim();
+            if (hots3Answer) {
+                feedback += 'Jawaban HOTS 7 Anda akan dinilai secara manual. Pastikan pseudocode atau langkah-langkah deskriptif Anda mencakup kondisi cuaca dan pilihan pakaian yang sesuai.\n';
+            } else {
+                feedback += '\nAnda belum mengisi jawaban untuk Soal HOTS 7.\n';
+            }
+
+
+            // Menampilkan hasil dan umpan balik
+            showMessage(`<h3>Hasil Kuis Anda:</h3><p>Anda mendapatkan ${score} dari 4 soal pilihan ganda yang benar.</p><pre class="whitespace-pre-wrap">${feedback}</pre><p class="mt-4 font-semibold text-center">Untuk soal HOTS, pahami penjelasan di atas dan diskusikan dengan guru Anda!</p>`);
+        }
+    </script>
+</body>
+
+</html>
