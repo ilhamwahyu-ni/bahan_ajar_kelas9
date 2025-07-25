@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bab 5: Jaringan Komputer dan Internet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles to complement Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .slides-viewport {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+            visibility: hidden;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            position: relative;
+            /* Change position to relative for the active slide to define viewport height */
+            visibility: visible;
+        }
+
+        .slide.exiting-left {
+            transform: translateX(-100%);
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .slide.exiting-right {
+            transform: translateX(100%);
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        figcaption {
+            text-align: center;
+            font-style: italic;
+            color: #6b7280;
+            /* gray-500 */
+            margin-top: 0.5rem;
+        }
+
+        /* Style for zoomable images */
+        .slide img {
+            cursor: zoom-in;
+        }
+
+        /* Modal transition */
+        #imageModal {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* NEW: Animation styles for slide elements */
+        .animatable {
+            opacity: 0;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .anim-fade-in {
+            transform: translateY(20px);
+        }
+
+        .animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <div class="presentation-container w-full max-w-4xl bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col">
+        <!-- Slide Content Area -->
+        <div class="slides-viewport p-6 sm:p-10 flex-grow">
+            <!-- Slide 1: Judul dan Tujuan -->
+            <div class="slide active">
+                <h2
+                    class="text-3xl font-bold text-indigo-700 border-b-2 border-indigo-200 pb-2 mb-4 animatable anim-fade-in">
+                    Bab 5: Jaringan Komputer dan Internet</h2>
+                <p class="text-gray-700 mb-6 animatable anim-fade-in">Keberadaan jaringan komputer dan internet sudah
+                    tidak bisa dipisahkan lagi di era digital sekarang ini. Banyak kegiatan dan fasilitas publik yang
+                    bergantung pada jaringan komputer dan internet. Sebagai contoh adalah mesin ATM dan kegiatan
+                    perbankan berbasis mobile banking.</p>
+                <h3 class="text-2xl font-bold text-gray-800 mb-3 animatable anim-fade-in">Tujuan Pembelajaran</h3>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li class="animatable anim-fade-in">Mengetahui dan memahami tentang konsep dasar jaringan komputer
+                        dan internet.</li>
+                    <li class="animatable anim-fade-in">Mempraktikkan koneksi internet menggunakan Wi-Fi, Bluetooth, dan
+                        tethering.</li>
+                    <li class="animatable anim-fade-in">Menjelaskan tentang enkripsi data dan beberapa metode enkripsi.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Slide 2: Pengantar Jaringan Komputer dan Internet -->
+            <div class="slide">
+                <h2
+                    class="text-3xl font-bold text-indigo-700 border-b-2 border-indigo-200 pb-2 mb-4 animatable anim-fade-in">
+                    A. Pengantar Jaringan Komputer dan Internet</h2>
+
+                <p class="text-gray-700 animatable anim-fade-in"><b>Jaringan komputer</b> adalah kumpulan beberapa
+                    perangkat seperti komputer dan alat elektronik lainnya yang terhubung satu sama lain untuk melakukan
+                    pengolahan data, penyebaran informasi, dan pertukaran data.</p>
+            </div>
+
+            <!-- Slide 3: Jaringan Lokal (LAN) -->
+            <div class="slide">
+                <h3 class="text-2xl font-bold text-gray-800 mb-3 animatable anim-fade-in">1. Jaringan Lokal (Local Area
+                    Network/LAN)</h3>
+                <p class="text-gray-700 mb-4 animatable anim-fade-in">Jaringan komputer yang menghubungkan perangkat
+                    dalam area terbatas seperti rumah, sekolah, atau gedung kantor. Setiap perangkat memiliki <b>Alamat
+                        IP (IP address)</b> yang unik. Dalam LAN, terdapat <b>server</b> yang melayani dan <b>klien</b>
+                    yang mengakses layanan.</p>
+                <img src="https://tse1.mm.bing.net/th/id/OIP.bHmgt-8pX7GRc-HWLPx3WgHaEK?rs=1&pid=ImgDetMain&o=7&rm=3"
+                    alt="Skema jaringan LAN"
+                    class="mx-auto rounded-lg shadow-md max-h-64 object-contain bg-white animatable anim-fade-in"
+                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/E2E8F0/4A5568?text=Gagal+Memuat+Gambar';">
+                <figcaption class="animatable anim-fade-in">Gambar 5.1 Skema jaringan LAN</figcaption>
+            </div>
+
+            <!-- Slide 4: MAN dan WAN -->
+            <div class="slide">
+                <h3 class="text-2xl font-bold text-gray-800 mb-3 animatable anim-fade-in">2. Metropolitan Area Network
+                    (MAN)</h3>
+                <p class="text-gray-700 mb-4 animatable anim-fade-in">Menghubungkan komputer dalam area yang lebih luas
+                    dari LAN, mencakup satu kota (10-50 km). MAN merupakan gabungan dari beberapa jaringan LAN.</p>
+                <img src="https://i.postimg.cc/pTqCJkDk/jaringan-man-metropolitan-area-network.jpg"
+                    alt="Skema jaringan MAN"
+                    class="mx-auto rounded-lg shadow-md mb-6 max-h-48 object-contain bg-white animatable anim-fade-in"
+                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/E2E8F0/4A5568?text=Gagal+Memuat+Gambar';">
+                <h3 class="text-2xl font-bold text-gray-800 mb-3 animatable anim-fade-in">3. Wide Area Network (WAN)
+                </h3>
+                <p class="text-gray-700 animatable anim-fade-in">Jaringan komputer dengan jangkauan koneksi yang sangat
+                    luas, seringkali mencakup area suatu negara.</p>
+                <img src="https://www.smtsa.net/wp-content/uploads/2022/06/Creating-a-Wide-Area-Network-Example-13-06-2022.jpg"
+                    alt="Skema jaringan WAN"
+                    class="mx-auto rounded-lg shadow-md max-h-48 object-contain bg-white animatable anim-fade-in"
+                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/E2E8F0/4A5568?text=Gagal+Memuat+Gambar';">
+                <figcaption class="animatable anim-fade-in">Gambar 5.3 Skema jaringan WAN</figcaption>
+            </div>
+
+            <!-- Slide 5: Internet -->
+            <div class="slide">
+                <h3 class="text-2xl font-bold text-gray-800 mb-3 animatable anim-fade-in">4. Internet</h3>
+                <p class="text-gray-700 mb-4 animatable anim-fade-in">Singkatan dari <b>interconnection-networking</b>,
+                    yaitu jaringan global yang menghubungkan perangkat di seluruh dunia. Agar dapat mengakses, perangkat
+                    harus terhubung dengan <b>Internet Service Provider (ISP)</b>.</p>
+                <img src="https://tse4.mm.bing.net/th/id/OIP.yK-Ws8AS8hXRr4sdhpFQfAHaE7?rs=1&pid=ImgDetMain&o=7&rm=3"
+                    alt="Skema internet"
+                    class="mx-auto rounded-lg shadow-md max-h-72 object-contain animatable anim-fade-in">
+                <figcaption class="animatable anim-fade-in">Gambar 5.4 ISP</figcaption>
+            </div>
+
+            <!-- Slide 6: Perangkat Keras Jaringan -->
+            <div class="slide">
+                <h2
+                    class="text-3xl font-bold text-indigo-700 border-b-2 border-indigo-200 pb-2 mb-4 animatable anim-fade-in">
+                    Perangkat Keras Jaringan</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
+                    <li class="animatable anim-fade-in"><b>Ethernet/LAN Card:</b> Kartu jaringan.</li>
+                    <li class="animatable anim-fade-in"><b>Router:</b> Mentransmisikan paket data.</li>
+                    <li class="animatable anim-fade-in"><b>Kabel Jaringan:</b> Seperti kabel UTP, STP, dan fiber optik.
+                    </li>
+                    <li class="animatable anim-fade-in"><b>Hub:</b> Mengoneksikan banyak komputer.</li>
+                    <li class="animatable anim-fade-in"><b>Komputer Server:</b> Menjalankan layanan dalam jaringan.</li>
+                </ul>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Ethernet_10-100_pci_card.jpg"
+                        alt="Kartu LAN" class="w-full h-32 object-cover rounded-lg shadow-md animatable anim-fade-in"
+                        onerror="this.onerror=null;this.src='https://placehold.co/400x300/E2E8F0/4A5568?text=LAN+Card';">
+                    <img src="https://i.ytimg.com/vi/r9DtISHRGm0/maxresdefault.jpg" alt="Router Nirkabel"
+                        class="w-full h-32 object-cover rounded-lg shadow-md animatable anim-fade-in"
+                        onerror="this.onerror=null;this.src='https://placehold.co/400x300/E2E8F0/4A5568?text=Router';">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/5-port_10-100_Ethernet_switch_and_hub.jpg/1280px-5-port_10-100_Ethernet_switch_and_hub.jpg"
+                        alt="Network Hub" class="w-full h-32 object-cover rounded-lg shadow-md animatable anim-fade-in"
+                        onerror="this.onerror=null;this.src='https://placehold.co/400x300/E2E8F0/4A5568?text=Hub';">
+                </div>
+            </div>
+
+            <!-- Slide 7: Info Tambahan -->
+            <div class="slide">
+                <div
+                    class="bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-4 rounded-r-lg mb-6 animatable anim-fade-in">
+                    <h4 class="font-bold">Tahukah Kamu? Mengenal IPv6</h4>
+                    <p><b>IPv6</b> diluncurkan untuk menampung lebih banyak alamat IP karena IPv4 sudah tidak mencukupi.
+                        IPv6 menggunakan alamat 128-bit, menyediakan alamat yang sangat banyak untuk era 5G dan Internet
+                        of Things (IoT).</p>
+                </div>
+                <div
+                    class="bg-green-50 border-l-4 border-green-500 text-green-800 p-4 rounded-r-lg animatable anim-fade-in">
+                    <h4 class="font-bold">Info Tokoh: Joseph Luhukay</h4>
+                    <p>Dikenal sebagai orang pertama yang melakukan koneksi internet di Indonesia. Pada tahun 1983, ia
+                        mengembangkan jaringan UINet di Universitas Indonesia, yang terhubung ke internet global pada
+                        tahun 1984.</p>
+                </div>
+            </div>
+
+            <!-- Slide 8: Koneksi Internet Berkabel -->
+            <div class="slide">
+                <h2
+                    class="text-3xl font-bold text-indigo-700 border-b-2 border-indigo-200 pb-2 mb-4 animatable anim-fade-in">
+                    B. Koneksi Internet Berkabel</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
+                    <li class="animatable anim-fade-in"><b>Dial-up PSTN:</b> Memanfaatkan jaringan telepon rumah.
+                        Kecepatan maksimal 56 Kbps.</li>
+                    <li class="animatable anim-fade-in"><b>ADSL:</b> Menggunakan teknologi modem pada frekuensi yang
+                        lebih tinggi.</li>
+                    <li class="animatable anim-fade-in"><b>LAN:</b> Bergabung pada jaringan lokal yang terhubung ke ISP.
+                    </li>
+                </ul>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <figure class="flex-1 animatable anim-fade-in">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Dial-up_modem_setup.svg/1024px-Dial-up_modem_setup.svg.png"
+                            alt="Skema dial-up PSTN"
+                            class="mx-auto rounded-lg shadow-md max-h-56 object-contain bg-white">
+                        <figcaption>Gambar 5.9 Skema dial-up PSTN</figcaption>
+                    </figure>
+                    <figure class="flex-1 animatable anim-fade-in">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/ADSL_scheme.svg/1200px-ADSL_scheme.svg.png"
+                            alt="Skema ADSL" class="mx-auto rounded-lg shadow-md max-h-56 object-contain bg-white">
+                        <figcaption>Gambar 5.10 Skema ADSL</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Slide 9: Koneksi Internet Nirkabel -->
+            <div class="slide">
+                <h2
+                    class="text-3xl font-bold text-indigo-700 border-b-2 border-indigo-200 pb-2 mb-4 animatable anim-fade-in">
+                    Koneksi Internet Nirkabel</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
+                    <li class="animatable anim-fade-in"><b>GPRS:</b> Menggunakan gelombang radio. Telah digantikan oleh
+                        3G, 4G, dan 5G.</li>
+                    <li class="animatable anim-fade-in"><b>Wi-Fi:</b> Koneksi tanpa kabel yang praktis namun
+                        jangkauannya terbatas.</li>
+                    <li class="animatable anim-fade-in"><b>Akses Satelit:</b> Menggunakan antena parabola, kecepatan
+                        tinggi namun mahal.</li>
+                </ul>
+                <img src="https://img.freepik.com/premium-photo/laptops-around-wifi-router-white-background_476612-12280.jpg?w=360"
+                    alt="Diagram jaringan nirkabel"
+                    class="mx-auto rounded-lg shadow-md max-h-64 object-contain bg-white animatable anim-fade-in"
+                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/E2E8F0/4A5568?text=Gagal+Memuat+Gambar';">
+                <figcaption class="animatable anim-fade-in">Gambar 5.11 Diagram jaringan nirkabel</figcaption>
+            </div>
+
+            <!-- Slide 10: Enkripsi Data -->
+            <div class="slide">
+                <h2
+                    class="text-3xl font-bold text-indigo-700 border-b-2 border-indigo-200 pb-2 mb-4 animatable anim-fade-in">
+                    C. Enkripsi Data</h2>
+                <p class="text-gray-700 mb-4 animatable anim-fade-in"><b>Enkripsi</b> adalah proses mengubah data
+                    menjadi bentuk yang tidak dapat dibaca oleh orang yang tidak berwenang untuk melindungi data saat
+                    online.</p>
+                <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
+                    <li class="animatable anim-fade-in">Menggunakan password yang kuat.</li>
+                    <li class="animatable anim-fade-in">Menghindari Wi-Fi publik yang tidak aman.</li>
+                    <li class="animatable anim-fade-in">Memperbarui perangkat lunak secara teratur.</li>
+                </ul>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Public_key_encryption.svg/1200px-Public_key_encryption.svg.png"
+                    alt="Skema enkripsi data"
+                    class="mx-auto rounded-lg shadow-md max-h-64 object-contain bg-white animatable anim-fade-in">
+                <figcaption class="animatable anim-fade-in">Gambar 5.12 Skema enkripsi data</figcaption>
+            </div>
+
+            <!-- Slide 11: Cara Kerja Enkripsi -->
+            <div class="slide">
+                <h3 class="text-2xl font-bold text-gray-800 mb-3 animatable anim-fade-in">Bagaimana Enkripsi Bekerja?
+                </h3>
+                <p class="text-gray-700 mb-4 animatable anim-fade-in">Pesan asli (<b>plaintext</b>) diacak menjadi
+                    <b>ciphertext</b>. Penerima memerlukan kunci untuk melakukan <b>dekripsi</b>.
+                </p>
+                <p class="text-gray-700 mb-4 animatable anim-fade-in">Contoh sederhana, <b>Sandi Caesar</b>:</p>
+                <div class="bg-gray-100 p-3 rounded-lg text-center font-mono animatable anim-fade-in">
+                    <p>"Selamat ulang tahun" &rarr; "Tfmbtnb vmbou vibo"</p>
+                </div>
+                <p class="text-gray-700 mt-4 animatable anim-fade-in">Enkripsi modern melibatkan <b>kunci
+                        kriptografi</b> yang kompleks.</p>
+            </div>
+
+            <!-- Slide 12: Jenis Kunci dan Metode Enkripsi -->
+            <div class="slide">
+                <h3 class="text-2xl font-bold text-gray-800 mb-3 animatable anim-fade-in">Jenis Kunci & Metode Enkripsi
+                </h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="animatable anim-fade-in">
+                        <h4 class="font-bold text-lg mb-2">Jenis Kunci Enkripsi</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            <li><b>Public Key (Asimetris)</b></li>
+                            <li><b>Private Key (Simetris)</b></li>
+                        </ul>
+                    </div>
+                    <div class="animatable anim-fade-in">
+                        <h4 class="font-bold text-lg mb-2">Metode Enkripsi Umum</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            <li>MD5, SHA, RC4, Base64</li>
+                        </ul>
+                    </div>
+                </div>
+                <div
+                    class="bg-green-50 border-l-4 border-green-500 text-green-800 p-4 rounded-r-lg mt-6 animatable anim-fade-in">
+                    <h4 class="font-bold">Info Tokoh: Ronald Rivest</h4>
+                    <p>Seorang ahli kriptografi, penemu algoritma enkripsi RSA, RC2, RC4, dan RC5.</p>
+                </div>
+            </div>
+
+            <!-- Slide 13: Informasi Penting Jaringan untuk Kelas 9 -->
+            <div class="slide">
+                <h2
+                    class="text-3xl font-bold text-indigo-700 border-b-2 border-indigo-200 pb-2 mb-4 animatable anim-fade-in">
+                    Informasi Penting Jaringan untuk Kelas 9</h2>
+
+                <div class="flex justify-center mb-6 flex-col items-center animatable anim-fade-in">
+                    <img src="https://cdn.pixabay.com/photo/2018/05/08/08/50/artificial-intelligence-3382521_1280.jpg"
+                        alt="Jaringan Komputer Modern" class="rounded-lg shadow-md max-h-64 object-cover">
+                    <figcaption class="text-center text-gray-500 text-sm mt-2">Ilustrasi Jaringan Komputer Modern
+                    </figcaption>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="animatable anim-fade-in">
+                        <h4 class="font-bold text-lg mb-2 text-indigo-600">Konsep Dasar yang Perlu Dikuasai</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><b>IP Address:</b> Alamat unik untuk identifikasi perangkat dalam jaringan (seperti
+                                alamat rumah di dunia digital)</li>
+                            <li><b>DNS (Domain Name System):</b> Penerjemah nama domain (misalnya google.com) menjadi
+                                alamat IP</li>
+                            <li><b>Bandwidth:</b> Jumlah data yang dapat ditransfer dalam waktu tertentu (diukur dalam
+                                Mbps)</li>
+                            <li><b>Latency:</b> Waktu yang dibutuhkan data untuk berpindah dari satu titik ke titik lain
+                                (ping)</li>
+                        </ul>
+                        <img src="https://cdn.pixabay.com/photo/2018/03/15/16/11/network-3229787_1280.jpg"
+                            alt="Konsep Jaringan"
+                            class="mt-4 w-full h-48 object-cover rounded-lg shadow-md animatable anim-fade-in">
+                    </div>
+                    <div class="animatable anim-fade-in">
+                        <h4 class="font-bold text-lg mb-2 text-indigo-600">Keamanan Jaringan untuk Remaja</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><b>Password yang Kuat:</b> Kombinasi huruf, angka, dan simbol yang sulit ditebak</li>
+                            <li><b>Phishing:</b> Penipuan untuk mendapatkan informasi pribadi melalui email/website
+                                palsu</li>
+                            <li><b>VPN:</b> Virtual Private Network untuk melindungi privasi online</li>
+                            <li><b>Firewall:</b> Sistem yang memblokir akses tidak sah ke jaringan pribadi</li>
+                        </ul>
+                        <img src="https://cdn.pixabay.com/photo/2017/01/17/14/44/security-1987093_1280.jpg"
+                            alt="Keamanan Jaringan"
+                            class="mt-4 w-full h-48 object-cover rounded-lg shadow-md animatable anim-fade-in">
+                    </div>
+                </div>
+
+                <div
+                    class="mt-6 bg-yellow-50 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-r-lg animatable anim-fade-in">
+                    <h4 class="font-bold">Fakta Menarik untuk Presentasi</h4>
+                    <div class="flex flex-col md:flex-row items-center gap-4">
+                        <ul class="list-disc list-inside space-y-1 mt-2 flex-1">
+                            <li>Internet pertama kali digunakan pada tahun 1969 dengan nama ARPANET</li>
+                            <li>Lebih dari 4,9 miliar orang di dunia menggunakan internet (63% populasi global)</li>
+                            <li>Kecepatan internet 5G bisa mencapai 10 Gbps, 100x lebih cepat dari 4G</li>
+                            <li>Rata-rata remaja Indonesia menghabiskan 8-9 jam sehari untuk online</li>
+                        </ul>
+                        <img src="https://cdn.pixabay.com/photo/2016/10/12/21/10/business-1736333_1280.jpg"
+                            alt="Perkembangan Internet Global"
+                            class="w-full md:w-1/3 h-48 object-cover rounded-lg shadow-md animatable anim-fade-in">
+                    </div>
+                </div>
+
+                <div class="mt-4 grid md:grid-cols-2 gap-4 animatable anim-fade-in">
+                    <div class="bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-4 rounded-r-lg">
+                        <h4 class="font-bold">Aplikasi Praktis Jaringan</h4>
+                        <p class="mt-2">Jaringan komputer memungkinkan: game online, pembelajaran jarak jauh, media
+                            sosial, streaming video, dan IoT (Internet of Things) seperti rumah pintar.</p>
+                        <img src="https://cdn.pixabay.com/photo/2020/03/06/08/00/e-learning-4906268_1280.jpg"
+                            alt="Pembelajaran Jarak Jauh"
+                            class="mt-3 w-full h-36 object-cover rounded-lg shadow-md animatable anim-fade-in">
+                    </div>
+                    <div class="bg-green-50 border-l-4 border-green-500 text-green-800 p-4 rounded-r-lg">
+                        <h4 class="font-bold">Perkembangan Terbaru</h4>
+                        <p class="mt-2">Teknologi 5G, Edge Computing, dan Cloud Computing mengubah cara kita terhubung
+                            dan berbagi informasi, memungkinkan aplikasi yang lebih cepat dan responsif.</p>
+                        <img src="https://cdn.pixabay.com/photo/2019/09/22/16/20/network-4496464_1280.jpg"
+                            alt="Teknologi 5G dan Cloud Computing"
+                            class="mt-3 w-full h-36 object-cover rounded-lg shadow-md animatable anim-fade-in">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 14: Rangkuman -->
+            <div class="slide">
+                <h2
+                    class="text-3xl font-bold text-indigo-700 border-b-2 border-indigo-200 pb-2 mb-4 animatable anim-fade-in">
+                    Rangkuman</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li class="animatable anim-fade-in">Jenis jaringan komputer: LAN, MAN, WAN, dan Internet.</li>
+                    <li class="animatable anim-fade-in">Perangkat keras jaringan: LAN card, router, hub, kabel, dan
+                        server.</li>
+                    <li class="animatable anim-fade-in">Koneksi internet bisa berkabel (Dial-Up, ADSL, LAN) atau
+                        nirkabel (GPRS, Wi-Fi, Satelit).</li>
+                    <li class="animatable anim-fade-in">Keamanan data dijaga dengan enkripsi.</li>
+                    <li class="animatable anim-fade-in">Enkripsi adalah proses mengubah data menjadi kode rahasia.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation bg-gray-50 p-4 flex items-center justify-between border-t mt-auto">
+            <button id="prevBtn"
+                class="nav-button bg-indigo-600 text-white py-2 px-4 rounded-lg shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">Sebelumnya</button>
+            <span id="slide-indicator" class="text-gray-600 font-semibold"></span>
+            <button id="nextBtn"
+                class="nav-button bg-indigo-600 text-white py-2 px-4 rounded-lg shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">Berikutnya</button>
+        </div>
+    </div>
+
+    <!-- Modal for Image Zoom -->
+    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden items-center justify-center p-4">
+        <span id="closeModal"
+            class="absolute top-4 right-6 text-white text-5xl font-bold cursor-pointer hover:text-gray-300 transition-colors">&times;</span>
+        <img id="modalImage" src="" alt="Gambar yang diperbesar" class="max-w-full max-h-full rounded-lg shadow-lg">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const slideIndicator = document.getElementById('slide-indicator');
+            let currentSlide = 0;
+            let isAnimating = false;
+            const imageModal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const closeModal = document.getElementById('closeModal');
+            const zoomableImages = document.querySelectorAll('.slide img');
+
+            /**
+             * Triggers animations for elements within a given slide.
+             * @param {HTMLElement} slide - The slide container element.
+             */
+            function animateSlideElements(slide) {
+                const elements = slide.querySelectorAll('.animatable');
+                elements.forEach((el, index) => {
+                    // Stagger the animation start time
+                    setTimeout(() => {
+                        el.classList.add('animated');
+                    }, (index + 1) * 150); // 150ms delay between each element
+                });
+            }
+
+            /**
+             * Resets animations for elements within a given slide.
+             * @param {HTMLElement} slide - The slide container element.
+             */
+            function resetSlideAnimations(slide) {
+                const elements = slide.querySelectorAll('.animatable');
+                elements.forEach(el => {
+                    el.classList.remove('animated');
+                });
+            }
+
+            function goToSlide(newIndex) {
+                if (isAnimating || newIndex < 0 || newIndex >= slides.length) {
+                    return;
+                }
+                isAnimating = true;
+
+                const oldIndex = currentSlide;
+                const oldSlide = slides[oldIndex];
+                const newSlide = slides[newIndex];
+                const direction = newIndex > oldIndex ? 'right' : 'left';
+
+                // Reset animations on the old slide before it transitions out
+                resetSlideAnimations(oldSlide);
+
+                newSlide.classList.remove('exiting-left', 'exiting-right');
+                newSlide.style.transform = direction === 'right' ? 'translateX(100%)' : 'translateX(-100%)';
+
+                setTimeout(() => {
+                    oldSlide.classList.remove('active');
+                    oldSlide.classList.add(direction === 'right' ? 'exiting-left' : 'exiting-right');
+
+                    newSlide.classList.add('active');
+                    newSlide.style.transform = 'translateX(0)';
+
+                    // Animate elements of the new slide
+                    animateSlideElements(newSlide);
+                }, 20);
+
+                currentSlide = newIndex;
+                updateNavigation();
+
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 600);
+            }
+
+            function updateNavigation() {
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === slides.length - 1;
+                slideIndicator.textContent = `Slide ${currentSlide + 1} dari ${slides.length}`;
+            }
+
+            prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+            nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !imageModal.classList.contains('hidden')) {
+                    hideModal();
+                    return;
+                }
+                if (!imageModal.classList.contains('hidden')) {
+                    return;
+                }
+                if (e.key === 'ArrowRight') {
+                    goToSlide(currentSlide + 1);
+                } else if (e.key === 'ArrowLeft') {
+                    goToSlide(currentSlide - 1);
+                }
+            });
+
+            function showModal(src) {
+                modalImage.src = src;
+                imageModal.classList.remove('hidden');
+                imageModal.classList.add('flex');
+            }
+
+            function hideModal() {
+                imageModal.classList.add('hidden');
+                imageModal.classList.remove('flex');
+                modalImage.src = '';
+            }
+
+            zoomableImages.forEach(img => {
+                img.addEventListener('click', function () {
+                    showModal(this.src);
+                });
+            });
+
+            closeModal.addEventListener('click', hideModal);
+            imageModal.addEventListener('click', (e) => {
+                if (e.target === imageModal) {
+                    hideModal();
+                }
+            });
+
+            // Initial setup
+            updateNavigation();
+            // Animate the first slide on page load
+            animateSlideElements(slides[currentSlide]);
+        });
+    </script>
+
+</body>
+
+</html>
