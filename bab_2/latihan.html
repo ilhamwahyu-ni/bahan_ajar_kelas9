@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tantangan Logika & Enkripsi</title>
+    <style>
+        /* Mengimpor font Poppins dari Google Fonts untuk tampilan yang modern */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1a2e; /* Warna latar belakang gelap seperti tema luar angkasa/teknologi */
+            color: #e0e0e0; /* Warna teks yang kontras dan nyaman dibaca */
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #16213e; /* Warna dasar untuk kontainer utama */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.15); /* Efek bayangan untuk memberikan kedalaman */
+            border: 1px solid #0f3460;
+        }
+
+        h1, h2, h3 {
+            color: #00c2cb; /* Warna aksen untuk judul */
+            border-bottom: 2px solid #e94560; /* Garis bawah sebagai pemisah */
+            padding-bottom: 10px;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #00c2cb;
+        }
+
+        .pola-lampu {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .lampu {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-block;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+        
+        .lampu:hover {
+            transform: scale(1.15); /* Efek zoom saat kursor di atas lampu */
+            box-shadow: 0 0 25px var(--glow-color); /* Efek glow yang lebih kuat saat hover */
+        }
+
+        .merah { 
+            background-color: #e94560; 
+            box-shadow: 0 0 15px #e94560;
+            --glow-color: #e94560;
+        }
+        .biru { 
+            background-color: #53a8b6; 
+            box-shadow: 0 0 15px #53a8b6;
+            --glow-color: #53a8b6;
+        }
+        
+        .card {
+            background-color: #0f3460; /* Warna kartu yang sedikit lebih gelap dari kontainer */
+            border-left: 5px solid #e94560;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+            transition: box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+        }
+        
+        .rules-card {
+            border-left: 5px solid #53a8b6;
+        }
+        
+        strong {
+            color: #fca311; /* Warna oranye untuk penekanan */
+        }
+        
+        .alphabet-ref {
+            background-color: #1a1a2e;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            letter-spacing: 3px;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.1em;
+            overflow-x: auto; /* Memastikan bisa di-scroll di layar kecil */
+        }
+        
+        .tugas-siswa {
+            background: linear-gradient(45deg, #fca311, #e94560);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 40px;
+            color: #1a1a2e;
+        }
+        
+        .tugas-siswa h2 {
+            color: #fff;
+            border-bottom: 2px solid #fff;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Tantangan Logika & Enkripsi</h1>
+        
+        <!-- TANTANGAN 1: KODE LAMPU BENI -->
+        <h2>🕵️‍♂️ Tantangan 1: Memecahkan Kode Rahasia Beni</h2>
+        <p>Beni mengirimkan pesan rahasia menggunakan 7 lampu. Misi kita adalah mencari tahu pola mana yang dikirim dengan benar sesuai aturan yang ada.</p>
+
+        <div class="card rules-card">
+            <h3>💡 Aturan Main Kode Lampu</h3>
+            <p>Beni menggunakan 5 lampu pertama untuk pesannya, dan 2 lampu terakhir sebagai <strong>kode pengecekan (checksum)</strong>.</p>
+            <ul>
+                <li><strong>Aturan Lampu ke-6 (Pengecek Biru):</strong> Lampu ini akan berwarna <strong>BIRU</strong> jika jumlah lampu biru di 5 lampu pertama adalah <strong>GENAP</strong> (ingat, 0 juga genap!). Jika jumlahnya ganjil, lampu ke-6 akan berwarna <strong>MERAH</strong>.</li>
+                <li><strong>Aturan Lampu ke-7 (Pengecek Merah):</strong> Lampu ini akan berwarna <strong>MERAH</strong> jika jumlah lampu merah di 6 lampu pertama adalah <strong>GENAP</strong>. Jika jumlahnya ganjil, lampu ke-7 akan berwarna <strong>BIRU</strong>.</li>
+            </ul>
+        </div>
+        
+        <h3>Pilihan Pola Lampu:</h3>
+        <!-- Opsi A -->
+        <div class="card">
+            <h4>Pola A</h4>
+            <div class="pola-lampu">
+                <span class="lampu merah"></span><span class="lampu biru"></span><span class="lampu merah"></span><span class="lampu merah"></span><span class="lampu merah"></span>
+                <span style="font-size: 2em; margin: 0 10px;">|</span>
+                <span class="lampu merah"></span><span class="lampu biru"></span>
+            </div>
+        </div>
+        <!-- Opsi B -->
+        <div class="card">
+            <h4>Pola B</h4>
+            <div class="pola-lampu">
+                <span class="lampu merah"></span><span class="lampu biru"></span><span class="lampu merah"></span><span class="lampu biru"></span><span class="lampu merah"></span>
+                <span style="font-size: 2em; margin: 0 10px;">|</span>
+                <span class="lampu biru"></span><span class="lampu merah"></span>
+            </div>
+        </div>
+        <!-- Opsi C -->
+        <div class="card">
+            <h4>Pola C</h4>
+            <div class="pola-lampu">
+                <span class="lampu merah"></span><span class="lampu biru"></span><span class="lampu biru"></span><span class="lampu biru"></span><span class="lampu biru"></span>
+                <span style="font-size: 2em; margin: 0 10px;">|</span>
+                <span class="lampu biru"></span><span class="lampu merah"></span>
+            </div>
+        </div>
+        <!-- Opsi D -->
+        <div class="card">
+            <h4>Pola D</h4>
+            <div class="pola-lampu">
+                <span class="lampu merah"></span><span class="lampu merah"></span><span class="lampu merah"></span><span class="lampu merah"></span><span class="lampu merah"></span>
+                <span style="font-size: 2em; margin: 0 10px;">|</span>
+                <span class="lampu merah"></span><span class="lampu biru"></span>
+            </div>
+        </div>
+        
+        <!-- TANTANGAN 2 & 3: SANDI CAESAR -->
+        <h2>🔐 Tantangan 2 & 3: Enkripsi Sandi Caesar</h2>
+        <p>Selain menggunakan lampu, kita juga bisa mengirim pesan rahasia dengan menggeser huruf dalam alfabet. Teknik ini disebut <strong>Sandi Caesar</strong>. Ayo pecahkan dua tantangan berikut!</p>
+
+        <div class="card rules-card">
+            <h3>Aturan Main Sandi Caesar</h3>
+            <p>Setiap huruf pada teks asli (plaintext) digeser maju beberapa langkah sesuai angka kunci (key) untuk menghasilkan teks sandi (ciphertext).</p>
+            <p><strong>Contoh:</strong> Jika kuncinya <strong>3</strong>, maka huruf <strong>A</strong> menjadi <strong>D</strong>, <strong>B</strong> menjadi <strong>E</strong>, dan seterusnya. Jika sudah sampai Z, hitungan kembali ke A.</p>
+            <div class="alphabet-ref">
+                A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+            </div>
+        </div>
+
+        <!-- Soal Enkripsi -->
+        <div class="card">
+            <h3>Tantangan 2: Mengirim Pesan Rahasia</h3>
+            <p>Kamu ingin mengirim kata <strong>"INFORMATIKA"</strong> kepada temanmu. Agar aman, enkripsilah kata tersebut menggunakan Sandi Caesar dengan <strong>kunci = 3</strong>.</p>
+            <p><strong>Teks Asli:</strong> INFORMATIKA</p>
+            <p><strong>Kunci Geser:</strong> 3 (Geser 3 huruf ke kanan/maju)</p>
+            <p><strong>Teks Sandi (Jawabanmu):</strong> ............................</p>
+        </div>
+
+        <!-- Soal Dekripsi -->
+        <div class="card">
+            <h3>Tantangan 3: Membaca Pesan Rahasia</h3>
+            <p>Kamu menerima sebuah pesan sandi: <strong>"UGFENAP"</strong>. Temanmu memberitahu bahwa pesan itu dienkripsi menggunakan Sandi Caesar dengan <strong>kunci = 5</strong>.</p>
+            <p><strong>Teks Sandi:</strong> UGFENAP</p>
+            <p><strong>Kunci Geser:</strong> 5</p>
+            <p><strong>Teks Asli (Jawabanmu):</strong> ............................</p>
+        </div>
+
+        <div class="tugas-siswa">
+            <h2>🧠 Sekarang Giliranmu!</h2>
+            <p>Analisislah setiap tantangan di atas, mulai dari kode lampu Beni hingga sandi Caesar. Pola manakah yang benar dan apa isi pesan rahasia yang tersembunyi? Diskusikan dengan temanmu dan temukan semua jawabannya!</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
