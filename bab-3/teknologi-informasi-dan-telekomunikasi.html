@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentasi Interaktif: TIK Kelas 9 (Final v3)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #f0f2f5;
+        }
+
+        /* Efek latar belakang gradien bergerak */
+        .animated-gradient-bg {
+            background: linear-gradient(-45deg, #e0c3fc, #8ec5fc, #a8e063, #fbc2eb);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Styling dasar untuk setiap slide */
+        .slide {
+            display: none;
+            transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+            transform: scale(0.95);
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Styling untuk slide yang aktif/terlihat */
+        .slide.active {
+            display: flex;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* Tombol navigasi kustom */
+        .nav-button {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-button:active {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Animasi untuk elemen di dalam slide */
+        .animated-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .slide.active .animated-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8 animated-gradient-bg">
+
+    <div class="w-full max-w-4xl mx-auto">
+        <!-- Kontainer utama untuk presentasi dengan efek glassmorphism -->
+        <div id="presentation-container" class="relative w-full aspect-[16/9] bg-white/50 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden border border-white/30">
+            
+            <!-- Slide 1: Judul -->
+            <div class="slide active p-8 sm:p-12 lg:p-16 flex-col justify-center items-center text-center text-gray-800">
+                <h1 class="animated-item text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight" style="transition-delay: 0.1s;">Teknologi Informasi dan Kominukasi</h1>
+                <p class="animated-item text-lg sm:text-xl lg:text-2xl font-light text-gray-600" style="transition-delay: 0.2s;">Kelas 9</p>
+            </div>
+
+            <!-- Slide 2: Apa itu Browser (Browser)? -->
+            <div class="slide p-8 sm:p-12 lg:p-16 flex-col lg:flex-row justify-center items-center gap-8">
+                <div class="lg:w-1/3 text-center lg:text-left">
+                    <svg class="animated-item w-32 h-32 lg:w-48 lg:h-48 mx-auto lg:mx-0 text-indigo-500" style="transition-delay: 0.1s;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.99998 3H8.99998C7.04998 8.84 7.04998 15.16 8.99998 21H7.99998" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 3H16C18.95 8.84 18.95 15.16 16 21H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 16V15C8.84 17 15.16 17 21 15V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9.00001V8.00001C8.84 6.05001 15.16 6.05001 21 8.00001V9.00001" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="lg:w-2/3">
+                    <h2 class="animated-item text-3xl lg:text-4xl font-bold text-gray-800 mb-4" style="transition-delay: 0.2s;">Browser: Gerbang Internetmu</h2>
+                    <p class="animated-item text-xl text-gray-700" style="transition-delay: 0.3s;">Aplikasi canggih yang mengubah barisan kode rumit (HTML, CSS) menjadi website indah yang bisa kita nikmati. Anggap saja ini penerjemah bahasa komputer ke bahasa manusia.</p>
+                </div>
+            </div>
+
+            <!-- Slide 3: Cara Kerja Browser -->
+            <div class="slide p-8 sm:p-12 lg:p-16 flex-col justify-center items-center text-center">
+                <h2 class="animated-item text-3xl font-bold text-gray-800 mb-8" style="transition-delay: 0.1s;">Bagaimana Browser Bekerja?</h2>
+                <div class="w-full flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="animated-item text-center" style="transition-delay: 0.2s;"><div class="bg-white/60 p-4 rounded-xl"><svg class="w-12 h-12 mx-auto text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10h.01M15 10h.01M9 14h6"></path></svg><p class="mt-2 font-semibold">1. Meminta (Request)</p><p class="text-xs">Kamu ketik alamat web, Browser mengirim permintaan via HTTP.</p></div></div>
+                    <div class="animated-item text-2xl text-gray-500" style="transition-delay: 0.3s;">→</div>
+                    <div class="animated-item text-center" style="transition-delay: 0.4s;"><div class="bg-white/60 p-4 rounded-xl"><svg class="w-12 h-12 mx-auto text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path></svg><p class="mt-2 font-semibold">2. Menerima (Response)</p><p class="text-xs">Web server mengirim data (kode HTML, CSS, gambar).</p></div></div>
+                    <div class="animated-item text-2xl text-gray-500" style="transition-delay: 0.5s;">→</div>
+                    <div class="animated-item text-center" style="transition-delay: 0.6s;"><div class="bg-white/60 p-4 rounded-xl"><svg class="w-12 h-12 mx-auto text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg><p class="mt-2 font-semibold">3. Menampilkan (Render)</p><p class="text-xs">Browser 'melukis' kode menjadi halaman web yang kita lihat.</p></div></div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Tips Aman Berselancar di Internet -->
+            <div class="slide p-8 sm:p-12 lg:p-16 flex-col justify-center items-center text-center">
+                 <h2 class="animated-item text-3xl font-bold text-gray-800 mb-8" style="transition-delay: 0.1s;">Benteng Keamanan Digitalmu 🛡️</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                    <div class="animated-item bg-white/50 p-6 rounded-xl text-center" style="transition-delay: 0.2s;">
+                        <h3 class="font-bold text-lg">Cari Gembok HTTPS</h3>
+                        <p class="text-sm text-gray-600">Pastikan ada ikon gembok di bar alamat. Ini tanda datamu dienkripsi dan aman dari pengintip.</p>
+                    </div>
+                    <div class="animated-item bg-white/50 p-6 rounded-xl text-center" style="transition-delay: 0.3s;">
+                        <h3 class="font-bold text-lg">Waspada "Phishing"</h3>
+                        <p class="text-sm text-gray-600">Jangan pernah berikan password atau PIN lewat link dari email/chat tak dikenal.</p>
+                    </div>
+                    <div class="animated-item bg-white/50 p-6 rounded-xl text-center" style="transition-delay: 0.4s;">
+                        <h3 class="font-bold text-lg">Selalu Perbarui</h3>
+                        <p class="text-sm text-gray-600">Update Browsermu secara rutin untuk menutup celah keamanan dari virus dan malware terbaru.</p>
+                    </div>
+                     <div class="animated-item bg-white/50 p-6 rounded-xl text-center" style="transition-delay: 0.5s;">
+                        <h3 class="font-bold text-lg">Diagnosis Situs</h3>
+                        <p class="text-sm text-gray-600">Gunakan Google Safe Browsing untuk mengecek apakah sebuah website berbahaya atau tidak sebelum membukanya.</p>
+                    </div>
+                 </div>
+            </div>
+
+            <!-- Slide 5: Cerdas Mencari dengan Search Engine -->
+            <div class="slide p-8 sm:p-12 lg:p-16 flex-col lg:flex-row justify-center items-center gap-8">
+                <div class="lg:w-1/3 text-center lg:text-left">
+                    <svg class="animated-item w-32 h-32 lg:w-48 lg:h-48 mx-auto lg:mx-0 text-orange-500" style="transition-delay: 0.1s;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <div class="lg:w-2/3">
+                    <h2 class="animated-item text-3xl font-bold text-gray-800 mb-4" style="transition-delay: 0.2s;">Cerdas Mencari Informasi</h2>
+                    <p class="animated-item text-lg text-gray-600" style="transition-delay: 0.3s;">Search Engine (seperti Google) adalah teman terbaikmu untuk menemukan apa pun. Kunci utamanya adalah menggunakan **kata kunci yang tepat dan spesifik**.</p>
+                </div>
+            </div>
+
+            <!-- Slide 6: Trik Pencarian Canggih -->
+            <div class="slide p-8 sm:p-12 lg:p-16 flex-col justify-center items-start">
+                <h2 class="animated-item text-3xl font-bold text-gray-800 mb-6" style="transition-delay: 0.1s;">Trik Pencarian Canggih 🧙‍♂️</h2>
+                <div class="space-y-4 w-full">
+                    <div class="animated-item bg-white/50 p-4 rounded-lg" style="transition-delay: 0.2s;">
+                        <h3 class="font-bold text-lg">Mencari di Situs Tertentu</h3>
+                        <p class="text-sm text-gray-600 mb-2">Gunakan `site:` untuk membatasi pencarian hanya di satu website.</p>
+                        <code class="bg-gray-200 text-gray-800 px-2 py-1 rounded text-sm">browser site:wikipedia.org</code>
+                    </div>
+                    <div class="animated-item bg-white/50 p-4 rounded-lg" style="transition-delay: 0.3s;">
+                        <h3 class="font-bold text-lg">Mencari Tipe File Spesifik</h3>
+                        <p class="text-sm text-gray-600 mb-2">Gunakan `filetype:` untuk mencari jenis file tertentu, seperti PDF atau PPT.</p>
+                        <code class="bg-gray-200 text-gray-800 px-2 py-1 rounded text-sm">laporan karya ilmiah filetype:pdf</code>
+                    </div>
+                     <div class="animated-item bg-white/50 p-4 rounded-lg" style="transition-delay: 0.4s;">
+                        <h3 class="font-bold text-lg">Mencari Gambar</h3>
+                        <p class="text-sm text-gray-600 mb-2">Buka `images.google.com` untuk pencarian yang hasilnya khusus gambar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Masa Depan Pencarian: AI -->
+            <div class="slide p-8 sm:p-12 lg:p-16 flex-col lg:flex-row justify-center items-center gap-8">
+                <div class="lg:w-1/3 text-center lg:text-left">
+                    <svg class="animated-item w-32 h-32 lg:w-48 lg:h-48 mx-auto lg:mx-0 text-teal-500" style="transition-delay: 0.1s;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 16.663c.52-1.261 1.23-2.433 2.05-3.536M12 20.5c1.885-1.256 3.44-2.81 4.63-4.63m0 0a9 9 0 10-9.26 0M12 20.5c-1.885-1.256-3.44-2.81-4.63-4.63m9.26 0A9.006 9.006 0 0012 3.5a9.006 9.006 0 00-4.63 12.37z"></path></svg>
+                </div>
+                <div class="lg:w-2/3">
+                    <h2 class="animated-item text-3xl font-bold text-gray-800 mb-4" style="transition-delay: 0.2s;">Masa Depan Pencarian: AI 🤖</h2>
+                    <p class="animated-item text-lg text-gray-600" style="transition-delay: 0.3s;">Mesin pencari modern kini menggunakan Kecerdasan Buatan (AI). Kamu bisa bertanya seperti sedang mengobrol, dan AI akan memberikan jawaban ringkas, bukan hanya daftar link.</p>
+                </div>
+            </div>
+
+            <!-- Slide 8: Fakta Menarik Pencarian AI -->
+            <div class="slide p-8 sm:p-12 lg:p-16 flex-col justify-center items-center text-center">
+                 <h2 class="animated-item text-3xl font-bold text-gray-800 mb-8" style="transition-delay: 0.1s;">Fakta Menarik: Pencarian AI</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full text-left">
+                    <div class="animated-item bg-white/50 p-6 rounded-xl" style="transition-delay: 0.2s;">
+                        <h3 class="font-bold text-lg">Memahami Konteks</h3>
+                        <p class="text-sm text-gray-600">AI bisa mengerti pertanyaan panjang dan kompleks, tidak hanya kata kunci.</p>
+                    </div>
+                    <div class="animated-item bg-white/50 p-6 rounded-xl" style="transition-delay: 0.3s;">
+                        <h3 class="font-bold text-lg">Menghasilkan Konten</h3>
+                        <p class="text-sm text-gray-600">Bisa membuat ringkasan, menulis puisi, bahkan membuat gambar dari teks.</p>
+                    </div>
+                    <div class="animated-item bg-white/50 p-6 rounded-xl" style="transition-delay: 0.4s;">
+                        <h3 class="font-bold text-lg">Terus Belajar</h3>
+                        <p class="text-sm text-gray-600">Semakin sering digunakan, AI menjadi semakin pintar dan relevan dengan kebutuhanmu.</p>
+                    </div>
+                 </div>
+            </div>
+            
+            <!-- Slide 9: Sisi Lain AI: Hal yang Perlu Diwaspadai -->
+            <div class="slide p-8 sm:p-12 lg:p-16 flex-col justify-center items-center text-center">
+                 <h2 class="animated-item text-3xl font-bold text-gray-800 mb-8" style="transition-delay: 0.1s;">Sisi Lain AI: Hal yang Perlu Diwaspadai ⚠️</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full text-left">
+                    <div class="animated-item bg-yellow-50/50 p-6 rounded-xl border border-yellow-200" style="transition-delay: 0.2s;">
+                        <h3 class="font-bold text-lg text-yellow-800">Informasi Tidak Akurat</h3>
+                        <p class="text-sm text-gray-600">AI bisa "berhalusinasi" atau memberikan jawaban yang salah. Selalu cek ulang ke sumber terpercaya.</p>
+                    </div>
+                    <div class="animated-item bg-red-50/50 p-6 rounded-xl border border-red-200" style="transition-delay: 0.3s;">
+                        <h3 class="font-bold text-lg text-red-800">Hoax & Deepfake</h3>
+                        <p class="text-sm text-gray-600">AI bisa disalahgunakan untuk membuat berita bohong atau video/foto palsu yang sangat meyakinkan.</p>
+                    </div>
+                    <div class="animated-item bg-blue-50/50 p-6 rounded-xl border border-blue-200" style="transition-delay: 0.4s;">
+                        <h3 class="font-bold text-lg text-blue-800">Masalah Privasi</h3>
+                        <p class="text-sm text-gray-600">Layanan AI sering mengumpulkan data. Berhati-hatilah saat membagikan informasi pribadi.</p>
+                    </div>
+                 </div>
+            </div>
+
+            <!-- Slide 10: Apa itu Surel (Email)? -->
+            <div class="slide p-8 sm:p-12 lg:p-16 flex-col lg:flex-row-reverse justify-center items-center gap-8">
+                <div class="lg:w-1/3 text-center lg:text-right">
+                     <svg class="animated-item w-32 h-32 lg:w-48 lg:h-48 mx-auto lg:mx-0 text-cyan-500" style="transition-delay: 0.1s;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </div>
+                <div class="lg:w-2/3">
+                    <h2 class="animated-item text-3xl font-bold text-gray-800 mb-4" style="transition-delay: 0.2s;">Surel: Identitas Digitalmu</h2>
+                    <p class="animated-item text-lg text-gray-600" style="transition-delay: 0.3s;">Lebih dari sekadar surat, surel (email) adalah kunci untuk mendaftar hampir di semua layanan online, mulai dari media sosial hingga akun game favoritmu.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 11: Etika Mengirim Surel (Netiket) -->
+            <div class="slide p-8 sm:p-12 lg:p-16 flex-col justify-center items-start">
+                <h2 class="animated-item text-3xl font-bold text-gray-800 mb-6" style="transition-delay: 0.1s;">Etika Mengirim Surel (Netiket) 💌</h2>
+                <p class="animated-item text-lg text-gray-600 mb-4" style="transition-delay: 0.2s;">Mengirim surel, terutama yang formal (ke guru), punya aturan tak tertulis agar terlihat sopan dan profesional.</p>
+                 <ul class="animated-item space-y-2 text-gray-700 list-disc list-inside" style="transition-delay: 0.3s;">
+                    <li><strong class="font-semibold">Subjek Jelas:</strong> Contoh: "Tugas TIK Bab 1 - Budi Kelas 9A".</li>
+                    <li><strong class="font-semibold">Salam Pembuka:</strong> Gunakan sapaan yang sopan, seperti "Yth. Bapak/Ibu Guru".</li>
+                    <li><strong class="font-semibold">Isi Singkat & Padat:</strong> Sampaikan maksud dan tujuanmu dengan jelas.</li>
+                    <li><strong class="font-semibold">Salam Penutup:</strong> Akhiri dengan "Terima kasih" dan namamu.</li>
+                </ul>
+            </div>
+
+            <!-- Slide 12: Fakta Unik Seputar Surel -->
+            <div class="slide p-8 sm:p-12 lg:p-16 flex-col justify-center items-center text-center">
+                 <h2 class="animated-item text-3xl font-bold text-gray-800 mb-8" style="transition-delay: 0.1s;">Tahukah Kamu? 🤔</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full text-left">
+                    <div class="animated-item bg-white/50 p-6 rounded-xl" style="transition-delay: 0.2s;">
+                        <h3 class="font-bold text-lg">Simbol "@" Punya Banyak Nama</h3>
+                        <p class="text-sm text-gray-600">Di Belanda disebut "ekor monyet", di Swedia "belalai gajah", dan di Italia "keong kecil".</p>
+                    </div>
+                    <div class="animated-item bg-white/50 p-6 rounded-xl" style="transition-delay: 0.3s;">
+                        <h3 class="font-bold text-lg">Ratusan Miliar Setiap Hari</h3>
+                        <p class="text-sm text-gray-600">Diperkirakan lebih dari 300 miliar email dikirim setiap hari di seluruh dunia!</p>
+                    </div>
+                 </div>
+            </div>
+            
+            <!-- Slide 13: Mengirim File Besar Lewat Surel -->
+            <div class="slide p-8 sm:p-12 lg:p-16 flex-col lg:flex-row justify-center items-center gap-8">
+                <div class="lg:w-1/3 text-center lg:text-left">
+                    <svg class="animated-item w-32 h-32 lg:w-48 lg:h-48 mx-auto lg:mx-0 text-blue-500" style="transition-delay: 0.1s;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 12l-4 4m4-4l4 4m-4-4V4"></path></svg>
+                </div>
+                <div class="lg:w-2/3">
+                    <h2 class="animated-item text-3xl font-bold text-gray-800 mb-4" style="transition-delay: 0.2s;">File Terlalu Besar?</h2>
+                    <p class="animated-item text-lg text-gray-600" style="transition-delay: 0.3s;">Jangan panik! Gunakan <strong class="text-blue-600">Cloud Storage</strong> seperti Google Drive. Cukup unggah filemu, lalu kirim tautannya lewat surel. Praktis dan efisien.</p>
+                </div>
+            </div>
+
+            <!-- Slide 14: Membuat Desain Konten dengan Canva -->
+            <div class="slide p-8 sm:p-12 lg:p-16 flex-col lg:flex-row-reverse justify-center items-center gap-8">
+                <div class="lg:w-1/3 text-center lg:text-right">
+                    <svg class="animated-item w-32 h-32 lg:w-48 lg:h-48 mx-auto lg:mx-0 text-purple-500" style="transition-delay: 0.1s;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+                </div>
+                <div class="lg:w-2/3">
+                    <h2 class="animated-item text-3xl font-bold text-gray-800 mb-4" style="transition-delay: 0.2s;">Canva: Studio Desain di Jarimu</h2>
+                    <p class="animated-item text-lg text-gray-600" style="transition-delay: 0.3s;">Aplikasi online super mudah untuk membuat desain apa pun—poster, presentasi, konten media sosial—tanpa harus jadi seorang desainer profesional.</p>
+                </div>
+            </div>
+
+            <!-- Slide 15: Langkah Membuat Desain di Canva -->
+            <div class="slide p-8 sm:p-12 lg:p-16 flex-col justify-center items-center text-center">
+                <h2 class="animated-item text-3xl font-bold text-gray-800 mb-8" style="transition-delay: 0.1s;">Sihir Desain dalam 3 Langkah</h2>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 w-full">
+                    <div class="animated-item flex items-center p-4" style="transition-delay: 0.2s;">
+                        <span class="text-5xl font-extrabold text-purple-300 mr-4">1</span>
+                        <p class="text-left text-lg">Pilih <strong class="text-purple-600">Template</strong><br><span class="text-sm text-gray-500">Pilih dari ribuan desain siap pakai.</span></p>
+                    </div>
+                    <div class="animated-item text-2xl text-purple-300 hidden md:block" style="transition-delay: 0.3s;">→</div>
+                     <div class="animated-item flex items-center p-4" style="transition-delay: 0.4s;">
+                        <span class="text-5xl font-extrabold text-purple-300 mr-4">2</span>
+                        <p class="text-left text-lg">Ubah & <strong class="text-purple-600">Sesuaikan</strong><br><span class="text-sm text-gray-500">Ganti teks, warna, dan gambar.</span></p>
+                    </div>
+                    <div class="animated-item text-2xl text-purple-300 hidden md:block" style="transition-delay: 0.5s;">→</div>
+                     <div class="animated-item flex items-center p-4" style="transition-delay: 0.6s;">
+                        <span class="text-5xl font-extrabold text-purple-300 mr-4">3</span>
+                        <p class="text-left text-lg">Tambah <strong class="text-purple-600">Elemen</strong><br><span class="text-sm text-gray-500">Hias dengan stiker atau ikon.</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 16: Penutup -->
+            <div class="slide p-8 sm:p-12 lg:p-16 flex-col justify-center items-center text-center text-gray-800">
+                <h2 class="animated-item text-4xl sm:text-5xl font-extrabold mb-4" style="transition-delay: 0.1s;">Terima Kasih!</h2>
+                <p class="animated-item text-xl text-gray-600" style="transition-delay: 0.2s;">Siap untuk bertanya dan berkreasi?</p>
+            </div>
+
+        </div>
+
+        <!-- Kontrol Navigasi -->
+        <div class="flex justify-between items-center mt-6 w-full">
+            <button id="prev-button" class="nav-button bg-white/50 backdrop-blur-sm shadow-lg px-6 py-3 rounded-lg font-semibold text-gray-700 flex items-center disabled:opacity-50 disabled:cursor-not-allowed">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                Sebelumnya
+            </button>
+            <div id="slide-counter" class="text-white font-bold text-sm sm:text-base bg-black/20 px-4 py-2 rounded-lg"></div>
+            <button id="next-button" class="nav-button bg-indigo-500 hover:bg-indigo-600 shadow-lg px-6 py-3 rounded-lg font-semibold text-white flex items-center disabled:opacity-50 disabled:cursor-not-allowed">
+                Selanjutnya
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        const slideCounter = document.getElementById('slide-counter');
+        
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function showSlide(slideIndex) {
+            // Sembunyikan slide saat ini
+            if (slides[currentSlide]) {
+                slides[currentSlide].classList.remove('active');
+            }
+
+            // Tentukan slide berikutnya
+            currentSlide = (slideIndex + totalSlides) % totalSlides;
+            const newSlide = slides[currentSlide];
+            if (newSlide) {
+                newSlide.classList.add('active');
+            }
+            
+            updateControls();
+        }
+
+        function updateControls() {
+            if (slideCounter) {
+                slideCounter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+            }
+            if (prevButton) {
+                prevButton.disabled = currentSlide === 0;
+            }
+            if (nextButton) {
+                nextButton.disabled = currentSlide === totalSlides - 1;
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        if (nextButton && prevButton) {
+            nextButton.addEventListener('click', nextSlide);
+            prevButton.addEventListener('click', prevSlide);
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Inisialisasi presentasi
+        showSlide(0);
+    </script>
+</body>
+</html>
