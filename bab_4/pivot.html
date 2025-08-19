@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentasi Interaktif: Menguasai Pivot Table</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* CSS Utama */
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide {
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 20px 40px 60px 40px;
+            /* Tambah padding bawah untuk footer */
+            width: 95%;
+            max-width: 1200px;
+            height: 90%;
+            max-height: 750px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            transition: opacity 0.5s ease-in-out;
+            position: relative;
+            /* Diperlukan untuk footer */
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            z-index: 10;
+        }
+
+        .nav-button:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        #prev-btn {
+            left: 20px;
+        }
+
+        #next-btn {
+            right: 20px;
+        }
+
+        .slide-indicator {
+            position: absolute;
+            bottom: 20px;
+            right: 90px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        /* CSS BARU: Footer di setiap slide */
+        .slide-footer {
+            position: absolute;
+            bottom: 25px;
+            left: 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            /* Sedikit dirapatkan */
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .slide-footer a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        .slide-footer a:hover {
+            color: white;
+        }
+
+        .slide-footer .separator {
+            width: 1px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* CSS UNTUK FITUR PRAKTIK */
+        .practice-area {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .source-data-view,
+        .fields-list,
+        .pivot-zones {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 15px;
+            height: 100%;
+        }
+
+        .source-data-view {
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .fields-list {
+            width: 20%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pivot-zones {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .field-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: grab;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .field-item:active {
+            cursor: grabbing;
+        }
+
+        .drop-zone {
+            border: 2px dashed rgba(255, 255, 255, 0.4);
+            border-radius: 8px;
+            padding: 10px;
+            min-height: 60px;
+            transition: background-color 0.3s;
+        }
+
+        .table-container {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+
+        .table-container table,
+        .pivot-result-area table {
+            width: 100%;
+            text-align: left;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .table-container th,
+        .table-container td,
+        .pivot-result-area th,
+        .pivot-result-area td {
+            padding: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .table-container th {
+            background-color: rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+        }
+
+        .pivot-result-area {
+            flex-grow: 1;
+            margin-top: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            overflow: auto;
+        }
+
+        .reset-btn {
+            background-color: #e73c7e;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: auto;
+        }
+
+        .calc-toggle {
+            cursor: pointer;
+            font-size: 10px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        /* CSS UNTUK CONTOH FITUR */
+        .feature-example-container {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .feature-controls {
+            width: 30%;
+        }
+
+        .feature-output {
+            width: 70%;
+        }
+
+        .control-btn {
+            background: #23a6d5;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .control-btn:hover {
+            background: #23d5ab;
+        }
+
+        .chart-container {
+            display: flex;
+            height: 250px;
+            align-items: flex-end;
+            gap: 15px;
+            padding: 10px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .chart-bar {
+            width: 100%;
+            background-color: #e73c7e;
+            border-radius: 5px 5px 0 0;
+            text-align: center;
+            position: relative;
+            transition: height 0.5s ease;
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="presentation-container">
+        <!-- Slide 1-5: Intro & Persiapan -->
+        <div class="slide active">
+            <h1 class="text-5xl md:text-7xl font-black mb-4">BAB 4 : Pivot Table</h1>
+            <p class="text-xl md:text-2xl text-gray-200">Panduan Lengkap untuk Menganalisis Data Seperti Profesional</p>
+            <div class="slide-footer"></div>
+        </div>
+        <div class="slide">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">🤔 Apa itu Pivot Table?</h2>
+            <p class="text-lg md:text-xl max-w-3xl">Sebuah tabel interaktif yang dalam waktu singkat bisa **meringkas
+                data** dalam jumlah besar, menampilkannya dari berbagai sudut pandang, dan melakukan kalkulasi tanpa
+                perlu rumus yang rumit.</p>
+            <div class="slide-footer"></div>
+        </div>
+        <div class="slide">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">🔧 Anatomi Pivot Table</h2>
+            <ul class="text-left mt-4 space-y-3 text-lg">
+                <li><strong>FILTERS:</strong> Menyaring keseluruhan data.</li>
+                <li><strong>COLUMNS:</strong> Judul di bagian atas (horizontal).</li>
+                <li><strong>ROWS:</strong> Judul di sisi kiri (vertikal).</li>
+                <li><strong>VALUES:</strong> Tempat data dihitung (SUM, COUNT, dll).</li>
+            </ul>
+            <div class="slide-footer"></div>
+        </div>
+        <div class="slide">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">📋 Persiapan Data Sumber</h2>
+            <p class="text-lg md:text-xl max-w-3xl">Sebelum mulai, pastikan datamu sudah "bersih":</p>
+            <ul class="text-left mt-4 space-y-3 text-lg">
+                <li>✅ Tidak ada baris atau kolom yang kosong.</li>
+                <li>✅ Setiap kolom punya judul (header) yang unik.</li>
+                <li>✅ Tidak ada "merged cells" pada baris judul.</li>
+                <li>⭐ **Sangat disarankan:** Ubah data mentahmu menjadi <strong>Table</strong> resmi Excel (Blok data,
+                    lalu tekan <strong>Ctrl + T</strong>).</li>
+            </ul>
+            <div class="slide-footer"></div>
+        </div>
+        <div class="slide">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">⚙️ Langkah Membuat Pivot Table</h2>
+            <p class="text-lg md:text-xl max-w-3xl">Prosesnya sangat mudah:</p>
+            <ol class="text-left mt-4 space-y-3 text-lg list-decimal list-inside">
+                <li>Klik di mana saja di dalam tabel datamu.</li>
+                <li>Buka menu <strong>Insert &rarr; PivotTable</strong>.</li>
+                <li>Kotak dialog akan muncul. Biasanya, Excel sudah pintar memilih datamu. Cukup klik
+                    <strong>OK</strong>.</li>
+                <li>"Kanvas" Pivot Table kosong dan panel "PivotTable Fields" akan muncul, siap untuk diisi.</li>
+            </ol>
+            <div class="slide-footer"></div>
+        </div>
+
+        <!-- LAB 1: Ringkasan Dasar -->
+        <div class="slide">
+            <h2 class="text-3xl font-bold mb-1">🔬 Lab 1: Ringkasan Dasar</h2>
+            <p class="text-md mb-3"><strong>Tujuan:</strong> Cari tahu **total penjualan** untuk setiap **kategori
+                barang**.</p>
+            <div class="practice-area" id="lab1">
+                <div class="source-data-view">
+                    <h3 class="font-bold mb-2">Data Sumber</h3>
+                    <div class="table-container"></div>
+                </div>
+                <div class="fields-list">
+                    <h3 class="font-bold mb-2">Bidang Data</h3>
+                    <div class="field-item" draggable="true" data-field="Kategori"><span>Kategori</span></div>
+                    <div class="field-item" draggable="true" data-field="Nama Barang"><span>Nama Barang</span></div>
+                    <div class="field-item" draggable="true" data-field="Jumlah Terjual"><span>Jumlah Terjual</span>
+                    </div>
+                    <div class="field-item" draggable="true" data-field="Total Penjualan"><span>Total Penjualan</span>
+                    </div>
+                    <button class="reset-btn">Reset</button>
+                </div>
+                <div class="pivot-zones">
+                    <div class="flex gap-4 h-1/2">
+                        <div class="w-1/2 flex flex-col"><label>Baris (Rows)</label>
+                            <div class="drop-zone flex-grow" data-zone="rows"></div>
+                        </div>
+                        <div class="w-1/2 flex flex-col"><label>Nilai (Values)</label>
+                            <div class="drop-zone flex-grow" data-zone="values"></div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col h-1/2">
+                        <h3 class="font-bold">Hasil Pivot Table</h3>
+                        <div class="pivot-result-area">
+                            <p class="text-gray-300">Tarik 'Kategori' ke Baris dan 'Total Penjualan' ke Nilai...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer"></div>
+        </div>
+
+        <!-- LAB 2: Menambah Dimensi Kolom -->
+        <div class="slide">
+            <h2 class="text-3xl font-bold mb-1">🔬 Lab 2: Menambah Dimensi</h2>
+            <p class="text-md mb-3"><strong>Tujuan:</strong> Lihat rincian **jumlah terjual** dari setiap **nama
+                barang**, yang dikelompokkan berdasarkan **kategori**.</p>
+            <div class="practice-area" id="lab2">
+                <div class="source-data-view">
+                    <h3 class="font-bold mb-2">Data Sumber</h3>
+                    <div class="table-container"></div>
+                </div>
+                <div class="fields-list">
+                    <h3 class="font-bold mb-2">Bidang Data</h3>
+                    <div class="field-item" draggable="true" data-field="Kategori"><span>Kategori</span></div>
+                    <div class="field-item" draggable="true" data-field="Nama Barang"><span>Nama Barang</span></div>
+                    <div class="field-item" draggable="true" data-field="Jumlah Terjual"><span>Jumlah Terjual</span>
+                    </div>
+                    <div class="field-item" draggable="true" data-field="Total Penjualan"><span>Total Penjualan</span>
+                    </div>
+                    <button class="reset-btn">Reset</button>
+                </div>
+                <div class="pivot-zones">
+                    <div class="flex gap-4 h-1/2">
+                        <div class="w-1/3 flex flex-col"><label>Baris (Rows)</label>
+                            <div class="drop-zone flex-grow" data-zone="rows"></div>
+                        </div>
+                        <div class="w-1/3 flex flex-col"><label>Kolom (Columns)</label>
+                            <div class="drop-zone flex-grow" data-zone="columns"></div>
+                        </div>
+                        <div class="w-1/3 flex flex-col"><label>Nilai (Values)</label>
+                            <div class="drop-zone flex-grow" data-zone="values"></div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col h-1/2">
+                        <h3 class="font-bold">Hasil Pivot Table</h3>
+                        <div class="pivot-result-area">
+                            <p class="text-gray-300">Coba: 'Nama Barang' ke Baris, 'Kategori' ke Kolom, 'Jumlah Terjual'
+                                ke Nilai.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer"></div>
+        </div>
+
+        <!-- LAB 3: Mengubah Kalkulasi -->
+        <div class="slide">
+            <h2 class="text-3xl font-bold mb-1">🔬 Lab 3: Mengubah Kalkulasi</h2>
+            <p class="text-md mb-3"><strong>Tujuan:</strong> Klik tulisan <span
+                    class="font-bold text-yellow-300">[SUM]</span> di bawah untuk mengubahnya menjadi <span
+                    class="font-bold text-yellow-300">[COUNT]</span>.</p>
+            <div class="practice-area" id="lab3">
+                <div class="source-data-view">
+                    <h3 class="font-bold mb-2">Data Sumber</h3>
+                    <div class="table-container"></div>
+                </div>
+                <div class="fields-list">
+                    <h3 class="font-bold mb-2">Bidang Data</h3>
+                    <div class="field-item" draggable="true" data-field="Kategori"><span>Kategori</span></div>
+                    <div class="field-item" draggable="true" data-field="Nama Barang"><span>Nama Barang</span></div>
+                    <div class="field-item" draggable="true" data-field="Jumlah Terjual"><span>Jumlah Terjual</span>
+                    </div>
+                    <div class="field-item" draggable="true" data-field="Total Penjualan"><span>Total Penjualan</span>
+                    </div>
+                    <button class="reset-btn">Reset</button>
+                </div>
+                <div class="pivot-zones">
+                    <div class="flex gap-4 h-1/2">
+                        <div class="w-1/2 flex flex-col"><label>Baris (Rows)</label>
+                            <div class="drop-zone flex-grow" data-zone="rows"></div>
+                        </div>
+                        <div class="w-1/2 flex flex-col"><label>Nilai (Values)</label>
+                            <div class="drop-zone flex-grow" data-zone="values"></div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col h-1/2">
+                        <h3 class="font-bold">Hasil Pivot Table</h3>
+                        <div class="pivot-result-area">
+                            <p class="text-gray-300">Tarik 'Nama Barang' ke Baris, dan 'Total Penjualan' ke Nilai.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer"></div>
+        </div>
+
+        <!-- Slide Desain & Layout -->
+        <div class="slide">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">🎨 Mengubah Desain Laporan</h2>
+            <p class="text-lg md:text-xl max-w-2xl">Bosan dengan tampilan biru standar? Kamu bisa mengubah warna dan
+                gaya tabelmu dengan mudah melalui menu <strong>Design</strong> di Excel.</p>
+            <div class="slide-footer"></div>
+        </div>
+        <div class="slide">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">📐 Mengubah Layout Laporan</h2>
+            <p class="text-lg md:text-xl max-w-3xl">Di menu <strong>Design &rarr; Report Layout</strong>, kamu bisa
+                memilih tampilan <strong>Compact, Outline, atau Tabular</strong> untuk menyajikan data dengan cara yang
+                berbeda.</p>
+            <div class="slide-footer"></div>
+        </div>
+        <div class="slide">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">🧮 Mengatur Grand Total</h2>
+            <p class="text-lg md:text-xl max-w-2xl">Kamu bisa menyembunyikan atau menampilkan total keseluruhan melalui
+                menu <strong>Design &rarr; Grand Totals</strong>.</p>
+            <div class="slide-footer"></div>
+        </div>
+
+        <!-- Contoh Fitur Interaktif -->
+        <div class="slide">
+            <h2 class="text-3xl font-bold mb-4">✨ Contoh Fitur: Sorting & Filtering</h2>
+            <div class="feature-example-container">
+                <div class="feature-controls">
+                    <h3 class="font-bold text-xl mb-4">Kontrol</h3>
+                    <div id="sort-btn" class="control-btn">Urutkan (Besar ke Kecil)</div>
+                    <div id="filter-btn" class="control-btn">Filter Penjualan > 50.000</div>
+                    <div id="reset-feature1" class="control-btn !bg-gray-500">Reset</div>
+                </div>
+                <div class="feature-output">
+                    <h3 class="font-bold mb-2">Data: Total Penjualan per Barang</h3>
+                    <div id="feature1-table" class="pivot-result-area"></div>
+                </div>
+            </div>
+            <div class="slide-footer"></div>
+        </div>
+        <div class="slide">
+            <h2 class="text-3xl font-bold mb-4">📊 Contoh Fitur: Pivot Chart</h2>
+            <p class="text-md mb-3">Grafik akan otomatis mengikuti data di tabel. Coba filter data di bawah!</p>
+            <div class="feature-example-container">
+                <div class="feature-controls">
+                    <h3 class="font-bold text-xl mb-4">Filter Kategori (Slicer)</h3>
+                    <div class="control-btn" data-filter="Semua">Tampilkan Semua</div>
+                    <div class="control-btn" data-filter="Makanan">Hanya Makanan</div>
+                    <div class="control-btn" data-filter="Minuman">Hanya Minuman</div>
+                </div>
+                <div class="feature-output">
+                    <div id="feature2-table" class="pivot-result-area h-24"></div>
+                    <h3 class="font-bold my-2">Grafik Penjualan</h3>
+                    <div id="feature2-chart" class="chart-container"></div>
+                </div>
+            </div>
+            <div class="slide-footer"></div>
+        </div>
+
+        <!-- SLIDE BARU: Refresh Data -->
+        <div class="slide">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">🔄 Memperbarui Data (Refresh)</h2>
+            <p class="text-lg md:text-xl max-w-3xl">Jika data sumbermu berubah, Pivot Table tidak otomatis update. Kamu
+                harus:</p>
+            <ul class="text-left mt-4 space-y-3 text-lg">
+                <li>Klik kanan di dalam Pivot Table &rarr; pilih <strong>Refresh</strong>.</li>
+                <li><strong>PENTING:</strong> Jika kamu memakai <strong>Format as Table (Ctrl+T)</strong>, data baru
+                    akan otomatis masuk saat di-refresh. Jika tidak, kamu harus mengubah sumber data secara manual lewat
+                    menu <strong>Change Data Source</strong>.</li>
+            </ul>
+            <div class="slide-footer"></div>
+        </div>
+
+        <!-- Slide Penutup -->
+        <div class="slide">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">🚀 Siap Berlatih!</h2>
+            <p class="text-lg md:text-xl max-w-2xl">Teori terbaik adalah praktik. Sekarang buka Excel-mu dan coba semua
+                fitur yang sudah kita pelajari. Selamat menganalisis data!</p>
+            <div class="slide-footer"></div>
+        </div>
+
+        <!-- Tombol Navigasi -->
+        <button id="prev-btn" class="nav-button">&lt;</button>
+        <button id="next-btn" class="nav-button">&gt;</button>
+        <div id="slide-indicator" class="slide-indicator"></div>
+    </div>
+
+    <script>
+        // --- KODE NAVIGASI SLIDE ---
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const slideIndicator = document.getElementById('slide-indicator');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+            slideIndicator.textContent = `${index + 1} / ${slides.length}`;
+            if (slides[index].querySelector('#feature1-table')) initFeature1();
+            if (slides[index].querySelector('#feature2-chart')) initFeature2();
+        }
+        function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; showSlide(currentSlide); }
+        function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; showSlide(currentSlide); }
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        document.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') nextSlide(); else if (e.key === 'ArrowLeft') prevSlide(); });
+
+        // --- KODE FOOTER ---
+        const footerHTML = `
+            <a href="https://ilwa.my.id" target="_blank" rel="noopener noreferrer"><strong>ilwa.my.id</strong></a>
+            <div class="separator"></div>
+            <a href="https://www.linkedin.com/in/ilhamwahyu-ni/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="https://github.com/ilhamwahyu-ni" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+            <a href="mailto:wahyuilham20@gmail.com" title="Gmail">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+            <a href="https://www.instagram.com/ilhamwahyu_ni/" title="Instagram" target="_blank" rel="noopener noreferrer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://www.youtube.com/@ilhamwahyu_ni" title="YouTube" target="_blank" rel="noopener noreferrer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+            </a>
+        `;
+        document.querySelectorAll('.slide-footer').forEach(footer => {
+            footer.innerHTML = footerHTML;
+        });
+
+        // --- KODE FITUR PRAKTIK ---
+        const sampleData = [
+            { Kategori: 'Makanan', 'Nama Barang': 'Bakwan', 'Jumlah Terjual': 20, 'Total Penjualan': 20000 },
+            { Kategori: 'Minuman', 'Nama Barang': 'Es Teh', 'Jumlah Terjual': 15, 'Total Penjualan': 45000 },
+            { Kategori: 'Makanan', 'Nama Barang': 'Nasi Goreng', 'Jumlah Terjual': 10, 'Total Penjualan': 100000 },
+            { Kategori: 'Makanan', 'Nama Barang': 'Bakwan', 'Jumlah Terjual': 25, 'Total Penjualan': 25000 },
+            { Kategori: 'Minuman', 'Nama Barang': 'Kopi', 'Jumlah Terjual': 12, 'Total Penjualan': 60000 },
+            { Kategori: 'Makanan', 'Nama Barang': 'Sosis Bakar', 'Jumlah Terjual': 30, 'Total Penjualan': 60000 },
+            { Kategori: 'Minuman', 'Nama Barang': 'Es Teh', 'Jumlah Terjual': 10, 'Total Penjualan': 30000 },
+        ];
+
+        function renderSourceDataTable(container) {
+            if (!container) return;
+            let tableHTML = '<table><thead><tr>';
+            const headers = Object.keys(sampleData[0]);
+            headers.forEach(h => tableHTML += `<th>${h}</th>`);
+            tableHTML += '</tr></thead><tbody>';
+            sampleData.forEach(row => {
+                tableHTML += '<tr>';
+                headers.forEach(h => tableHTML += `<td>${row[h].toLocaleString('id-ID')}</td>`);
+                tableHTML += '</tr>';
+            });
+            tableHTML += '</tbody></table>';
+            container.innerHTML = tableHTML;
+        }
+
+        function setupLab(labId) {
+            const lab = document.getElementById(labId);
+            if (!lab) return;
+            renderSourceDataTable(lab.querySelector('.table-container'));
+            const fields = lab.querySelectorAll('.field-item');
+            const dropZones = lab.querySelectorAll('.drop-zone');
+            const pivotResultDiv = lab.querySelector('.pivot-result-area');
+            const resetBtn = lab.querySelector('.reset-btn');
+            const fieldsList = lab.querySelector('.fields-list');
+
+            let draggedItem = null;
+
+            fields.forEach(field => {
+                field.addEventListener('dragstart', (e) => {
+                    draggedItem = e.target;
+                    setTimeout(() => { e.target.style.opacity = '0.5'; }, 0);
+                });
+                field.addEventListener('dragend', (e) => {
+                    e.target.style.opacity = '1';
+                    draggedItem = null;
+                });
+            });
+
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', (e) => e.preventDefault());
+                zone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    if (draggedItem) {
+                        if (labId === 'lab3' && zone.dataset.zone === 'values' && zone.children.length > 0) {
+                            // Jangan tambah jika sudah ada
+                        } else {
+                            zone.appendChild(draggedItem);
+                        }
+                        generatePivotTable(labId);
+                    }
+                });
+            });
+
+            resetBtn.addEventListener('click', () => {
+                dropZones.forEach(zone => zone.innerHTML = '');
+                fields.forEach(field => {
+                    const span = field.querySelector('span');
+                    if (span) field.innerHTML = `<span>${span.textContent}</span>`; // Hapus toggle
+                    fieldsList.insertBefore(field, resetBtn)
+                });
+                generatePivotTable(labId);
+            });
+        }
+
+        function generatePivotTable(labId) {
+            const lab = document.getElementById(labId);
+            if (!lab) return;
+            const pivotResultDiv = lab.querySelector('.pivot-result-area');
+            const getFieldText = (zone) => lab.querySelector(`[data-zone="${zone}"] .field-item`)?.dataset.field;
+
+            if (labId === 'lab1') {
+                const rowField = getFieldText('rows');
+                const valueField = getFieldText('values');
+                if (!rowField || !valueField) { pivotResultDiv.innerHTML = '<p>Tarik bidang data...</p>'; return; }
+
+                const pivotData = sampleData.reduce((acc, item) => {
+                    acc[item[rowField]] = (acc[item[rowField]] || 0) + item[valueField];
+                    return acc;
+                }, {});
+
+                let table = `<table><tr><th>${rowField}</th><th>Total ${valueField}</th></tr>`;
+                for (const key in pivotData) { table += `<tr><td>${key}</td><td>${pivotData[key].toLocaleString('id-ID')}</td></tr>`; }
+                pivotResultDiv.innerHTML = table + '</table>';
+            }
+
+            if (labId === 'lab2') {
+                const rowField = getFieldText('rows');
+                const colField = getFieldText('columns');
+                const valueField = getFieldText('values');
+                if (!rowField || !colField || !valueField) { pivotResultDiv.innerHTML = '<p>Tarik bidang data...</p>'; return; }
+
+                const colHeaders = [...new Set(sampleData.map(item => item[colField]))].sort();
+                const pivotData = sampleData.reduce((acc, item) => {
+                    if (!acc[item[rowField]]) acc[item[rowField]] = {};
+                    acc[item[rowField]][item[colField]] = (acc[item[rowField]][item[colField]] || 0) + item[valueField];
+                    return acc;
+                }, {});
+
+                let table = `<table><tr><th>${rowField} \\ ${colField}</th>`;
+                colHeaders.forEach(h => table += `<th>${h}</th>`);
+                table += '</tr>';
+                for (const rowKey in pivotData) {
+                    table += `<tr><td>${rowKey}</td>`;
+                    colHeaders.forEach(colKey => { table += `<td>${(pivotData[rowKey][colKey] || 0).toLocaleString('id-ID')}</td>`; });
+                    table += '</tr>';
+                }
+                pivotResultDiv.innerHTML = table + '</table>';
+            }
+
+            if (labId === 'lab3') {
+                const rowField = getFieldText('rows');
+                const valueItem = lab.querySelector('[data-zone="values"] .field-item');
+                if (!rowField || !valueItem) { pivotResultDiv.innerHTML = '<p>Tarik bidang data...</p>'; return; }
+
+                const valueField = valueItem.dataset.field;
+                let calcType = valueItem.dataset.calc || 'SUM';
+
+                if (!valueItem.querySelector('.calc-toggle')) {
+                    valueItem.innerHTML = `<span>${valueField}</span> <span class="calc-toggle">[${calcType}]</span>`;
+                    valueItem.querySelector('.calc-toggle').onclick = () => {
+                        valueItem.dataset.calc = (valueItem.dataset.calc === 'SUM') ? 'COUNT' : 'SUM';
+                        generatePivotTable('lab3');
+                    };
+                }
+                valueItem.querySelector('.calc-toggle').textContent = `[${calcType}]`;
+
+                const pivotData = sampleData.reduce((acc, item) => {
+                    const key = item[rowField];
+                    if (!acc[key]) acc[key] = { sum: 0, count: 0 };
+                    acc[key].sum += item[valueField];
+                    acc[key].count += 1;
+                    return acc;
+                }, {});
+
+                let table = `<table><tr><th>${rowField}</th><th>${calcType === 'SUM' ? 'Total' : 'Jumlah'} ${valueField}</th></tr>`;
+                for (const key in pivotData) {
+                    const value = (calcType === 'SUM') ? pivotData[key].sum.toLocaleString('id-ID') : pivotData[key].count;
+                    table += `<tr><td>${key}</td><td>${value}</td></tr>`;
+                }
+                pivotResultDiv.innerHTML = table + '</table>';
+            }
+        }
+
+        // --- KODE UNTUK FITUR INTERAKTIF ---
+        function initFeature1() {
+            const tableDiv = document.getElementById('feature1-table');
+            const baseData = sampleData.reduce((acc, item) => {
+                acc[item['Nama Barang']] = (acc[item['Nama Barang']] || 0) + item['Total Penjualan'];
+                return acc;
+            }, {});
+
+            const renderTable = (data) => {
+                let table = `<table><tr><th>Nama Barang</th><th>Total Penjualan</th></tr>`;
+                for (const key in data) { table += `<tr><td>${key}</td><td>${data[key].toLocaleString('id-ID')}</td></tr>`; }
+                tableDiv.innerHTML = table + '</table>';
+            };
+
+            document.getElementById('sort-btn').onclick = () => {
+                const sorted = Object.fromEntries(Object.entries(baseData).sort(([, a], [, b]) => b - a));
+                renderTable(sorted);
+            };
+            document.getElementById('filter-btn').onclick = () => {
+                const filtered = Object.fromEntries(Object.entries(baseData).filter(([, v]) => v > 50000));
+                renderTable(filtered);
+            };
+            document.getElementById('reset-feature1').onclick = () => renderTable(baseData);
+            renderTable(baseData);
+        }
+
+        function initFeature2() {
+            const chartSlide = document.querySelector('#feature2-chart')?.closest('.slide');
+            if (!chartSlide) return;
+
+            const tableDiv = chartSlide.querySelector('#feature2-table');
+            const chartDiv = chartSlide.querySelector('#feature2-chart');
+            const filterBtns = chartSlide.querySelectorAll('.feature-controls .control-btn');
+
+            const render = (filter) => {
+                let filteredData = (filter === 'Semua') ? sampleData : sampleData.filter(item => item.Kategori === filter);
+                const pivotData = filteredData.reduce((acc, item) => {
+                    acc[item['Nama Barang']] = (acc[item['Nama Barang']] || 0) + item['Total Penjualan'];
+                    return acc;
+                }, {});
+
+                let table = `<table><tr><th>Nama Barang</th><th>Total Penjualan</th></tr>`;
+                for (const key in pivotData) { table += `<tr><td>${key}</td><td>${pivotData[key].toLocaleString('id-ID')}</td></tr>`; }
+                tableDiv.innerHTML = table + '</table>';
+
+                chartDiv.innerHTML = '';
+                const maxValue = Math.max(...Object.values(pivotData), 1);
+                for (const key in pivotData) {
+                    const bar = document.createElement('div');
+                    bar.className = 'chart-bar';
+                    const height = (pivotData[key] / maxValue) * 100;
+                    bar.style.height = `${height}%`;
+                    bar.innerHTML = `<div class="bar-label">${key}</div>`;
+                    chartDiv.appendChild(bar);
+                }
+            };
+            filterBtns.forEach(btn => btn.onclick = () => render(btn.dataset.filter));
+            render('Semua');
+        }
+
+        // Inisialisasi semua lab dan slide pertama
+        setupLab('lab1');
+        setupLab('lab2');
+        setupLab('lab3');
+        showSlide(currentSlide);
+    </script>
+</body>
+
+</html>
