@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Lengkap Infografis untuk Siswa MTS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .slide {
+            display: none;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-2px);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .interactive-element:hover {
+            background-color: #f3f4f6;
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-white shadow-lg z-50 px-6 py-4">
+        <div class="flex justify-between items-center max-w-6xl mx-auto">
+            <h1 class="text-xl font-bold text-gray-800">📚 Panduan Infografis</h1>
+            <div class="flex items-center space-x-4">
+                <span class="text-sm text-gray-600">Slide <span id="currentSlide">1</span> dari <span id="totalSlides">9</span></span>
+                <div class="w-32 bg-gray-200 rounded-full h-2">
+                    <div id="progressBar" class="progress-bar bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full" style="width: 10%"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Slide Container -->
+    <div class="pt-20 pb-8 px-6">
+        <div class="max-w-6xl mx-auto">
+            
+            <!-- Slide 1: Title Slide -->
+            <div class="slide active" id="slide1">
+                <div class="text-center py-16">
+                    <h1 class="text-6xl font-bold text-gray-800 mb-6">📊 INFOGRAFIS</h1>
+                    <h2 class="text-3xl text-gray-600 mb-8">Panduan Visual Lengkap untuk Siswa MTS</h2>
+                    <p class="text-xl text-gray-500 max-w-2xl mx-auto">Kuasai seni bercerita visual melalui visualisasi data dan desain yang menarik!</p>
+                    <div class="mt-12 flex justify-center space-x-4 flex-wrap gap-4">
+                        <div class="bg-blue-500 text-white px-6 py-3 rounded-lg">📈 Statistik</div>
+                        <div class="bg-green-500 text-white px-6 py-3 rounded-lg">⏰ Timeline</div>
+                        <div class="bg-pink-500 text-white px-6 py-3 rounded-lg">📋 List</div>
+                        <div class="bg-purple-500 text-white px-6 py-3 rounded-lg">🗺️ Geografis</div>
+                        <div class="bg-orange-500 text-white px-6 py-3 rounded-lg">⚖️ Perbandingan</div>
+                    </div>
+                    <div class="mt-8">
+                        <div class="text-4xl">🎓</div>
+                      
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: What is an Infographic -->
+            <div class="slide" id="slide2">
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <div class="max-w-4xl mx-auto">
+                        <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Apa itu Infografis? 🤔</h2>
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-xl mb-6">
+                                <h3 class="text-2xl font-semibold mb-4">Definisi</h3>
+                                <p class="text-lg">Infografis adalah representasi visual dari informasi, data, atau pengetahuan yang dirancang untuk menyajikan informasi kompleks dengan cepat dan jelas.</p>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">✓</div>
+                                    <span class="text-lg">Menggabungkan teks, gambar, dan data</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">✓</div>
+                                    <span class="text-lg">Membuat data kompleks mudah dipahami</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">✓</div>
+                                    <span class="text-lg">Menarik bagi pembelajar visual</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-center">Komponen Utama</h4>
+                            <div class="space-y-3">
+                                <div class="bg-blue-100 p-3 rounded-lg">📊 <strong>Data:</strong> Statistik, fakta, angka</div>
+                                <div class="bg-green-100 p-3 rounded-lg">🎨 <strong>Desain:</strong> Warna, tipografi, tata letak</div>
+                                <div class="bg-purple-100 p-3 rounded-lg">📝 <strong>Konten:</strong> Pesan yang jelas dan ringkas</div>
+                                <div class="bg-orange-100 p-3 rounded-lg">🎯 <strong>Tujuan:</strong> Menginformasikan, mendidik, membujuk</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Statistical Infographic -->
+            <div class="slide" id="slide3">
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <div class="max-w-4xl mx-auto">
+                        <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">📈 Infografis Statistik</h2>
+                        <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4 text-blue-600">Tujuan & Fitur</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-center"><span class="text-blue-500 mr-2">•</span> Menyajikan data numerik secara visual</li>
+                                <li class="flex items-center"><span class="text-blue-500 mr-2">•</span> Menggunakan grafik, diagram, dan persentase</li>
+                                <li class="flex items-center"><span class="text-blue-500 mr-2">•</span> Menyoroti statistik penting</li>
+                                <li class="flex items-center"><span class="text-blue-500 mr-2">•</span> Membuat data mudah diingat</li>
+                            </ul>
+                            <div class="mt-6 bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-blue-800 mb-2">💡 Tips untuk Siswa MTS:</h4>
+                                <p class="text-sm text-blue-700">Gunakan warna yang kontras dan angka yang besar untuk menarik perhatian!</p>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl">
+                            <h4 class="text-xl font-bold text-center mb-4">📱 Penggunaan Media Sosial Remaja 2024</h4>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-medium">Instagram</span>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-24 bg-gray-200 rounded-full h-3">
+                                            <div class="bg-pink-500 h-3 rounded-full" style="width: 85%"></div>
+                                        </div>
+                                        <span class="font-bold">85%</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="font-medium">TikTok</span>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-24 bg-gray-200 rounded-full h-3">
+                                            <div class="bg-black h-3 rounded-full" style="width: 72%"></div>
+                                        </div>
+                                        <span class="font-bold">72%</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="font-medium">YouTube</span>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-24 bg-gray-200 rounded-full h-3">
+                                            <div class="bg-red-500 h-3 rounded-full" style="width: 90%"></div>
+                                        </div>
+                                        <span class="font-bold">90%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 text-center">
+                                <div class="text-3xl font-bold text-blue-600">4.8M</div>
+                                <div class="text-sm text-gray-600">Pengguna Media Sosial Remaja Indonesia</div>
+                            </div>
+                            <div class="mt-6">
+                                <img src="http://humas.jatengprov.go.id/foto/1667966123110-p1_detail.png" alt="Statistik Visual" class="w-full rounded-lg shadow-md">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Timeline Infographic -->
+            <div class="slide" id="slide4">
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <div class="max-w-4xl mx-auto">
+                        <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">⏰ Infografis Timeline</h2>
+                        <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4 text-green-600">Tujuan & Fitur</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-center"><span class="text-green-500 mr-2">•</span> Menunjukkan perkembangan kronologis</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">•</span> Memvisualisasikan peristiwa sejarah</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">•</span> Melacak pencapaian proyek</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">•</span> Menampilkan langkah-langkah proses</li>
+                            </ul>
+                            <div class="mt-6 bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-green-800 mb-2">💡 Contoh Penggunaan:</h4>
+                                <p class="text-sm text-green-700">Timeline sejarah Indonesia, perkembangan teknologi, atau jadwal kegiatan sekolah!</p>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl">
+                            <h4 class="text-xl font-bold text-center mb-6">🇮🇩 Sejarah Kemerdekaan Indonesia</h4>
+                            <div class="relative">
+                                <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-green-400"></div>
+                                <div class="space-y-6">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold relative z-10">1</div>
+                                        <div class="ml-4">
+                                            <div class="font-bold">1928</div>
+                                            <div class="text-sm">Sumpah Pemuda</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold relative z-10">2</div>
+                                        <div class="ml-4">
+                                            <div class="font-bold">1942</div>
+                                            <div class="text-sm">Jepang menduduki Indonesia</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold relative z-10">3</div>
+                                        <div class="ml-4">
+                                            <div class="font-bold">17 Agustus 1945</div>
+                                            <div class="text-sm">Proklamasi Kemerdekaan</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold relative z-10">4</div>
+                                        <div class="ml-4">
+                                            <div class="font-bold">1949</div>
+                                            <div class="text-sm">Pengakuan Kedaulatan</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <img src="https://s3.amazonaws.com/thumbnails.venngage.com/template/c38a9d92-774b-4505-93f4-ce5b1266dfa9.png" alt="Timeline Visual" class="w-full rounded-lg shadow-md">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Geographic Infographic -->
+            <div class="slide" id="slide5">
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <div class="max-w-4xl mx-auto">
+                        <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">🗺️ Infografis Geografis</h2>
+                        <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4 text-purple-600">Tujuan & Fitur</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-center"><span class="text-purple-500 mr-2">•</span> Menampilkan data berdasarkan lokasi</li>
+                                <li class="flex items-center"><span class="text-purple-500 mr-2">•</span> Menunjukkan perbedaan regional</li>
+                                <li class="flex items-center"><span class="text-purple-500 mr-2">•</span> Memvisualisasikan data demografis</li>
+                                <li class="flex items-center"><span class="text-purple-500 mr-2">•</span> Menyoroti tren geografis</li>
+                            </ul>
+                            <div class="mt-6 bg-purple-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-purple-800 mb-2">💡 Contoh untuk Pelajaran:</h4>
+                                <p class="text-sm text-purple-700">Peta persebaran suku di Indonesia, data curah hujan, atau populasi kota-kota besar!</p>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl">
+                            <h4 class="text-xl font-bold text-center mb-6">🇮🇩 Populasi Pulau-Pulau Besar Indonesia</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-white p-4 rounded-lg text-center">
+                                    <div class="text-2xl mb-2">🏝️</div>
+                                    <div class="font-bold">Jawa</div>
+                                    <div class="text-purple-600 font-bold">145 Juta</div>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg text-center">
+                                    <div class="text-2xl mb-2">🌴</div>
+                                    <div class="font-bold">Sumatera</div>
+                                    <div class="text-purple-600 font-bold">58 Juta</div>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg text-center">
+                                    <div class="text-2xl mb-2">🏔️</div>
+                                    <div class="font-bold">Sulawesi</div>
+                                    <div class="text-purple-600 font-bold">19 Juta</div>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg text-center">
+                                    <div class="text-2xl mb-2">🌺</div>
+                                    <div class="font-bold">Kalimantan</div>
+                                    <div class="text-purple-600 font-bold">16 Juta</div>
+                                </div>
+                            </div>
+                            <div class="mt-4 text-center">
+                                <div class="text-sm text-gray-600">Data Penduduk per Pulau (2023)</div>
+                            </div>
+                            <!-- Added image card -->
+                            <div class="mt-6">
+                                <img src="https://img.inews.co.id/media/600/files/inews_new/2022/04/05/gempa_terdahsyat_di_Indonesia__2_.jpeg" alt="Gempa Terdahsyat di Indonesia" class="w-full rounded-lg shadow-md">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Comparison Infographic -->
+            <div class="slide" id="slide6">
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <div class="max-w-4xl mx-auto">
+                        <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">⚖️ Infografis Perbandingan</h2>
+                        <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4 text-orange-600">Tujuan & Fitur</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-center"><span class="text-orange-500 mr-2">•</span> Membandingkan beberapa pilihan</li>
+                                <li class="flex items-center"><span class="text-orange-500 mr-2">•</span> Menyoroti perbedaan</li>
+                                <li class="flex items-center"><span class="text-orange-500 mr-2">•</span> Membantu pengambilan keputusan</li>
+                                <li class="flex items-center"><span class="text-orange-500 mr-2">•</span> Menunjukkan kelebihan dan kekurangan</li>
+                            </ul>
+                            <div class="mt-6 bg-orange-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-orange-800 mb-2">💡 Contoh untuk Siswa:</h4>
+                                <p class="text-sm text-orange-700">Perbandingan sekolah negeri vs swasta, buku fisik vs e-book, atau metode belajar!</p>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-xl">
+                            <h4 class="text-xl font-bold text-center mb-6">📚 Belajar Online vs Offline</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-white p-4 rounded-lg">
+                                    <div class="text-center mb-3">
+                                        <div class="text-3xl">💻</div>
+                                        <div class="font-bold">Online</div>
+                                    </div>
+                                    <div class="space-y-2 text-sm">
+                                        <div class="flex justify-between">
+                                            <span>Fleksibilitas</span>
+                                            <span class="text-green-600">★★★★★</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span>Interaksi</span>
+                                            <span class="text-yellow-600">★★☆☆☆</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span>Biaya</span>
+                                            <span class="text-green-600">★★★★☆</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg">
+                                    <div class="text-center mb-3">
+                                        <div class="text-3xl">🏫</div>
+                                        <div class="font-bold">Offline</div>
+                                    </div>
+                                    <div class="space-y-2 text-sm">
+                                        <div class="flex justify-between">
+                                            <span>Fleksibilitas</span>
+                                            <span class="text-yellow-600">★★☆☆☆</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span>Interaksi</span>
+                                            <span class="text-green-600">★★★★★</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span>Biaya</span>
+                                            <span class="text-red-600">★★☆☆☆</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+         
+            </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: List Infographic -->
+            <div class="slide" id="slide7">
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <div class="max-w-4xl mx-auto">
+                        <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">📋 Infografis List</h2>
+                        <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4 text-pink-600">Tujuan & Fitur</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-center"><span class="text-pink-500 mr-2">•</span> Menyajikan informasi dalam bentuk list</li>
+                                <li class="flex items-center"><span class="text-pink-500 mr-2">•</span> Mengurutkan berdasarkan prioritas</li>
+                                <li class="flex items-center"><span class="text-pink-500 mr-2">•</span> Memberikan tips dan saran</li>
+                                <li class="flex items-center"><span class="text-pink-500 mr-2">•</span> Mudah dibaca dan dipahami</li>
+                            </ul>
+                            <div class="mt-6 bg-pink-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-pink-800 mb-2">💡 Contoh untuk Siswa:</h4>
+                                <p class="text-sm text-pink-700">List tips belajar, ranking prestasi, checklist tugas, atau list buku bacaan!</p>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-6 rounded-xl">
+                            <h4 class="text-xl font-bold text-center mb-6">📚 Top 5 Tips Sukses Ujian</h4>
+                            <div class="space-y-4">
+                                <div class="bg-white p-4 rounded-lg flex items-center space-x-4">
+                                    <div class="w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg">1</div>
+                                    <div>
+                                        <div class="font-semibold text-gray-800">Buat Jadwal Belajar</div>
+                                        <div class="text-sm text-gray-600">Atur waktu belajar setiap mata pelajaran</div>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg flex items-center space-x-4">
+                                    <div class="w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg">2</div>
+                                    <div>
+                                        <div class="font-semibold text-gray-800">Latihan Soal Rutin</div>
+                                        <div class="text-sm text-gray-600">Kerjakan soal-soal latihan setiap hari</div>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg flex items-center space-x-4">
+                                    <div class="w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg">3</div>
+                                    <div>
+                                        <div class="font-semibold text-gray-800">Istirahat Cukup</div>
+                                        <div class="text-sm text-gray-600">Tidur 7-8 jam setiap malam</div>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg flex items-center space-x-4">
+                                    <div class="w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg">4</div>
+                                    <div>
+                                        <div class="font-semibold text-gray-800">Belajar Kelompok</div>
+                                        <div class="text-sm text-gray-600">Diskusi dengan teman sekelas</div>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg flex items-center space-x-4">
+                                    <div class="w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg">5</div>
+                                    <div>
+                                        <div class="font-semibold text-gray-800">Tetap Tenang</div>
+                                        <div class="text-sm text-gray-600">Jaga ketenangan saat ujian</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <img src="https://s3.amazonaws.com/thumbnails.venngage.com/template/1b287748-f140-4e90-a36c-c99c2998337b.png" alt="Infografis List" class="w-full rounded-lg shadow-md">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <!-- Slide 8: Interactive Elements -->
+            <div class="slide" id="slide8">
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">🎮 Infografis Interaktif</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4 text-teal-600">Fitur & Manfaat</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-center"><span class="text-teal-500 mr-2">•</span> Keterlibatan pengguna melalui interaksi</li>
+                                <li class="flex items-center"><span class="text-teal-500 mr-2">•</span> Elemen yang dapat diklik</li>
+                                <li class="flex items-center"><span class="text-teal-500 mr-2">•</span> Efek hover dan animasi</li>
+                                <li class="flex items-center"><span class="text-teal-500 mr-2">•</span> Pembaruan data dinamis</li>
+                            </ul>
+                            <div class="mt-6 bg-teal-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-teal-800 mb-2">💡 Keunggulan:</h4>
+                                <p class="text-sm text-teal-700">Membuat pembelajaran lebih menyenangkan dan mudah diingat oleh siswa!</p>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-6 rounded-xl">
+                            <h4 class="text-xl font-bold text-center mb-6">🎯 Demo Interaktif - Coba Klik!</h4>
+                            <div class="space-y-4">
+                                <div class="interactive-element bg-white p-4 rounded-lg cursor-pointer" onclick="toggleInfo(1)">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-semibold">📊 Klik untuk Statistik</span>
+                                        <span class="text-teal-600">→</span>
+                                    </div>
+                                    <div id="info1" class="hidden mt-2 text-sm text-gray-600">
+                                        Elemen interaktif meningkatkan keterlibatan siswa hingga 300%!
+                                    </div>
+                                </div>
+                                <div class="interactive-element bg-white p-4 rounded-lg cursor-pointer" onclick="toggleInfo(2)">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-semibold">🎨 Efek Hover</span>
+                                        <span class="text-teal-600">→</span>
+                                    </div>
+                                    <div id="info2" class="hidden mt-2 text-sm text-gray-600">
+                                        Umpan balik visual meningkatkan pengalaman belajar secara signifikan.
+                                    </div>
+                                </div>
+                                <div class="interactive-element bg-white p-4 rounded-lg cursor-pointer" onclick="toggleInfo(3)">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-semibold">⚡ Pembaruan Dinamis</span>
+                                        <span class="text-teal-600">→</span>
+                                    </div>
+                                    <div id="info3" class="hidden mt-2 text-sm text-gray-600">
+                                        Data real-time membuat infografis lebih berharga dan menarik.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+
+            <!-- Slide 10: Interactive Elements -->
+            <div class="slide" id="slide10">
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <div class="max-w-4xl mx-auto">
+                        <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">🎮 Infografis Interaktif</h2>
+                        <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4 text-teal-600">Fitur & Manfaat</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-center"><span class="text-teal-500 mr-2">•</span> Keterlibatan pengguna melalui interaksi</li>
+                                <li class="flex items-center"><span class="text-teal-500 mr-2">•</span> Elemen yang dapat diklik</li>
+                                <li class="flex items-center"><span class="text-teal-500 mr-2">•</span> Efek hover dan animasi</li>
+                                <li class="flex items-center"><span class="text-teal-500 mr-2">•</span> Pembaruan data dinamis</li>
+                            </ul>
+                            <div class="mt-6 bg-teal-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-teal-800 mb-2">💡 Keunggulan:</h4>
+                                <p class="text-sm text-teal-700">Membuat pembelajaran lebih menyenangkan dan mudah diingat oleh siswa!</p>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-6 rounded-xl">
+                            <h4 class="text-xl font-bold text-center mb-6">🎯 Demo Interaktif - Coba Klik!</h4>
+                            <div class="space-y-4">
+                                <div class="interactive-element bg-white p-4 rounded-lg cursor-pointer" onclick="toggleInfo(1)">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-semibold">📊 Klik untuk Statistik</span>
+                                        <span class="text-teal-600">→</span>
+                                    </div>
+                                    <div id="info1" class="hidden mt-2 text-sm text-gray-600">
+                                        Elemen interaktif meningkatkan keterlibatan siswa hingga 300%!
+                                    </div>
+                                </div>
+                                <div class="interactive-element bg-white p-4 rounded-lg cursor-pointer" onclick="toggleInfo(2)">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-semibold">🎨 Efek Hover</span>
+                                        <span class="text-teal-600">→</span>
+                                    </div>
+                                    <div id="info2" class="hidden mt-2 text-sm text-gray-600">
+                                        Umpan balik visual meningkatkan pengalaman belajar secara signifikan.
+                                    </div>
+                                </div>
+                                <div class="interactive-element bg-white p-4 rounded-lg cursor-pointer" onclick="toggleInfo(3)">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-semibold">⚡ Pembaruan Dinamis</span>
+                                        <span class="text-teal-600">→</span>
+                                    </div>
+                                    <div id="info3" class="hidden mt-2 text-sm text-gray-600">
+                                        Data real-time membuat infografis lebih berharga dan menarik.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Best Practices -->
+            <div class="slide" id="slide9">
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">✨ Tips & Praktik Terbaik</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-6 text-green-600">Yang Harus Dilakukan ✅</h3>
+                            <div class="space-y-4">
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <div class="font-semibold text-green-800">Tetap Sederhana</div>
+                                    <div class="text-sm text-green-600">Fokus pada satu pesan utama</div>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <div class="font-semibold text-green-800">Gunakan Warna Konsisten</div>
+                                    <div class="text-sm text-green-600">Maksimal 3-5 warna saja</div>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <div class="font-semibold text-green-800">Ceritakan Kisah</div>
+                                    <div class="text-sm text-green-600">Buat alur yang logis</div>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <div class="font-semibold text-green-800">Cantumkan Sumber</div>
+                                    <div class="text-sm text-green-600">Bangun kredibilitas dengan data</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-6 text-red-600">Yang Harus Dihindari ❌</h3>
+                            <div class="space-y-4">
+                                <div class="bg-red-50 p-4 rounded-lg">
+                                    <div class="font-semibold text-red-800">Terlalu Banyak Teks</div>
+                                    <div class="text-sm text-red-600">Visual harus mendominasi</div>
+                                </div>
+                                <div class="bg-red-50 p-4 rounded-lg">
+                                    <div class="font-semibold text-red-800">Terlalu Banyak Font</div>
+                                    <div class="text-sm text-red-600">Maksimal 2-3 jenis font</div>
+                                </div>
+                                <div class="bg-red-50 p-4 rounded-lg">
+                                    <div class="font-semibold text-red-800">Abaikan Pengguna Mobile</div>
+                                    <div class="text-sm text-red-600">Pastikan responsif di HP</div>
+                                </div>
+                                <div class="bg-red-50 p-4 rounded-lg">
+                                    <div class="font-semibold text-red-800">Menyesatkan dengan Visual</div>
+                                    <div class="text-sm text-red-600">Jaga akurasi data</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 text-center">
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-xl">
+                            <h4 class="text-2xl font-bold mb-2">🎉 Selamat!</h4>
+                            <p class="text-lg">Kalian telah menyelesaikan panduan lengkap infografis!</p>
+                            <div class="mt-4 text-3xl">🎓📊✨</div>
+                            <p class="text-sm mt-2">Sekarang saatnya berkreasi membuat infografis sendiri!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Best Practices -->
+            <div class="slide" id="slide9">
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">✨ Tips & Praktik Terbaik</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-6 text-green-600">Yang Harus Dilakukan ✅</h3>
+                            <div class="space-y-4">
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <div class="font-semibold text-green-800">Tetap Sederhana</div>
+                                    <div class="text-sm text-green-600">Fokus pada satu pesan utama</div>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <div class="font-semibold text-green-800">Gunakan Warna Konsisten</div>
+                                    <div class="text-sm text-green-600">Maksimal 3-5 warna saja</div>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <div class="font-semibold text-green-800">Ceritakan Kisah</div>
+                                    <div class="text-sm text-green-600">Buat alur yang logis</div>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <div class="font-semibold text-green-800">Cantumkan Sumber</div>
+                                    <div class="text-sm text-green-600">Bangun kredibilitas dengan data</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-6 text-red-600">Yang Harus Dihindari ❌</h3>
+                            <div class="space-y-4">
+                                <div class="bg-red-50 p-4 rounded-lg">
+                                    <div class="font-semibold text-red-800">Terlalu Banyak Teks</div>
+                                    <div class="text-sm text-red-600">Visual harus mendominasi</div>
+                                </div>
+                                <div class="bg-red-50 p-4 rounded-lg">
+                                    <div class="font-semibold text-red-800">Terlalu Banyak Font</div>
+                                    <div class="text-sm text-red-600">Maksimal 2-3 jenis font</div>
+                                </div>
+                                <div class="bg-red-50 p-4 rounded-lg">
+                                    <div class="font-semibold text-red-800">Abaikan Pengguna Mobile</div>
+                                    <div class="text-sm text-red-600">Pastikan responsif di HP</div>
+                                </div>
+                                <div class="bg-red-50 p-4 rounded-lg">
+                                    <div class="font-semibold text-red-800">Menyesatkan dengan Visual</div>
+                                    <div class="text-sm text-red-600">Jaga akurasi data</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 text-center">
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-xl">
+                            <h4 class="text-2xl font-bold mb-2">🎉 Selamat!</h4>
+                            <p class="text-lg">Kalian telah menyelesaikan panduan lengkap infografis!</p>
+                            <div class="mt-4 text-3xl">🎓📊✨</div>
+                            <p class="text-sm mt-2">Sekarang saatnya berkreasi membuat infografis sendiri!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+
+    <!-- Navigation Controls -->
+    <div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-white rounded-full shadow-lg px-6 py-3 flex items-center space-x-4">
+        <button id="prevBtn" onclick="changeSlide(-1)" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-all">← Sebelumnya</button>
+        <div class="flex space-x-2">
+            <div class="w-3 h-3 bg-blue-500 rounded-full slide-dot active cursor-pointer hover:scale-125 transition-all" onclick="goToSlide(1)"></div>
+            <div class="w-3 h-3 bg-gray-300 rounded-full slide-dot cursor-pointer hover:scale-125 transition-all" onclick="goToSlide(2)"></div>
+            <div class="w-3 h-3 bg-gray-300 rounded-full slide-dot cursor-pointer hover:scale-125 transition-all" onclick="goToSlide(3)"></div>
+            <div class="w-3 h-3 bg-gray-300 rounded-full slide-dot cursor-pointer hover:scale-125 transition-all" onclick="goToSlide(4)"></div>
+            <div class="w-3 h-3 bg-gray-300 rounded-full slide-dot cursor-pointer hover:scale-125 transition-all" onclick="goToSlide(5)"></div>
+            <div class="w-3 h-3 bg-gray-300 rounded-full slide-dot cursor-pointer hover:scale-125 transition-all" onclick="goToSlide(6)"></div>
+            <div class="w-3 h-3 bg-gray-300 rounded-full slide-dot cursor-pointer hover:scale-125 transition-all" onclick="goToSlide(7)"></div>
+            <div class="w-3 h-3 bg-gray-300 rounded-full slide-dot cursor-pointer hover:scale-125 transition-all" onclick="goToSlide(8)"></div>
+            <div class="w-3 h-3 bg-gray-300 rounded-full slide-dot cursor-pointer hover:scale-125 transition-all" onclick="goToSlide(9)"></div>
+        </div>
+        <button id="nextBtn" onclick="changeSlide(1)" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-all">Selanjutnya →</button>
+    </div>
+
+    <script>
+        let currentSlideIndex = 1;
+        const totalSlides = 9;
+
+        function updateSlideDisplay() {
+            // Hide all slides
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Show current slide
+            document.getElementById(`slide${currentSlideIndex}`).classList.add('active');
+            
+            // Update navigation
+            document.getElementById('currentSlide').textContent = currentSlideIndex;
+            document.getElementById('progressBar').style.width = `${(currentSlideIndex / totalSlides) * 100}%`;
+            
+            // Update dots
+            document.querySelectorAll('.slide-dot').forEach((dot, index) => {
+                if (index + 1 === currentSlideIndex) {
+                    dot.classList.add('bg-blue-500');
+                    dot.classList.remove('bg-gray-300');
+                } else {
+                    dot.classList.add('bg-gray-300');
+                    dot.classList.remove('bg-blue-500');
+                }
+            });
+            
+            // Update button states
+            document.getElementById('prevBtn').disabled = currentSlideIndex === 1;
+            document.getElementById('nextBtn').disabled = currentSlideIndex === totalSlides;
+        }
+
+        function changeSlide(direction) {
+            const newIndex = currentSlideIndex + direction;
+            if (newIndex >= 1 && newIndex <= totalSlides) {
+                currentSlideIndex = newIndex;
+                updateSlideDisplay();
+            }
+        }
+
+        function goToSlide(slideNumber) {
+            if (slideNumber >= 1 && slideNumber <= totalSlides) {
+                currentSlideIndex = slideNumber;
+                updateSlideDisplay();
+            }
+        }
+
+        function toggleInfo(infoId) {
+            const info = document.getElementById(`info${infoId}`);
+            info.classList.toggle('hidden');
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                changeSlide(-1);
+            } else if (event.key === 'ArrowRight') {
+                changeSlide(1);
+            }
+        });
+
+        // Initialize
+        updateSlideDisplay();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9806d11254578342',t:'MTc1ODA5MzM3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

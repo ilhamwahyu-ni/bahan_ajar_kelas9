@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Lengkap Infografis untuk Siswa MTS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide.active {
+            display: block;
+        }
+        
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-2px);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .interactive-element:hover {
+            background-color: #f3f4f6;
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-white shadow-lg z-50 px-6 py-4">
+        <div class="flex justify-between items-center max-w-6xl mx-auto">
+            <h1 class="text-xl font-bold text-gray-800">📚 Panduan Infografis</h1>
+            <div class="flex items-center space-x-4">
+                <span class="text-sm text-gray-600">Slide <span id="currentSlide">1</span> dari <span id="totalSlides">9</span></span>
+                <div class="w-32 bg-gray-200 rounded-full h-2">
+                    <div id="progressBar" class="progress-bar bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full" style="width: 11.1%"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Slide Container -->
+    <main class="pt-24 pb-24 px-4 sm:px-6">
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Slide 1: Title Slide -->
+            <div class="slide active" id="slide1">
+                <div class="text-center py-12 sm:py-16">
+                    <h1 class="text-5xl sm:text-6xl font-bold text-gray-800 mb-6">📊 INFOGRAFIS</h1>
+                    <h2 class="text-2xl sm:text-3xl text-gray-600 mb-8">Panduan Visual Lengkap untuk Siswa MTS</h2>
+                    <p class="text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto">Kuasai seni bercerita visual melalui visualisasi data dan desain yang menarik!</p>
+                    <div class="mt-12 flex justify-center space-x-2 sm:space-x-4 flex-wrap gap-4">
+                        <div class="bg-blue-500 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg text-sm sm:text-base">📈 Statistik</div>
+                        <div class="bg-green-500 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg text-sm sm:text-base">⏰ Timeline</div>
+                        <div class="bg-pink-500 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg text-sm sm:text-base">📋 List</div>
+                        <div class="bg-purple-500 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg text-sm sm:text-base">🗺️ Geografis</div>
+                        <div class="bg-orange-500 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg text-sm sm:text-base">⚖️ Perbandingan</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: What is an Infographic -->
+            <div class="slide" id="slide2">
+                <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-8 text-center">Apa itu Infografis? 🤔</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-xl mb-6">
+                            <h3 class="text-xl sm:text-2xl font-semibold mb-4">Definisi</h3>
+                            <p class="text-base sm:text-lg">Infografis adalah representasi visual dari informasi, data, atau pengetahuan yang dirancang untuk menyajikan informasi kompleks dengan cepat dan jelas.</p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">✓</div>
+                                <span class="text-base sm:text-lg">Menggabungkan teks, gambar, dan data</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">✓</div>
+                                <span class="text-base sm:text-lg">Membuat data kompleks mudah dipahami</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">✓</div>
+                                <span class="text-base sm:text-lg">Menarik bagi pembelajar visual</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl">
+                        <h4 class="text-lg sm:text-xl font-semibold mb-4 text-center">Komponen Utama</h4>
+                        <div class="space-y-3">
+                            <div class="bg-blue-100 p-3 rounded-lg">📊 <strong>Data:</strong> Statistik, fakta, angka</div>
+                            <div class="bg-green-100 p-3 rounded-lg">🎨 <strong>Desain:</strong> Warna, tipografi, tata letak</div>
+                            <div class="bg-purple-100 p-3 rounded-lg">📝 <strong>Konten:</strong> Pesan yang jelas dan ringkas</div>
+                            <div class="bg-orange-100 p-3 rounded-lg">🎯 <strong>Tujuan:</strong> Menginformasikan, mendidik, membujuk</div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Statistical Infographic -->
+            <div class="slide" id="slide3">
+                <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-8 text-center">📈 Infografis Statistik</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-start">
+                    <div>
+                        <h3 class="text-xl sm:text-2xl font-semibold mb-4 text-blue-600">Tujuan & Fitur</h3>
+                        <ul class="space-y-3 text-lg">
+                            <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">•</span> Menyajikan data numerik secara visual</li>
+                            <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">•</span> Menggunakan grafik, diagram, dan persentase</li>
+                            <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">•</span> Menyoroti statistik penting</li>
+                            <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">•</span> Membuat data mudah diingat</li>
+                        </ul>
+                        <div class="mt-6 bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-blue-800 mb-2">💡 Tips untuk Siswa MTS:</h4>
+                            <p class="text-sm text-blue-700">Gunakan warna yang kontras dan angka yang besar untuk menarik perhatian!</p>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl">
+                        <h4 class="text-lg sm:text-xl font-bold text-center mb-4">📱 Penggunaan Media Sosial Remaja 2024</h4>
+                        <img src="http://humas.jatengprov.go.id/foto/1667966123110-p1_detail.png" alt="Statistik Visual" class="w-full rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/e0e0e0/757575?text=Contoh+Statistik';">
+                        <div class="mt-4 text-center">
+                            <div class="text-2xl sm:text-3xl font-bold text-blue-600">4.8 Juta</div>
+                            <div class="text-sm text-gray-600">Pengguna Media Sosial Remaja di Indonesia</div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Timeline Infographic -->
+            <div class="slide" id="slide4">
+                <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-8 text-center">⏰ Infografis Timeline</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-start">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-semibold mb-4 text-green-600">Tujuan & Fitur</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-start"><span class="text-green-500 mr-2 mt-1">•</span> Menunjukkan perkembangan kronologis</li>
+                                <li class="flex items-start"><span class="text-green-500 mr-2 mt-1">•</span> Memvisualisasikan peristiwa sejarah</li>
+                                <li class="flex items-start"><span class="text-green-500 mr-2 mt-1">•</span> Melacak pencapaian proyek</li>
+                                <li class="flex items-start"><span class="text-green-500 mr-2 mt-1">•</span> Menampilkan langkah-langkah proses</li>
+                            </ul>
+                            <div class="mt-6 bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-green-800 mb-2">💡 Contoh Penggunaan:</h4>
+                                <p class="text-sm text-green-700">Timeline sejarah Indonesia, perkembangan teknologi, atau jadwal kegiatan sekolah!</p>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl">
+                            <h4 class="text-lg sm:text-xl font-bold text-center mb-6">🇮🇩 Sejarah Kemerdekaan Indonesia</h4>
+                            <img src="https://s3.amazonaws.com/thumbnails.venngage.com/template/c38a9d92-774b-4505-93f4-ce5b1266dfa9.png" alt="Timeline Visual" class="w-full rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/e0e0e0/757575?text=Contoh+Timeline';">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Geographic Infographic -->
+            <div class="slide" id="slide5">
+                <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-8 text-center">🗺️ Infografis Geografis</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-start">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-semibold mb-4 text-purple-600">Tujuan & Fitur</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-start"><span class="text-purple-500 mr-2 mt-1">•</span> Menampilkan data berdasarkan lokasi</li>
+                                <li class="flex items-start"><span class="text-purple-500 mr-2 mt-1">•</span> Menunjukkan perbedaan regional</li>
+                                <li class="flex items-start"><span class="text-purple-500 mr-2 mt-1">•</span> Memvisualisasikan data demografis</li>
+                                <li class="flex items-start"><span class="text-purple-500 mr-2 mt-1">•</span> Menyoroti tren geografis</li>
+                            </ul>
+                            <div class="mt-6 bg-purple-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-purple-800 mb-2">💡 Contoh untuk Pelajaran:</h4>
+                                <p class="text-sm text-purple-700">Peta persebaran suku di Indonesia, data curah hujan, atau populasi kota-kota besar!</p>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl text-center">
+                            <h4 class="text-lg sm:text-xl font-bold text-center mb-6">🇮🇩 Populasi Pulau-Pulau Besar</h4>
+                            <img src="https://img.inews.co.id/media/600/files/inews_new/2022/04/05/gempa_terdahsyat_di_Indonesia__2_.jpeg" alt="Peta Persebaran Penduduk" class="w-full rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/e0e0e0/757575?text=Contoh+Peta';">
+                            <p class="text-sm text-gray-600 mt-2">Sumber: BPS (2023)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Comparison Infographic -->
+            <div class="slide" id="slide6">
+                <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-8 text-center">⚖️ Infografis Perbandingan</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-start">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-semibold mb-4 text-orange-600">Tujuan & Fitur</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-start"><span class="text-orange-500 mr-2 mt-1">•</span> Membandingkan beberapa pilihan</li>
+                                <li class="flex items-start"><span class="text-orange-500 mr-2 mt-1">•</span> Menyoroti perbedaan</li>
+                                <li class="flex items-start"><span class="text-orange-500 mr-2 mt-1">•</span> Membantu pengambilan keputusan</li>
+                                <li class="flex items-start"><span class="text-orange-500 mr-2 mt-1">•</span> Menunjukkan kelebihan dan kekurangan</li>
+                            </ul>
+                            <div class="mt-6 bg-orange-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-orange-800 mb-2">💡 Contoh untuk Siswa:</h4>
+                                <p class="text-sm text-orange-700">Perbandingan sekolah negeri vs swasta, buku fisik vs e-book, atau metode belajar!</p>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-xl">
+                           <h4 class="text-lg sm:text-xl font-bold text-center mb-6">📚 Belajar Online vs Offline</h4>
+                           <img src="https://s3.amazonaws.com/thumbnails.venngage.com/template/0ff2a100-1afc-4faa-987d-15b3d2557196.png" alt="Contoh Infografis Perbandingan" class="w-full rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/e0e0e0/757575?text=Contoh+Perbandingan';">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 7: List Infographic -->
+            <div class="slide" id="slide7">
+                <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-8 text-center">📋 Infografis List</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-start">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-semibold mb-4 text-pink-600">Tujuan & Fitur</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-start"><span class="text-pink-500 mr-2 mt-1">•</span> Menyajikan informasi dalam bentuk list</li>
+                                <li class="flex items-start"><span class="text-pink-500 mr-2 mt-1">•</span> Mengurutkan berdasarkan prioritas</li>
+                                <li class="flex items-start"><span class="text-pink-500 mr-2 mt-1">•</span> Memberikan tips dan saran</li>
+                                <li class="flex items-start"><span class="text-pink-500 mr-2 mt-1">•</span> Mudah dibaca dan dipahami</li>
+                            </ul>
+                            <div class="mt-6 bg-pink-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-pink-800 mb-2">💡 Contoh untuk Siswa:</h4>
+                                <p class="text-sm text-pink-700">List tips belajar, ranking prestasi, checklist tugas, atau list buku bacaan!</p>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-6 rounded-xl">
+                            <h4 class="text-lg sm:text-xl font-bold text-center mb-6">📚 Top 5 Tips Sukses Ujian</h4>
+                            <div class="space-y-3">
+                                <div class="bg-white p-3 rounded-lg flex items-center space-x-4 shadow-sm"><div class="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">1</div><div><div class="font-semibold text-gray-800">Buat Jadwal Belajar</div></div></div>
+                                <div class="bg-white p-3 rounded-lg flex items-center space-x-4 shadow-sm"><div class="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">2</div><div><div class="font-semibold text-gray-800">Latihan Soal Rutin</div></div></div>
+                                <div class="bg-white p-3 rounded-lg flex items-center space-x-4 shadow-sm"><div class="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">3</div><div><div class="font-semibold text-gray-800">Istirahat Cukup</div></div></div>
+                                <div class="bg-white p-3 rounded-lg flex items-center space-x-4 shadow-sm"><div class="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">4</div><div><div class="font-semibold text-gray-800">Belajar Kelompok</div></div></div>
+                                <div class="bg-white p-3 rounded-lg flex items-center space-x-4 shadow-sm"><div class="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">5</div><div><div class="font-semibold text-gray-800">Tetap Tenang</div></div></div>
+                            </div>
+                            <div class="mt-6">
+                                <img src="https://s3.amazonaws.com/thumbnails.venngage.com/template/1b287748-f140-4e90-a36c-c99c2998337b.png" alt="Infografis List" class="w-full rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/e0e0e0/757575?text=Contoh+List';">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 8: Interactive Elements -->
+            <div class="slide" id="slide8">
+                <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-8 text-center">🎮 Infografis Interaktif</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-start">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-semibold mb-4 text-teal-600">Fitur & Manfaat</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-start"><span class="text-teal-500 mr-2 mt-1">•</span> Keterlibatan pengguna melalui interaksi</li>
+                                <li class="flex items-start"><span class="text-teal-500 mr-2 mt-1">•</span> Elemen yang dapat diklik</li>
+                                <li class="flex items-start"><span class="text-teal-500 mr-2 mt-1">•</span> Efek hover dan animasi</li>
+                                <li class="flex items-start"><span class="text-teal-500 mr-2 mt-1">•</span> Pembaruan data dinamis</li>
+                            </ul>
+                            <div class="mt-6 bg-teal-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-teal-800 mb-2">💡 Keunggulan:</h4>
+                                <p class="text-sm text-teal-700">Membuat pembelajaran lebih menyenangkan dan mudah diingat oleh siswa!</p>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-6 rounded-xl">
+                            <h4 class="text-lg sm:text-xl font-bold text-center mb-6">🎯 Demo Interaktif - Coba Klik!</h4>
+                            <div class="space-y-4">
+                                <div class="interactive-element bg-white p-4 rounded-lg cursor-pointer shadow-sm" onclick="toggleInfo(1)">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-semibold">📊 Apa itu Infografis Statistik?</span>
+                                        <span class="text-teal-600 font-bold transform transition-transform" id="arrow1">▼</span>
+                                    </div>
+                                    <div id="info1" class="hidden mt-2 text-sm text-gray-600">Infografis statistik menggunakan diagram batang, diagram lingkaran, dan grafik garis untuk menampilkan data angka.</div>
+                                </div>
+                                <div class="interactive-element bg-white p-4 rounded-lg cursor-pointer shadow-sm" onclick="toggleInfo(2)">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-semibold">⏰ Kapan menggunakan Timeline?</span>
+                                        <span class="text-teal-600 font-bold transform transition-transform" id="arrow2">▼</span>
+                                    </div>
+                                    <div id="info2" class="hidden mt-2 text-sm text-gray-600">Gunakan infografis timeline untuk menampilkan peristiwa secara berurutan, bagus untuk pelajaran sejarah atau menjelaskan sebuah proses!</div>
+                                </div>
+                                <div class="interactive-element bg-white p-4 rounded-lg cursor-pointer shadow-sm" onclick="toggleInfo(3)">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-semibold">⚖️ Manfaat Perbandingan?</span>
+                                        <span class="text-teal-600 font-bold transform transition-transform" id="arrow3">▼</span>
+                                    </div>
+                                    <div id="info3" class="hidden mt-2 text-sm text-gray-600">Infografis perbandingan membantu membandingkan dua hal atau lebih secara berdampingan, seperti kelebihan dan kekurangan.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Conclusion -->
+            <div class="slide" id="slide9">
+                <div class="bg-white rounded-2xl shadow-xl p-8 text-center">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">🚀 Saatnya Kamu Berkarya!</h2>
+                    <p class="text-lg text-gray-600 mb-8">Kamu sudah belajar dasar-dasar infografis. Sekarang, giliranmu untuk mencoba!</p>
+                    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-left">
+                        <div class="bg-blue-50 p-4 rounded-lg"><h3 class="font-bold text-blue-800">1. Pilih Topik</h3><p class="text-sm text-blue-700">Pilih topik pelajaran yang kamu sukai.</p></div>
+                        <div class="bg-green-50 p-4 rounded-lg"><h3 class="font-bold text-green-800">2. Kumpulkan Data</h3><p class="text-sm text-green-700">Cari fakta dan angka menarik dari buku atau internet.</p></div>
+                        <div class="bg-purple-50 p-4 rounded-lg"><h3 class="font-bold text-purple-800">3. Pilih Jenis</h3><p class="text-sm text-purple-700">Tentukan jenis infografis yang paling cocok.</p></div>
+                        <div class="bg-pink-50 p-4 rounded-lg"><h3 class="font-bold text-pink-800">4. Desain!</h3><p class="text-sm text-pink-700">Gunakan kreativitasmu untuk mendesain.</p></div>
+                    </div>
+                    <div class="mt-8">
+                        <h3 class="font-semibold text-xl text-gray-700 mb-4">Alat Bantu Gratis yang Bisa Kamu Coba:</h3>
+                        <div class="flex justify-center space-x-4 flex-wrap gap-4">
+                            <span class="bg-gray-200 text-gray-800 px-4 py-2 rounded-full font-medium">Canva</span>
+                            <span class="bg-gray-200 text-gray-800 px-4 py-2 rounded-full font-medium">Piktochart</span>
+                            <span class="bg-gray-200 text-gray-800 px-4 py-2 rounded-full font-medium">Venngage</span>
+                        </div>
+                    </div>
+                    <div class="mt-10 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">
+                        Selamat Mencoba & Terus Belajar!
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <!-- Navigation Buttons -->
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/50 backdrop-blur-sm z-50">
+        <div class="flex justify-between max-w-sm mx-auto">
+            <button id="prevBtn" class="px-6 py-3 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-75 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                Sebelumnya
+            </button>
+            <button id="nextBtn" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition">
+                Selanjutnya
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Element Selectors
+            const slides = document.querySelectorAll('.slide');
+            const totalSlidesSpan = document.getElementById('totalSlides');
+            const currentSlideSpan = document.getElementById('currentSlide');
+            const progressBar = document.getElementById('progressBar');
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+
+            let currentSlideIndex = 0;
+            const totalSlides = slides.length;
+
+            // Initialize UI
+            totalSlidesSpan.textContent = totalSlides;
+            updateSlideUI();
+
+            // Event Listeners
+            nextBtn.addEventListener('click', showNextSlide);
+            prevBtn.addEventListener('click', showPrevSlide);
+            
+            // Swipe functionality for touch devices
+            let touchstartX = 0;
+            let touchendX = 0;
+            const slider = document.querySelector('main');
+
+            slider.addEventListener('touchstart', e => {
+                touchstartX = e.changedTouches[0].screenX;
+            });
+
+            slider.addEventListener('touchend', e => {
+                touchendX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                if (touchendX < touchstartX) { // Swiped left
+                    if(currentSlideIndex < totalSlides - 1) showNextSlide();
+                }
+                if (touchendX > touchstartX) { // Swiped right
+                    if(currentSlideIndex > 0) showPrevSlide();
+                }
+            }
+
+            // Functions
+            function showNextSlide() {
+                if (currentSlideIndex < totalSlides - 1) {
+                    currentSlideIndex++;
+                    updateSlideUI();
+                }
+            }
+
+            function showPrevSlide() {
+                if (currentSlideIndex > 0) {
+                    currentSlideIndex--;
+                    updateSlideUI();
+                }
+            }
+            
+            function updateSlideUI() {
+                // Update slides visibility
+                slides.forEach((slide, index) => {
+                    if (index === currentSlideIndex) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+
+                // Update progress bar and slide counter
+                const progressPercentage = ((currentSlideIndex + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                currentSlideSpan.textContent = currentSlideIndex + 1;
+
+                // Update button states
+                prevBtn.disabled = currentSlideIndex === 0;
+                nextBtn.disabled = currentSlideIndex === totalSlides - 1;
+
+                if (currentSlideIndex === totalSlides - 1) {
+                    nextBtn.textContent = 'Selesai';
+                } else {
+                    nextBtn.textContent = 'Selanjutnya';
+                }
+            }
+        });
+
+        // Function for interactive elements on Slide 8
+        function toggleInfo(id) {
+            const infoEl = document.getElementById(`info${id}`);
+            const arrowEl = document.getElementById(`arrow${id}`);
+            const isHidden = infoEl.classList.contains('hidden');
+            
+            if (isHidden) {
+                infoEl.classList.remove('hidden');
+                arrowEl.style.transform = 'rotate(180deg)';
+            } else {
+                infoEl.classList.add('hidden');
+                arrowEl.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
+</body>
+</html>
+
